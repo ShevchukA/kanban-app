@@ -1,6 +1,8 @@
+import classes from "./Board.module.css";
+
 const Board = () => {
   return (
-    <div>
+    <div className={classes.board}>
       <h1>board</h1>
     </div>
   );

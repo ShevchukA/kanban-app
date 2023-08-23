@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./components/pages/Root";
-import Board from "./components/pages/Board";
+import Root from "./pages/Root";
+import Board from "./pages/Board";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,7 +9,7 @@ function App() {
       element: <Root />,
       children: [
         {
-          path: "boards",
+          path: "/",
           element: <Board />,
         },
         {
