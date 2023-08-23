@@ -1,7 +1,26 @@
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./components/pages/Root";
+import Board from "./components/pages/Board";
 
 function App() {
-  return <div></div>;
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [
+        {
+          path: "boards",
+          element: <Board />,
+        },
+        {
+          path: "boards/:boardID",
+          element: <Board />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
