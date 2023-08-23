@@ -1,16 +1,68 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
 
+:root {
+  --color-black: #000112;
+  --color-white: #ffffff;
+  --color-purple: ##635FC7;
+  --color-purple-hover: #A8A4FF;
+  --color-red: #EA5555;
+  --color-hover: #EA5555;
+  --color-dark-grey: #2B2C37;
+  --color-medium-grey: #828FA3;
+
+
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-style: normal;
   font-synthesis: none;
+  line-height: normal;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+/* Dark mode */
+:root.dark {
+  --color-board: #20212C;
+  --color-interface: #2B2C37;
+  --color-lines: #3E3F4E;
+}
+
+/* Light mode */
+:root.light {
+  --color-board: #F4F7FD;
+  --color-interface: #ffffff;
+  --color-lines: #635FC7;
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  box-sizing: inherit;
   min-height: 100vh;
+}
+
+.text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 23px;
+}
+
+.text--bold {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.heading--xl {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.heading--m {
+  font-size: 15px;
+  font-weight: 700;
 }
