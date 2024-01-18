@@ -1,8 +1,8 @@
-import classes from "./Sidebar.module.css";
+import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
   return (
-    <nav className={classes.sidebar}>
+    <nav className={styles.sidebar}>
       <p>All boards</p>
       <ul>
         <li>Platform Launch</li>

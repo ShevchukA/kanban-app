@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root";
-import Board from "./pages/Board";
+import Root from "./pages/Root/Root";
+import Board from "./pages/Board/Board";
 
 function App() {
   const router = createBrowserRouter([
