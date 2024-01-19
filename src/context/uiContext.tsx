@@ -3,10 +3,10 @@ import { createContext, useState, ReactNode } from "react";
 type UiContextType = {
   isDarkMode: boolean;
   isSidebarShown: boolean;
-  activeBoard: string;
+  activeBoard: number;
   toggleSidebar: () => void;
   toggleDarkMode: () => void;
-  selectBoard: (board: string) => void;
+  selectBoard: (board: number) => void;
 };
 
 type UiContextProviderPropsType = {
@@ -16,7 +16,7 @@ type UiContextProviderPropsType = {
 const initialState: UiContextType = {
   isDarkMode: true,
   isSidebarShown: true,
-  activeBoard: "",
+  activeBoard: 0,
   toggleSidebar: () => {},
   toggleDarkMode: () => {},
   selectBoard: () => {},
@@ -27,7 +27,7 @@ export const UiContext = createContext(initialState);
 export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
   const [isDarkMode, setDarkMode] = useState(true);
   const [isSidebarShown, setSidebarShown] = useState(true);
-  const [activeBoard, setActiveBoard] = useState("");
+  const [activeBoard, setActiveBoard] = useState(0);
 
   const toggleSidebar = () => {
     setSidebarShown((prevState) => !prevState);
@@ -37,7 +37,7 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
     setDarkMode((prevState) => !prevState);
   };
 
-  const selectBoard = (board: string) => {
+  const selectBoard = (board: number) => {
     setActiveBoard(board);
   };
 
