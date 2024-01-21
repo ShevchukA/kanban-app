@@ -6,6 +6,7 @@
   align-items: center;
   flex-shrink: 0;
   border-radius: 0px 100px 100px 0px;
+  border: none;
   background: none;
   color: var(--color-medium-gray, #828FA3);
   font-size: 15px;
@@ -13,6 +14,7 @@
   text-decoration: none;
   transition: all 200ms;
   padding-left: 32px;
+  cursor: pointer;
 }
 
 .link path {
@@ -20,11 +22,12 @@
 }
 
 .link:hover {
-  color: var(--color-white, #FFF);
+  color: var(--color-purple, #635FC7);
+  background: var(--color-white, #FFF);
 }
 
 .link:hover path {
-  fill: var(--color-white, #FFF);
+  fill: var(--color-purple, #635FC7);
 }
 
 .link--active {
@@ -36,11 +39,11 @@
   fill: var(--color-white, #FFF);
 }
 
-.link--create {
+.link--spacial {
   background: none;
   color: var(--color-purple, #635FC7);
 }
 
-.link--create path {
+.link--spacial path {
   fill: var(--color-purple, #635FC7);
 }

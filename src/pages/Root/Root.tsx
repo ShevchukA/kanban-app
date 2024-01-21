@@ -12,7 +12,7 @@ import { UiContext } from "../../context/uiContext";
 const Root = () => {
   const { isSidebarShown, toggleSidebar } = useContext(UiContext);
 
-  const handleShowSidebar = () => {
+  const handleToggleSidebar = () => {
     toggleSidebar();
   };
 
@@ -26,7 +26,7 @@ const Root = () => {
             : `${styles.container} ${styles["container--hidden"]}`
         }
       >
-        <Sidebar onClick={handleShowSidebar} />
+        <Sidebar onToggle={handleToggleSidebar} />
         <Outlet />
       </main>
     </>

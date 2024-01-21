@@ -4,6 +4,8 @@ import logoDark from "./assets/logo-dark.svg";
 import logoLight from "./assets/logo-light.svg";
 import { UiContext } from "../../context/uiContext";
 import { BoardContext } from "../../context/boardsContext";
+import Button from "../ui/Button/Button";
+import MenuButton from "../ui/MenuButton/MenuButton";
 
 const Header = () => {
   const { boards } = useContext(BoardContext);
@@ -12,13 +14,11 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__logo}>
-        <img src={logoSrc} alt="logo" />
-      </div>
-      <div className={styles.header__container}>
-        <h1 className="heading--xl">{boards[activeBoard]?.name}</h1>
-        <button>+ Add New Task</button>
-        <button>More actions</button>
+      <img src={logoSrc} alt="logo" />
+      <h1 className="heading--xl">{boards[activeBoard]?.name}</h1>
+      <div className={styles.header__controls}>
+        <Button text="+ Add New Task" size="large" />
+        <MenuButton />
       </div>
     </header>
   );

@@ -2,9 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 255px;
   height: 40px;
   flex-shrink: 0;
+  padding: 14px 24px;
   border: none;
   border-radius: 20px;
   background: var(--color-purple, #635FC7);

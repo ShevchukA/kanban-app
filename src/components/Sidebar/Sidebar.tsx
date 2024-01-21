@@ -1,14 +1,18 @@
+/// <reference types="vite-plugin-svgr/client" />
+
 import { useContext } from "react";
 import styles from "./Sidebar.module.css";
 import { BoardContext } from "../../context/boardsContext";
 import { UiContext } from "../../context/uiContext";
-import BoardLink from "./components/BoardLink/BoardLink";
+import SidebarLink from "./components/SidebarLink/SidebarLink";
+import BoardIcon from "./assets/icon-board.svg?react";
+import HideIcon from "./assets/icon-hide-sidebar.svg?react";
 
 type SidebarProps = {
-  onClick: () => void;
+  onToggle: () => void;
 };
 
-const Sidebar = ({ onClick }: SidebarProps) => {
+const Sidebar = ({ onToggle }: SidebarProps) => {
   const { boards } = useContext(BoardContext);
   const { selectBoard } = useContext(UiContext);
 
@@ -22,26 +26,34 @@ const Sidebar = ({ onClick }: SidebarProps) => {
 
   return (
     <nav className={styles.sidebar}>
-      <div className={styles.boardList}>
-        <p className={`${styles.title} text--bold`}>All boards</p>
+      <div className={styles["sidebar__boardList"]}>
+        <p className={`${styles["sidebar__title"]} text--bold`}>All boards</p>
         <ul>
           {boards.map((board, index) => (
-            <BoardLink
+            <SidebarLink
               key={board.name}
               board={board.name}
+              icon={<BoardIcon />}
               onClick={() => handleBoardSelection(index)}
             >
               {board.name}
-            </BoardLink>
+            </SidebarLink>
           ))}
-          <BoardLink onClick={handleBoardCreation}>
+          <SidebarLink
+            specialLink={true}
+            icon={<BoardIcon />}
+            onClick={handleBoardCreation}
+          >
             + Create New Board
-          </BoardLink>
+          </SidebarLink>
         </ul>
       </div>
-
-      <div>toggle</div>
-      <button onClick={onClick}>Hide Sidebar</button>
+      <div className={styles["sidebar__controls"]}>
+        <div>toggle</div>
+        <SidebarLink icon={<HideIcon />} onClick={onToggle}>
+          Hide Sidebar
+        </SidebarLink>
+      </div>
     </nav>
   );
 };
