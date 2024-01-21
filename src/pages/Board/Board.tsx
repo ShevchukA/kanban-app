@@ -9,7 +9,7 @@ const Board = () => {
 
   return (
     <div className={styles.board}>
-      <h1>{boards[activeBoard].name}</h1>
+      <h1>{boards[activeBoard]?.name}</h1>
     </div>
   );
 };

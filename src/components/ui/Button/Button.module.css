@@ -1,0 +1,50 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 255px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-purple, #635FC7);
+  color: var(--color-white, #FFF);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Plus Jakarta Sans";
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+.button--large {
+  height: 48px;
+  border-radius: 24px;
+}
+
+.button--stretched {
+  width: auto;
+  flex-shrink: 1;
+}
+
+.button--secondary {
+  background: var(--color-white, #FFF);
+  color: var(--color-purple, #635FC7);
+}
+
+.button--negative {
+  background: var(--color-red, #EA5555);
+  color: var(--color-white, #FFF);
+}
+
+.button:hover {
+  background: var(--color-purple-hover, #A8A4FF);
+}
+
+.button.button--secondary:hover {
+  background: var(--color-white, #FFF);
+}
+
+.button.button--negative:hover {
+  background: var(--color-red-hover, #FF9898);
+}

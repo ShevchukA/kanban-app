@@ -1,0 +1,46 @@
+.link {
+  display: flex;
+  width: 276px;
+  height: 48px;
+  gap: 16px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 0px 100px 100px 0px;
+  background: none;
+  color: var(--color-medium-gray, #828FA3);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 200ms;
+  padding-left: 32px;
+}
+
+.link path {
+  transition: all 200ms;
+}
+
+.link:hover {
+  color: var(--color-white, #FFF);
+}
+
+.link:hover path {
+  fill: var(--color-white, #FFF);
+}
+
+.link--active {
+  background: var(--color-purple, #635FC7);
+  color: var(--color-white, #FFF);
+}
+
+.link--active path {
+  fill: var(--color-white, #FFF);
+}
+
+.link--create {
+  background: none;
+  color: var(--color-purple, #635FC7);
+}
+
+.link--create path {
+  fill: var(--color-purple, #635FC7);
+}

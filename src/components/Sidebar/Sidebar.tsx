@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styles from "./Sidebar.module.css";
 import { BoardContext } from "../../context/boardsContext";
 import { UiContext } from "../../context/uiContext";
+import BoardLink from "./components/BoardLink/BoardLink";
 
 type SidebarProps = {
   onClick: () => void;
@@ -15,18 +16,28 @@ const Sidebar = ({ onClick }: SidebarProps) => {
     selectBoard(index);
   };
 
+  const handleBoardCreation = () => {
+    console.log("create board");
+  };
+
   return (
     <nav className={styles.sidebar}>
       <div className={styles.boardList}>
         <p className={`${styles.title} text--bold`}>All boards</p>
         <ul>
           {boards.map((board, index) => (
-            <li key={board.name} onClick={() => handleBoardSelection(index)}>
+            <BoardLink
+              key={board.name}
+              board={board.name}
+              onClick={() => handleBoardSelection(index)}
+            >
               {board.name}
-            </li>
+            </BoardLink>
           ))}
+          <BoardLink onClick={handleBoardCreation}>
+            + Create New Board
+          </BoardLink>
         </ul>
-        <button>+ Create New Board</button>
       </div>
 
       <div>toggle</div>

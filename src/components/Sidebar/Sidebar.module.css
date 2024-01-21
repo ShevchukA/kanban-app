@@ -16,7 +16,7 @@
 
 .title {
   margin: 15px 0 19px 32px;
-  color: var(--Medium-Grey, #828FA3);
+  color: var(--color-medium-grey, #828FA3);
   text-transform: uppercase;
   letter-spacing: 2.4px;
 }
