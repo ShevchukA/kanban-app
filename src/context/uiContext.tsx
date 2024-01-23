@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 type UiContextType = {
   isDarkMode: boolean;
@@ -28,6 +28,16 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
   const [isDarkMode, setDarkMode] = useState(true);
   const [isSidebarShown, setSidebarShown] = useState(true);
   const [activeBoard, setActiveBoard] = useState(0);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+    }
+  }, [isDarkMode]);
 
   const toggleSidebar = () => {
     setSidebarShown((prevState) => !prevState);

@@ -1,0 +1,44 @@
+.toggle {
+  width: 251px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  border-radius: 6px;
+  background: var(--color-board, #20212C);
+  align-self: center;
+}
+
+.toggle__switch {
+  width: 40px;
+  height: 20px;
+  border-radius: 12px;
+  background: var(--color-purple, #635FC7);
+  position: relative;
+  padding: 3px;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.toggle__switch:hover {
+  background: var(--color-purple-hover, #A8A4FF);
+}
+
+.toggle__pointer {
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  background: var(--color-white, #FFF);
+  position: absolute;
+  top: 3px;
+  transition: all 150ms;
+}
+
+.toggle--light {
+  transform: translateX(0);
+}
+
+.toggle--dark {
+  transform: translateX(20px);
+}

@@ -23,7 +23,7 @@
 
 .link:hover {
   color: var(--color-purple, #635FC7);
-  background: var(--color-white, #FFF);
+  background: var(--color-nav-hover);
 }
 
 .link:hover path {

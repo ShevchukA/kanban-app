@@ -15,6 +15,7 @@
   --color-interface: #2B2C37;
   --color-lines: #3E3F4E;
   --color-heading: #ffffff;
+  --color-nav-hover: #ffffff;
 
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-style: normal;
@@ -31,7 +32,8 @@
   --color-board: #20212C;
   --color-interface: #2B2C37;
   --color-lines: #3E3F4E;
-  --color-heading: #ffffff
+  --color-heading: #ffffff;
+  --color-nav-hover: #ffffff;
 }
 
 /* Light mode */
@@ -39,7 +41,8 @@
   --color-board: #F4F7FD;
   --color-interface: #ffffff;
   --color-lines: #635FC7;
-  --color-heading: #000112
+  --color-heading: #000112;
+  --color-nav-hover: #f0effa;
 }
 
 * {

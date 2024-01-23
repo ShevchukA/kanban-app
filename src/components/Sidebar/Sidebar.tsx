@@ -7,6 +7,7 @@ import { UiContext } from "../../context/uiContext";
 import SidebarLink from "./components/SidebarLink/SidebarLink";
 import BoardIcon from "./assets/icon-board.svg?react";
 import HideIcon from "./assets/icon-hide-sidebar.svg?react";
+import Toggle from "../ui/Toggle/Toggle";
 
 type SidebarProps = {
   onToggle: () => void;
@@ -49,7 +50,7 @@ const Sidebar = ({ onToggle }: SidebarProps) => {
         </ul>
       </div>
       <div className={styles["sidebar__controls"]}>
-        <div>toggle</div>
+        <Toggle />
         <SidebarLink icon={<HideIcon />} onClick={onToggle}>
           Hide Sidebar
         </SidebarLink>
