@@ -1,0 +1,40 @@
+.contextMenu {
+  width: 192px;
+  height: 94px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 20px 0px rgba(54, 78, 126, 0.25);
+  background: var(--color-board);
+  animation: fadeIn 150ms ease-in forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  position: absolute;
+  top: 60px;
+  right: 0px;
+  padding: 16px;
+}
+
+.contextMenu--hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.contextMenu__editItem {
+  color: var(--color-medium-grey, #828FA3);
+  cursor: pointer;
+}
+
+.contextMenu__deleteItem {
+  color: var(--color-red, #EA5555);
+  cursor: pointer;
+}
