@@ -30,11 +30,10 @@
 }
 
 .contextMenu__editItem {
-  color: var(--color-medium-grey, #828FA3);
   cursor: pointer;
 }
 
-.contextMenu__deleteItem {
+.contextMenu__deleteItem.contextMenu__deleteItem {
   color: var(--color-red, #EA5555);
   cursor: pointer;
 }

@@ -15,6 +15,7 @@ const Board = () => {
       {columns.map((column) => (
         <Column key={column.name} name={column.name} cards={column.tasks} />
       ))}
+      <Column newColumn={true} />
     </div>
   );
 };

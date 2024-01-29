@@ -43,7 +43,7 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
             handleToggleMenu();
             onEdit && onEdit();
           }}
-          className={`${styles["contextMenu__editItem"]} text`}
+          className={`text ${styles["contextMenu__editItem"]}`}
         >
           Edit {target}
         </div>
@@ -52,7 +52,7 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
             handleToggleMenu();
             onDelete && onDelete();
           }}
-          className={`${styles["contextMenu__deleteItem"]} text`}
+          className={`text ${styles["contextMenu__deleteItem"]}`}
         >
           Delete {target}
         </div>

@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
 
 :root {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-style: normal;
+  font-synthesis: none;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
   --color-black: #000112;
   --color-white: #ffffff;
   --color-purple: #635FC7;
@@ -17,15 +26,6 @@
   --color-heading: #ffffff;
   --color-nav-hover: #ffffff;
   --color-text: #828FA3;
-
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-style: normal;
-  font-synthesis: none;
-  line-height: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 /* Dark mode */
