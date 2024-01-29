@@ -9,21 +9,22 @@ import ContextMenu from "../ui/ContextMenu/ContextMenu";
 
 const Header = () => {
   const { boards } = useContext(BoardContext);
-  const { isDarkMode, activeBoard } = useContext(UiContext);
+  const { isDarkMode, activeBoardIndex } = useContext(UiContext);
   const logoSrc = isDarkMode ? logoLight : logoDark;
+  const activeBoard = boards[activeBoardIndex];
 
   const handleEditBoard = () => {
-    console.log("Edit", boards[activeBoard]?.name);
+    console.log("Edit", activeBoard?.name);
   };
 
   const handleDeleteBoard = () => {
-    console.log("Delete", boards[activeBoard]?.name);
+    console.log("Delete", activeBoard?.name);
   };
 
   return (
     <header className={styles.header}>
       <img src={logoSrc} alt="logo" />
-      <h1 className="heading--xl">{boards[activeBoard]?.name}</h1>
+      <h1 className="heading--xl">{activeBoard?.name}</h1>
       <div className={styles.header__controls}>
         <Button text="+ Add New Task" size="large" />
         <ContextMenu

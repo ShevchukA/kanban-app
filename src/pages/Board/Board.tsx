@@ -2,14 +2,19 @@ import { useContext } from "react";
 import { BoardContext } from "../../context/boardsContext";
 import styles from "./Board.module.css";
 import { UiContext } from "../../context/uiContext";
+import Column from "../../components/Column/Column";
 
 const Board = () => {
   const { boards } = useContext(BoardContext);
-  const { activeBoard } = useContext(UiContext);
+  const { activeBoardIndex } = useContext(UiContext);
+  const activeBoard = boards[activeBoardIndex];
+  const columns = activeBoard.columns;
 
   return (
     <div className={styles.board}>
-      <h1>{boards[activeBoard]?.name}</h1>
+      {columns.map((column) => (
+        <Column key={column.name} name={column.name} cards={column.tasks} />
+      ))}
     </div>
   );
 };

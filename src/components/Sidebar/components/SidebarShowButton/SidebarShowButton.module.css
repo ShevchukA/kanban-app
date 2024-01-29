@@ -1,0 +1,35 @@
+.sidebar__showButton {
+  width: 56px;
+  height: 48px;
+  border-radius: 0px 100px 100px 0px;
+  background: var(--color-purple, #635FC7);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: -56px;
+  bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 150ms ease-in 200ms forwards;
+  animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+
+.sidebar__showButton:hover {
+  background: var(--color-purple-hover, #A8A4FF);
+}
+
+.sidebar__showButton--hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

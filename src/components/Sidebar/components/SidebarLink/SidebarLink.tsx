@@ -22,8 +22,8 @@ const SidebarLink = ({
       onClick={onClick}
       className={({ isActive }) => {
         return isActive
-          ? `${styles.link} ${styles["link--active"]}`
-          : styles.link;
+          ? `${styles.sidebar__link} ${styles["sidebar__link--active"]}`
+          : styles.sidebar__link;
       }}
     >
       {icon}
@@ -32,7 +32,9 @@ const SidebarLink = ({
   ) : (
     <button
       onClick={onClick}
-      className={`${styles.link} ${specialLink ? styles["link--spacial"] : ""}`}
+      className={`${styles.sidebar__link} ${
+        specialLink ? styles["sidebar__link--spacial"] : ""
+      }`}
     >
       {icon}
       {children}

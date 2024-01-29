@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MenuButton from "../MenuButton/MenuButton";
 import styles from "./ContextMenu.module.css";
 
@@ -11,6 +11,20 @@ type ContextMenuPropsType = {
 const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
+  const menuRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (isMenuShown) {
+  //     document.addEventListener("click", (e) => {
+  //       if (!menuRef.current?.contains(e.target)) {
+  //         handleToggleMenu();
+  //       }
+  //     });
+  //   } else {
+  //     document.removeEventListener("click", () => {});
+  //   }
+  // }, [isMenuShown]);
+
   const handleToggleMenu = () => {
     setIsMenuShown((prevState) => !prevState);
   };
@@ -19,18 +33,25 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
     <>
       <MenuButton onClick={handleToggleMenu} />
       <div
+        ref={menuRef}
         className={`${styles.contextMenu} ${
           isMenuShown ? "" : styles["contextMenu--hidden"]
         }`}
       >
         <div
-          onClick={onEdit}
+          onClick={() => {
+            handleToggleMenu();
+            onEdit && onEdit();
+          }}
           className={`${styles["contextMenu__editItem"]} text`}
         >
           Edit {target}
         </div>
         <div
-          onClick={onDelete}
+          onClick={() => {
+            handleToggleMenu();
+            onDelete && onDelete();
+          }}
           className={`${styles["contextMenu__deleteItem"]} text`}
         >
           Delete {target}

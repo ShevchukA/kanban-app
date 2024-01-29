@@ -7,6 +7,7 @@
   justify-content: space-between;
   background-color: var(--color-interface);
   border-right: 1px solid var(--color-lines);
+  position: relative;
 }
 
 .sidebar__boardList {

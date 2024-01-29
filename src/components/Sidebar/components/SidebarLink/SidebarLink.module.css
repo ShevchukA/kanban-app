@@ -1,4 +1,4 @@
-.link {
+.sidebar__link {
   display: flex;
   width: 276px;
   height: 48px;
@@ -17,33 +17,33 @@
   cursor: pointer;
 }
 
-.link path {
+.sidebar__link path {
   transition: all 200ms;
 }
 
-.link:hover {
+.sidebar__link:hover {
   color: var(--color-purple, #635FC7);
   background: var(--color-nav-hover);
 }
 
-.link:hover path {
+.sidebar__link:hover path {
   fill: var(--color-purple, #635FC7);
 }
 
-.link--active {
+.sidebar__link--active {
   background: var(--color-purple, #635FC7);
   color: var(--color-white, #FFF);
 }
 
-.link--active path {
+.sidebar__link--active path {
   fill: var(--color-white, #FFF);
 }
 
-.link--spacial {
+.sidebar__link--spacial {
   background: none;
   color: var(--color-purple, #635FC7);
 }
 
-.link--spacial path {
+.sidebar__link--spacial path {
   fill: var(--color-purple, #635FC7);
 }
