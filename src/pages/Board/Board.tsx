@@ -12,11 +12,13 @@ const Board = () => {
 
   return (
     <div className={styles.board}>
-      <div className={styles.board__container}>
-        {columns.map((column) => (
-          <Column key={column.name} name={column.name} cards={column.tasks} />
-        ))}
-        <Column addNewColumn={true} />
+      <div className={styles.board__scrollContainer}>
+        <div className={styles.board__container}>
+          {columns.map((column) => (
+            <Column key={column.name} name={column.name} cards={column.tasks} />
+          ))}
+          <Column addNewColumn={true} />
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,15 @@
 .board {
-  width: 100%;
-  height: 100%;
-  /* display: flex; */
+  flex: 1;
   background-color: var(--color-board);
+  display: flex;
   overflow: scroll;
 }
 
+.board__scrollContainer {
+  display: block;
+}
+
 .board__container {
-  /* flex: 1; */
   display: flex;
   flex-direction: row;
   gap: 24px;

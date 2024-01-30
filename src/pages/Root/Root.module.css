@@ -1,6 +1,13 @@
-.container {
+.app {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
+  background-color: var(--color-interface);
+}
+
+.main {
+  height: 100%;
+  /* width: calc(100% + 300px); */
   display: flex;
   flex-direction: row;
   transition: all 200ms;
@@ -8,6 +15,6 @@
 
 }
 
-.container--hidden {
+.main--hidden {
   transform: translateX(-300px);
 }

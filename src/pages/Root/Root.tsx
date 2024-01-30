@@ -17,19 +17,19 @@ const Root = () => {
   };
 
   return (
-    <>
+    <div className={styles.app}>
       <Header />
       <main
         className={
           isSidebarShown
-            ? `${styles.container}`
-            : `${styles.container} ${styles["container--hidden"]}`
+            ? `${styles.main}`
+            : `${styles.main} ${styles["main--hidden"]}`
         }
       >
         <Sidebar onToggle={handleToggleSidebar} />
         <Outlet />
       </main>
-    </>
+    </div>
   );
 };
 

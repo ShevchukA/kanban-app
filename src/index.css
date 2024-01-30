@@ -56,14 +56,12 @@
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--color-interface);
+  height: 100%;
 }
 
 body {
+  height: 100vh;
+  overflow: hidden;
   box-sizing: inherit;
 }
 
