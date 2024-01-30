@@ -96,3 +96,18 @@ body {
   font-size: 12px;
   font-weight: 700;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-board);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-purple);
+  border-radius: 5px;
+}

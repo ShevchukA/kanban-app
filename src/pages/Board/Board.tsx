@@ -12,10 +12,12 @@ const Board = () => {
 
   return (
     <div className={styles.board}>
-      {columns.map((column) => (
-        <Column key={column.name} name={column.name} cards={column.tasks} />
-      ))}
-      <Column newColumn={true} />
+      <div className={styles.board__container}>
+        {columns.map((column) => (
+          <Column key={column.name} name={column.name} cards={column.tasks} />
+        ))}
+        <Column addNewColumn={true} />
+      </div>
     </div>
   );
 };

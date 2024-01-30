@@ -3,11 +3,11 @@ import { Card } from "../../models/card";
 
 type TaskCardProps = {
   card?: Card;
-  newCard?: boolean;
+  addNewCard?: boolean;
 };
 
-const TaskCard = ({ card, newCard }: TaskCardProps) => {
-  return newCard ? (
+const TaskCard = ({ card, addNewCard }: TaskCardProps) => {
+  return addNewCard ? (
     <div className={`${styles.card} ${styles["card--new"]}`}>
       <button className={styles.card__addBtn}>+ New Task</button>
     </div>

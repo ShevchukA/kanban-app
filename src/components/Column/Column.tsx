@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import styles from "./Column.module.css";
 import { Card } from "../../models/card";
 import TaskCard from "../TaskCard/TaskCard";
@@ -6,12 +5,11 @@ import TaskCard from "../TaskCard/TaskCard";
 type ColumnProps = {
   name?: string;
   cards?: Card[];
-  newColumn?: boolean;
-  children?: ReactNode;
+  addNewColumn?: boolean;
 };
 
-const Column = ({ name, cards, newColumn }: ColumnProps) => {
-  return newColumn ? (
+const Column = ({ name, cards, addNewColumn }: ColumnProps) => {
+  return addNewColumn ? (
     <div className={`${styles.column} ${styles["column--new"]}`}>
       <button className={styles.column__addBtn}>+ New Column</button>
     </div>
@@ -26,7 +24,7 @@ const Column = ({ name, cards, newColumn }: ColumnProps) => {
       {cards?.map((card) => (
         <TaskCard key={card?.title} card={card} />
       ))}
-      <TaskCard newCard={true} />
+      <TaskCard addNewCard={true} />
     </div>
   );
 };
