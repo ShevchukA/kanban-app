@@ -9,7 +9,7 @@ import ContextMenu from "../ui/ContextMenu/ContextMenu";
 
 const Header = () => {
   const { boards } = useContext(BoardContext);
-  const { isDarkMode, activeBoardIndex } = useContext(UiContext);
+  const { isDarkMode, activeBoardIndex, openModal } = useContext(UiContext);
   const logoSrc = isDarkMode ? logoLight : logoDark;
   const activeBoard = boards[activeBoardIndex];
 
@@ -26,7 +26,13 @@ const Header = () => {
       <img src={logoSrc} alt="logo" />
       <h1 className="heading--xl">{activeBoard?.name}</h1>
       <div className={styles.header__controls}>
-        <Button text="+ Add New Task" size="large" />
+        <Button
+          text="+ Add New Task"
+          size="large"
+          // onClick={() => {
+          //   openModal(<TaskModal />);
+          // }}
+        />
         <ContextMenu
           target="Board"
           onDelete={handleDeleteBoard}

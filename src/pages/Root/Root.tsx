@@ -5,12 +5,14 @@ import Header from "../../components/Header/Header";
 import styles from "./Root.module.css";
 import { useContext } from "react";
 import { UiContext } from "../../context/uiContext";
+import Modal from "../../components/ui/Modal/Modal";
 // type RootProps = {
 //   propName: string;
 // };
 
 const Root = () => {
-  const { isSidebarShown, toggleSidebar } = useContext(UiContext);
+  const { isSidebarShown, isModalShown, activeModal, toggleSidebar } =
+    useContext(UiContext);
 
   const handleToggleSidebar = () => {
     toggleSidebar();
@@ -18,6 +20,7 @@ const Root = () => {
 
   return (
     <div className={styles.app}>
+      {isModalShown && <Modal window={activeModal} />}
       <Header />
       <main
         className={
