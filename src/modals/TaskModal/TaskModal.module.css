@@ -1,0 +1,60 @@
+.taskModal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.taskModal__title {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskModal__title button {
+  position: relative;
+  left: 7px;
+}
+
+.taskModal__subtasks {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style-type: none;
+}
+
+.taskModal__subtask {
+  flex-grow: 1;
+  display: flex;
+  gap: 16px;
+  padding: 12px;
+  align-items: center;
+  background-color: var(--color-board);
+  border-radius: 4px;
+}
+
+.taskModal__subtask input[type="checkbox"] {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--color-purple, #635FC7);
+  cursor: pointer;
+}
+
+.taskModal__subtask input[type="checkbox"]:disabled {
+  border: 1px solid rgba(130, 143, 163, 0.25);
+  background: var(--color-dark-grey, #2B2C37);
+}
+
+.taskModal__subtask label {
+  color: var(--color-heading);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.taskModal__subtask--completed label {
+  opacity: 0.5;
+  text-decoration-line: line-through;
+}

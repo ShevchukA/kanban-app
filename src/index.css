@@ -91,6 +91,7 @@ body {
 }
 
 .heading--s {
+  color: var(--color-heading);
   font-size: 12px;
   font-weight: 700;
 }
