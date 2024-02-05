@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
 import { Board } from "../models/board";
-import data from "../data/data.json";
+// import data from "../data/data.json";
 
 type BoardContextProviderPropsType = {
   children: ReactNode;
@@ -21,7 +21,7 @@ export const BoardContext = createContext(initialState);
 export const BoardContextProvider = ({
   children,
 }: BoardContextProviderPropsType) => {
-  const [boards, setBoards] = useState<Board[]>(data.boards);
+  const [boards, setBoards] = useState<Board[]>([]);
   const updateBoards = (boards: Board[]) => {
     setBoards(boards);
   };

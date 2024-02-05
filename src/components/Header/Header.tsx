@@ -3,42 +3,45 @@ import styles from "./Header.module.css";
 import logoDark from "./assets/logo-dark.svg";
 import logoLight from "./assets/logo-light.svg";
 import { UiContext } from "../../context/uiContext";
-import { BoardContext } from "../../context/boardsContext";
 import Button from "../ui/Button/Button";
 import ContextMenu from "../ui/ContextMenu/ContextMenu";
 
-const Header = () => {
-  const { boards } = useContext(BoardContext);
-  const { isDarkMode, activeBoardIndex, openModal } = useContext(UiContext);
+type HeaderPropsType = {
+  title?: string;
+};
+
+const Header = ({ title }: HeaderPropsType) => {
+  const { isDarkMode, openModal } = useContext(UiContext);
   const logoSrc = isDarkMode ? logoLight : logoDark;
-  const activeBoard = boards[activeBoardIndex];
 
   const handleEditBoard = () => {
-    console.log("Edit", activeBoard?.name);
+    console.log("Edit", title);
   };
 
   const handleDeleteBoard = () => {
-    console.log("Delete", activeBoard?.name);
+    console.log("Delete", title);
   };
 
   return (
     <header className={styles.header}>
       <img src={logoSrc} alt="logo" />
-      <h1 className="heading--xl">{activeBoard?.name}</h1>
-      <div className={styles.header__controls}>
-        <Button
-          text="+ Add New Task"
-          size="large"
-          // onClick={() => {
-          //   openModal(<TaskModal />);
-          // }}
-        />
-        <ContextMenu
-          target="Board"
-          onDelete={handleDeleteBoard}
-          onEdit={handleEditBoard}
-        />
-      </div>
+      <h1 className="heading--xl">{title}</h1>
+      {title && (
+        <div className={styles.header__controls}>
+          <Button
+            text="+ Add New Task"
+            size="large"
+            // onClick={() => {
+            //   openModal(<TaskModal />);
+            // }}
+          />
+          <ContextMenu
+            target="Board"
+            onDelete={handleDeleteBoard}
+            onEdit={handleEditBoard}
+          />
+        </div>
+      )}
     </header>
   );
 };

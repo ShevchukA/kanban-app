@@ -6,15 +6,15 @@ import Column from "../../components/Column/Column";
 
 const Board = () => {
   const { boards } = useContext(BoardContext);
-  const { activeBoardIndex } = useContext(UiContext);
-  const activeBoard = boards[activeBoardIndex];
-  const columns = activeBoard.columns;
+  const { activeBoardId } = useContext(UiContext);
+  const activeBoard = boards.find((board) => board.id === activeBoardId);
+  const columns = activeBoard?.columns;
 
   return (
     <div className={styles.board}>
       <div className={styles.board__scrollContainer}>
         <div className={styles.board__container}>
-          {columns.map((column) => (
+          {columns?.map((column) => (
             <Column key={column.name} name={column.name} cards={column.tasks} />
           ))}
           <Column addNewColumn={true} />

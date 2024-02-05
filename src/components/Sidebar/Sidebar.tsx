@@ -2,7 +2,6 @@
 
 import { useContext } from "react";
 import styles from "./Sidebar.module.css";
-import { BoardContext } from "../../context/boardsContext";
 import { UiContext } from "../../context/uiContext";
 import SidebarLink from "./components/SidebarLink/SidebarLink";
 import BoardIcon from "./assets/icon-board.svg?react";
@@ -10,17 +9,18 @@ import HideIcon from "./assets/icon-hide-sidebar.svg?react";
 import ShowIcon from "./assets/icon-show-sidebar.svg?react";
 import SidebarShowButton from "./components/SidebarShowButton/SidebarShowButton";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
+import { Board } from "../../models/board";
 
 type SidebarProps = {
+  boards: Board[];
   onToggle: () => void;
 };
 
-const Sidebar = ({ onToggle }: SidebarProps) => {
-  const { boards } = useContext(BoardContext);
+const Sidebar = ({ boards, onToggle }: SidebarProps) => {
   const { selectBoard } = useContext(UiContext);
 
-  const handleBoardSelection = (index: number) => {
-    selectBoard(index);
+  const handleBoardSelection = (id: number) => {
+    selectBoard(id);
   };
 
   const handleBoardCreation = () => {
@@ -31,25 +31,27 @@ const Sidebar = ({ onToggle }: SidebarProps) => {
     <nav className={styles.sidebar}>
       <div className={styles["sidebar__boardList"]}>
         <p className={`${styles["sidebar__title"]} text--bold`}>All boards</p>
-        <ul>
-          {boards.map((board, index) => (
+        {boards && (
+          <ul>
+            {boards.map((board) => (
+              <SidebarLink
+                key={board.name}
+                board={board.name}
+                icon={<BoardIcon />}
+                onClick={() => handleBoardSelection(board.id)}
+              >
+                {board.name}
+              </SidebarLink>
+            ))}
             <SidebarLink
-              key={board.name}
-              board={board.name}
+              specialLink={true}
               icon={<BoardIcon />}
-              onClick={() => handleBoardSelection(index)}
+              onClick={handleBoardCreation}
             >
-              {board.name}
+              + Create New Board
             </SidebarLink>
-          ))}
-          <SidebarLink
-            specialLink={true}
-            icon={<BoardIcon />}
-            onClick={handleBoardCreation}
-          >
-            + Create New Board
-          </SidebarLink>
-        </ul>
+          </ul>
+        )}
       </div>
       <div className={styles["sidebar__controls"]}>
         <ThemeToggle />
