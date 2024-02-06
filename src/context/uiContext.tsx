@@ -4,7 +4,7 @@ type UiContextType = {
   isDarkMode: boolean;
   isSidebarShown: boolean;
   isModalShown: boolean;
-  activeBoardId: number;
+  activeBoardIndex: number;
   activeModal: ReactNode | null;
   toggleSidebar: () => void;
   toggleDarkMode: () => void;
@@ -21,7 +21,7 @@ const initialState: UiContextType = {
   isDarkMode: true,
   isSidebarShown: true,
   isModalShown: false,
-  activeBoardId: 0,
+  activeBoardIndex: 0,
   activeModal: null,
   toggleSidebar: () => {},
   toggleDarkMode: () => {},
@@ -37,7 +37,7 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
   const [isSidebarShown, setSidebarIsShown] = useState(true);
   const [isModalShown, setModalIsShown] = useState(false);
   const [activeModal, setActiveModal] = useState<ReactNode>(null);
-  const [activeBoardId, setActiveBoardId] = useState(0);
+  const [activeBoardIndex, setActiveBoardIndex] = useState(0);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -66,8 +66,8 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
     setModalIsShown(false);
   };
 
-  const selectBoard = (board: number) => {
-    setActiveBoardId(board);
+  const selectBoard = (index: number) => {
+    setActiveBoardIndex(index);
   };
 
   return (
@@ -76,7 +76,7 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
         isDarkMode,
         isSidebarShown,
         isModalShown,
-        activeBoardId,
+        activeBoardIndex,
         activeModal,
         toggleSidebar,
         toggleDarkMode,

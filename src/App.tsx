@@ -1,11 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root/Root";
 import Board from "./pages/Board/Board";
-import { useContext, useEffect } from "react";
-import { BoardContext } from "./context/boardsContext";
-
-import { useQuery } from "@tanstack/react-query";
-import { getBoards } from "./database/api";
 
 function App() {
   // useEffect(() => {

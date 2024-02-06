@@ -3,12 +3,11 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 
 import styles from "./Root.module.css";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UiContext } from "../../context/uiContext";
 import Modal from "../../components/ui/Modal/Modal";
-import { BoardContext } from "../../context/boardsContext";
 import { useQuery } from "@tanstack/react-query";
-import { getBoards } from "../../database/api";
+import { getBoardsList } from "../../database/api";
 import { Board } from "../../models/board";
 
 const Root = () => {
@@ -16,25 +15,24 @@ const Root = () => {
     isSidebarShown,
     isModalShown,
     activeModal,
-    activeBoardId,
-    selectBoard,
+    activeBoardIndex,
     toggleSidebar,
   } = useContext(UiContext);
 
-  const { updateBoards } = useContext(BoardContext);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["getBoards"],
-    queryFn: getBoards, // fetch from my api
+  const { data } = useQuery({
+    queryKey: ["getBoardsList"],
+    queryFn: getBoardsList, // fetch from my api
+    select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
   });
 
-  useEffect(() => {
-    console.log(data);
-    if (data) {
-      updateBoards(data);
-      selectBoard(data[0]?.id);
-    }
-  }, [data]);
+  const boardTitle = data && data[activeBoardIndex];
+
+  // useEffect(() => {
+  //   if (data) {
+  //     updateBoards(data);
+  //     selectBoard(data[0]?.id);
+  //   }
+  // }, [data]);
 
   const handleToggleSidebar = () => {
     toggleSidebar();
@@ -43,9 +41,7 @@ const Root = () => {
   return (
     <div className={styles.app}>
       {isModalShown && <Modal window={activeModal} />}
-      <Header
-        title={data?.find((board: Board) => board.id === activeBoardId)?.name}
-      />
+      <Header title={boardTitle} />
       <main
         className={
           isSidebarShown
@@ -54,7 +50,7 @@ const Root = () => {
         }
       >
         <Sidebar boards={data} onToggle={handleToggleSidebar} />
-        {isLoading ? "Loading..." : <Outlet />}
+        <Outlet />{" "}
       </main>
     </div>
   );

@@ -9,18 +9,17 @@ import HideIcon from "./assets/icon-hide-sidebar.svg?react";
 import ShowIcon from "./assets/icon-show-sidebar.svg?react";
 import SidebarShowButton from "./components/SidebarShowButton/SidebarShowButton";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
-import { Board } from "../../models/board";
 
 type SidebarProps = {
-  boards: Board[];
+  boards: string[];
   onToggle: () => void;
 };
 
 const Sidebar = ({ boards, onToggle }: SidebarProps) => {
   const { selectBoard } = useContext(UiContext);
 
-  const handleBoardSelection = (id: number) => {
-    selectBoard(id);
+  const handleBoardSelection = (index: number) => {
+    selectBoard(index);
   };
 
   const handleBoardCreation = () => {
@@ -33,14 +32,14 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
         <p className={`${styles["sidebar__title"]} text--bold`}>All boards</p>
         {boards && (
           <ul>
-            {boards.map((board) => (
+            {boards.map((board, index) => (
               <SidebarLink
-                key={board.name}
-                board={board.name}
+                key={board}
+                board={board}
                 icon={<BoardIcon />}
-                onClick={() => handleBoardSelection(board.id)}
+                onClick={() => handleBoardSelection(index)}
               >
-                {board.name}
+                {board}
               </SidebarLink>
             ))}
             <SidebarLink
