@@ -27,7 +27,7 @@ const TaskModal = ({ card }: TaskModalProps) => {
                     : `${styles.taskModal__subtask}`
                 }
               >
-                <input type="checkbox" checked={subtask.isCompleted} />
+                <input type="checkbox" defaultChecked={subtask.isCompleted} />
                 <label>{subtask.title}</label>
               </li>
             ))}

@@ -1,3 +1,5 @@
+import data from "./data.json";
+
 const URL =
   "https://my-kanban-e646e-default-rtdb.asia-southeast1.firebasedatabase.app/kanban";
 
@@ -18,4 +20,11 @@ export async function getBoard(index: number) {
   const data = await res.json();
   // return data.find((board: Board) => board.id === id) || null;
   return data;
+}
+
+export async function resetServerData() {
+  const res = await fetch(URL, { method: "PUT", body: JSON.stringify(data) });
+  if (!res.ok) {
+    throw new Error(`Can't reset data`);
+  }
 }
