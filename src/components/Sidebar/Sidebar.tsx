@@ -9,6 +9,7 @@ import HideIcon from "./assets/icon-hide-sidebar.svg?react";
 import ShowIcon from "./assets/icon-show-sidebar.svg?react";
 import SidebarShowButton from "./components/SidebarShowButton/SidebarShowButton";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
+import BoardModal from "../../modals/BoardModal/BoardModal";
 
 type SidebarProps = {
   boards: string[];
@@ -16,14 +17,14 @@ type SidebarProps = {
 };
 
 const Sidebar = ({ boards, onToggle }: SidebarProps) => {
-  const { selectBoard } = useContext(UiContext);
+  const { selectBoard, openModal } = useContext(UiContext);
 
   const handleBoardSelection = (index: number) => {
     selectBoard(index);
   };
 
   const handleBoardCreation = () => {
-    console.log("create board");
+    openModal(<BoardModal type="newBoard" />);
   };
 
   return (

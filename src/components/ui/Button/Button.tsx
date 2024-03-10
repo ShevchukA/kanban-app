@@ -6,6 +6,7 @@ type ButtonPropsType = {
   type?: "secondary" | "negative";
   stretched?: boolean;
   disabled?: boolean;
+  submit?: boolean;
   onClick?: () => void;
 };
 
@@ -15,6 +16,7 @@ const Button = ({
   type,
   stretched,
   disabled,
+  submit,
   onClick,
 }: ButtonPropsType) => {
   const style = `${styles.button} ${
@@ -24,7 +26,12 @@ const Button = ({
   } ${stretched ? styles["button--stretched"] : ""}`;
 
   return (
-    <button disabled={disabled} className={style} onClick={onClick}>
+    <button
+      disabled={disabled}
+      className={style}
+      onClick={onClick}
+      type={submit ? "submit" : "button"}
+    >
       {text}
     </button>
   );
