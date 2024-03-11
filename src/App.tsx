@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root/Root";
 import Board from "./pages/Board/Board";
+// import data from "./database/data.json";
+// import { useEffect } from "react";
 
 function App() {
   // useEffect(() => {
