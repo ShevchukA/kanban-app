@@ -3,7 +3,7 @@ import Button from "../../components/ui/Button/Button";
 import InputText from "../../components/ui/InputText/InputText";
 import styles from "./BoardModal.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addNewBoard } from "../../database/api";
+import { updateBoards } from "../../database/api";
 import { Board } from "../../models/board";
 import { Column } from "../../models/column";
 import { UiContext } from "../../context/uiContext";
@@ -25,8 +25,8 @@ const BoardModal = ({ type }: BoardModalProps) => {
 
   const queryClient = useQueryClient();
 
-  const boardMutation = useMutation({
-    mutationFn: addNewBoard,
+  const boardsMutation = useMutation({
+    mutationFn: updateBoards,
     onSettled: () => {
       // refetch list of boards by setting initial query as invalid
       queryClient.invalidateQueries({
@@ -34,12 +34,13 @@ const BoardModal = ({ type }: BoardModalProps) => {
       });
       // TODO update cache
     },
-    onSuccess: (_, variables) => {
-      navigate(`/boards/${variables.name.toLowerCase()}`);
-      // TODO
-      selectBoard(variables.id);
-
-      closeModal();
+    onSuccess: (data) => {
+      if (data) {
+        // navigate to the last board in the list
+        navigate(`/boards/${data.at(-1).name.toLowerCase()}`);
+        selectBoard(data.length - 1);
+        closeModal();
+      }
     },
   });
 
@@ -78,7 +79,11 @@ const BoardModal = ({ type }: BoardModalProps) => {
         columns: columns,
       } as Board;
 
-      boardMutation.mutate(newBoard);
+      const boardsList: Board[] =
+        queryClient.getQueryData(["getBoardsList"]) || [];
+      const newBoardsList = [...boardsList, newBoard];
+
+      boardsMutation.mutate(newBoardsList);
 
       // const form = e.target as HTMLFormElement;
       // const title = form.elements.namedItem("name") as HTMLInputElement;
@@ -111,11 +116,11 @@ const BoardModal = ({ type }: BoardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={boardMutation.isPending}
+        disabled={boardsMutation.isPending}
       />
       {/* TODO Error modal */}
-      {boardMutation.isError && (
-        <p className="text">{boardMutation.error.message}</p>
+      {boardsMutation.isError && (
+        <p className="text">{boardsMutation.error.message}</p>
       )}
     </form>
   );

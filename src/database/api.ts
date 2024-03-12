@@ -10,6 +10,8 @@ export async function getBoardsList() {
     throw new Error(`Can't load boards... Network response was not ok`);
   }
   const data = await res.json();
+  console.log(data);
+
   return data;
 }
 
@@ -32,6 +34,18 @@ export async function resetServerData() {
   if (!res.ok) {
     throw new Error(`Can't reset data`);
   }
+}
+
+export async function updateBoards(boards: Board[]) {
+  const res = await fetch(`${URL}/boards.json`, {
+    method: "PUT",
+    body: JSON.stringify(boards),
+  });
+  if (!res.ok) {
+    throw new Error(`Can't update server data`);
+  }
+  const data = await res.json();
+  return data;
 }
 
 export async function addNewBoard(board: Board) {
