@@ -25,13 +25,10 @@ export async function getBoard(index: number) {
 // Mutations
 
 export async function resetServerData() {
-  const res = await fetch(
-    "https://my-kanban-e646e-default-rtdb.asia-southeast1.firebasedatabase.app/kanban.json",
-    {
-      method: "PUT",
-      body: JSON.stringify(data),
-    }
-  );
+  const res = await fetch(`${URL}.json`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
   if (!res.ok) {
     throw new Error(`Can't reset data`);
   }

@@ -1,11 +1,23 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.label {
+  --color-text: var(--color-heading);
+  margin-bottom: 8px;
 }
 
 .input {
   height: 40px;
+  width: 100%;
   background-color: var(--color-interface);
   border: solid 1px rgba(130, 143, 163, 0.25);
   border-radius: 4px;
@@ -13,14 +25,4 @@
   color: var(--color-heading);
 
   /* TODO outline style */
-}
-
-/* TODO */
-.input:-webkit-autofill {
-  background-color: var(--color-interface) !important;
-  color: var(--color-heading) !important;
-}
-
-.label {
-  --color-text: var(--color-heading);
 }

@@ -10,7 +10,7 @@ type UiContextType = {
   toggleDarkMode: () => void;
   openModal: (modal: ReactNode) => void;
   closeModal: () => void;
-  selectBoard: (board: number) => void;
+  selectBoard: (index: number) => void;
 };
 
 type UiContextProviderPropsType = {

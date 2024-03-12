@@ -42,7 +42,7 @@ const Board = () => {
       <div className={styles.board__scrollContainer}>
         <div className={styles.board__container}>
           {columns?.map((column: ColumnType) => (
-            <Column key={column.name} name={column.name} cards={column.tasks} />
+            <Column key={column.id} name={column.name} cards={column.tasks} />
           ))}
           <Column addNewColumn={true} />
         </div>
