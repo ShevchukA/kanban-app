@@ -10,8 +10,6 @@ export async function getBoardsList() {
     throw new Error(`Can't load boards... Network response was not ok`);
   }
   const data = await res.json();
-  console.log(data);
-
   return data;
 }
 

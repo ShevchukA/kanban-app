@@ -9,6 +9,8 @@ import { Column as ColumnType } from "../../models/column";
 const Board = () => {
   const { activeBoardIndex } = useContext(UiContext);
 
+  // the code below is an imitation of query to the backend to get single board
+  // all boards have already fetched in the initial query 'getBoardsList'
   const {
     data: board,
     isLoading,

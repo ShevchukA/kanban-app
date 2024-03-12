@@ -37,7 +37,7 @@ const BoardModal = ({ type }: BoardModalProps) => {
     onSuccess: (data) => {
       if (data) {
         // navigate to the last board in the list
-        navigate(`/boards/${data.at(-1).name.toLowerCase()}`);
+        navigate(`/boards/${data.at(-1).id}`);
         selectBoard(data.length - 1);
         closeModal();
       }
@@ -73,14 +73,16 @@ const BoardModal = ({ type }: BoardModalProps) => {
     e.preventDefault();
 
     if (name.length !== 0) {
-      const newBoard = {
+      const newBoard: Board = {
         id: generateId(),
         name: name,
         columns: columns,
-      } as Board;
+      };
 
+      // get boards array from cache for further mutation
       const boardsList: Board[] =
         queryClient.getQueryData(["getBoardsList"]) || [];
+
       const newBoardsList = [...boardsList, newBoard];
 
       boardsMutation.mutate(newBoardsList);

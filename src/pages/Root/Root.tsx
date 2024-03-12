@@ -8,7 +8,6 @@ import { UiContext } from "../../context/uiContext";
 import Modal from "../../components/ui/Modal/Modal";
 import { useQuery } from "@tanstack/react-query";
 import { getBoardsList } from "../../database/api";
-import { Board } from "../../models/board";
 
 const Root = () => {
   const {
@@ -19,13 +18,13 @@ const Root = () => {
     toggleSidebar,
   } = useContext(UiContext);
 
-  const { data } = useQuery({
+  const { data: boards } = useQuery({
     queryKey: ["getBoardsList"],
     queryFn: getBoardsList, // fetch from my api
-    select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
+    // select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
   });
 
-  const boardTitle = data && data[activeBoardIndex];
+  const boardTitle = boards && boards[activeBoardIndex]?.name;
 
   // useEffect(() => {
   //   if (data) {
@@ -49,7 +48,7 @@ const Root = () => {
             : `${styles.main} ${styles["main--hidden"]}`
         }
       >
-        <Sidebar boards={data} onToggle={handleToggleSidebar} />
+        <Sidebar boards={boards} onToggle={handleToggleSidebar} />
         <Outlet />{" "}
       </main>
     </div>

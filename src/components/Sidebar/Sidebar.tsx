@@ -13,9 +13,10 @@ import BoardModal from "../../modals/BoardModal/BoardModal";
 import Button from "../ui/Button/Button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { resetServerData } from "../../database/api";
+import { Board } from "../../models/board";
 
 type SidebarProps = {
-  boards: string[];
+  boards: Board[];
   onToggle: () => void;
 };
 
@@ -47,14 +48,14 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
         <p className={`${styles["sidebar__title"]} text--bold`}>All boards</p>
         {boards && (
           <ul>
-            {boards.map((board, index) => (
+            {boards.map((board: Board, index: number) => (
               <SidebarLink
-                key={board}
-                board={board}
+                key={board.id}
+                link={board.id}
                 icon={<BoardIcon />}
                 onClick={() => handleBoardSelection(index)}
               >
-                {board}
+                {board.name}
               </SidebarLink>
             ))}
             <SidebarLink

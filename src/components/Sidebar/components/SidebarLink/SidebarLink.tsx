@@ -3,22 +3,22 @@ import styles from "./SidebarLink.module.css";
 import { ReactNode } from "react";
 
 type SidebarLinkPropsType = {
-  board?: string;
+  link?: string;
   children?: ReactNode;
   icon?: ReactNode;
   specialLink?: boolean;
   onClick?: () => void;
 };
 const SidebarLink = ({
-  board,
+  link,
   children,
   icon,
   specialLink,
   onClick,
 }: SidebarLinkPropsType) => {
-  return board ? (
+  return link ? (
     <NavLink
-      to={`/boards/${board?.toLowerCase()}`}
+      to={`/boards/${link}`}
       onClick={onClick}
       className={({ isActive }) => {
         return isActive
