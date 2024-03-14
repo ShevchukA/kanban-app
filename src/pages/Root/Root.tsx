@@ -33,7 +33,7 @@ const Root = () => {
     if (boards) {
       setContentIsLoaded();
       setBoardTitle(boards[activeBoardIndex]?.name);
-      navigate(`/boards/${boards[activeBoardIndex].id}`);
+      navigate(`/boards/${boards[activeBoardIndex]?.id}`);
     }
   }, [boards, activeBoardIndex]);
 

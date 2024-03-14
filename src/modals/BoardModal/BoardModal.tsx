@@ -58,7 +58,6 @@ const BoardModal = ({ type }: BoardModalProps) => {
       queryClient.invalidateQueries({
         queryKey: ["getBoardsList"],
       });
-      // TODO update cache
     },
 
     // onSuccess: (data) => {

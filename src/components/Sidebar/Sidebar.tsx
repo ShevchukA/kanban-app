@@ -73,7 +73,13 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
         <SidebarLink icon={<HideIcon />} onClick={onToggle}>
           Hide Sidebar
         </SidebarLink>
-        <Button text="Reset" onClick={() => resetMutation.mutate()} />
+        <Button
+          text="Reset"
+          onClick={() => {
+            resetMutation.mutate();
+            selectBoard(0);
+          }}
+        />
       </div>
       <SidebarShowButton icon={<ShowIcon />} onClick={onToggle} />
     </nav>
