@@ -27,6 +27,32 @@ const BoardModal = ({ type }: BoardModalProps) => {
 
   const boardsMutation = useMutation({
     mutationFn: updateBoards,
+
+    // when mutate is called:
+    onMutate: async (newBoardsList: Board[]) => {
+      // cancel any outgoing refetches so they don't overwrite optimistic update
+      await queryClient.cancelQueries({ queryKey: ["getBoardsList"] });
+
+      // snapshot the previous value
+      const previousState = queryClient.getQueryData(["getBoardsList"]);
+
+      // optimistically update to the new value
+      queryClient.setQueryData(["getBoardsList"], () => newBoardsList);
+
+      // navigate to the last board in the list
+      navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
+      selectBoard(newBoardsList.length - 1);
+      closeModal();
+
+      // Return a context object with the snapshotted value
+      return { previousState };
+    },
+
+    // If the mutation fails, the context returned from onMutate to roll back
+    onError: (_, __, context) => {
+      queryClient.setQueryData(["getBoardsList"], context?.previousState);
+    },
+
     onSettled: () => {
       // refetch list of boards by setting initial query as invalid
       queryClient.invalidateQueries({
@@ -34,14 +60,15 @@ const BoardModal = ({ type }: BoardModalProps) => {
       });
       // TODO update cache
     },
-    onSuccess: (data) => {
-      if (data) {
-        // navigate to the last board in the list
-        navigate(`/boards/${data.at(-1).id}`);
-        selectBoard(data.length - 1);
-        closeModal();
-      }
-    },
+
+    // onSuccess: (data) => {
+    //   if (data) {
+    //     // navigate to the last board in the list
+    //     navigate(`/boards/${data.at(-1).id}`);
+    //     selectBoard(data.length - 1);
+    //     closeModal();
+    //   }
+    // },
   });
 
   const handleChangeName = (e: SyntheticEvent) => {
@@ -65,6 +92,7 @@ const BoardModal = ({ type }: BoardModalProps) => {
   };
 
   const handleDeleteColumn = (id: string) => {
+    // TODO check if column is not empty than show delete modal
     const newColumnsSet = columns.filter((column) => column.id !== id);
     setColumns(newColumnsSet);
   };

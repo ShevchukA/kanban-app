@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
 
 import styles from "./Root.module.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UiContext } from "../../context/uiContext";
 import Modal from "../../components/ui/Modal/Modal";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +16,12 @@ const Root = () => {
     activeModal,
     activeBoardIndex,
     toggleSidebar,
+    setContentIsLoaded,
   } = useContext(UiContext);
+
+  const [boardTitle, setBoardTitle] = useState("");
+
+  const navigate = useNavigate();
 
   const { data: boards } = useQuery({
     queryKey: ["getBoardsList"],
@@ -24,7 +29,15 @@ const Root = () => {
     // select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
   });
 
-  const boardTitle = boards && boards[activeBoardIndex]?.name;
+  useEffect(() => {
+    if (boards) {
+      setContentIsLoaded();
+      setBoardTitle(boards[activeBoardIndex]?.name);
+      navigate(`/boards/${boards[activeBoardIndex].id}`);
+    }
+  }, [boards, activeBoardIndex]);
+
+  // const boardTitle = boards && boards[activeBoardIndex]?.name;
 
   // useEffect(() => {
   //   if (data) {
