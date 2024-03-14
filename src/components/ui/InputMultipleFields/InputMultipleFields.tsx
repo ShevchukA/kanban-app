@@ -22,7 +22,7 @@ const InputMultipleFields = ({
   return (
     <div className={styles.container}>
       <label className={`${styles.label} text--bold`}>{label}</label>
-      {value.map((item, index) => (
+      {value?.map((item, index) => (
         <span key={item.id} className={styles.line}>
           <input
             type="text"

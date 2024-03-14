@@ -1,4 +1,4 @@
-import { SyntheticEvent, useContext, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import Button from "../../components/ui/Button/Button";
 import InputText from "../../components/ui/InputText/InputText";
 import styles from "./BoardModal.module.css";
@@ -15,11 +15,18 @@ type BoardModalProps = {
   type: "newBoard" | "editBoard";
   board?: Board | null;
 };
-const BoardModal = ({ type }: BoardModalProps) => {
+const BoardModal = ({ type, board }: BoardModalProps) => {
   const { closeModal, selectBoard } = useContext(UiContext);
 
   const [name, setName] = useState("");
   const [columns, setColumns] = useState<Column[]>([]);
+
+  useEffect(() => {
+    if (board) {
+      setName(board.name);
+      setColumns(board.columns);
+    }
+  }, [board]);
 
   const navigate = useNavigate();
 
@@ -39,9 +46,12 @@ const BoardModal = ({ type }: BoardModalProps) => {
       // optimistically update to the new value
       queryClient.setQueryData(["getBoardsList"], () => newBoardsList);
 
-      // navigate to the last board in the list
-      navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
-      selectBoard(newBoardsList.length - 1);
+      // navigate to the last board in the list if new board added
+      if (type === "newBoard") {
+        navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
+        selectBoard(newBoardsList.length - 1);
+      }
+
       closeModal();
 
       // Return a context object with the snapshotted value
@@ -60,14 +70,7 @@ const BoardModal = ({ type }: BoardModalProps) => {
       });
     },
 
-    // onSuccess: (data) => {
-    //   if (data) {
-    //     // navigate to the last board in the list
-    //     navigate(`/boards/${data.at(-1).id}`);
-    //     selectBoard(data.length - 1);
-    //     closeModal();
-    //   }
-    // },
+    // onSuccess: (data) => {},
   });
 
   const handleChangeName = (e: SyntheticEvent) => {
@@ -99,25 +102,45 @@ const BoardModal = ({ type }: BoardModalProps) => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    if (name.length !== 0) {
-      const newBoard: Board = {
-        id: generateId(),
-        name: name,
-        columns: columns,
-      };
+    // get boards array from cache for further mutation
+    const boardsList: Board[] =
+      queryClient.getQueryData(["getBoardsList"]) || [];
 
-      // get boards array from cache for further mutation
-      const boardsList: Board[] =
-        queryClient.getQueryData(["getBoardsList"]) || [];
+    switch (type) {
+      case "newBoard":
+        if (name.length !== 0) {
+          const newBoard: Board = {
+            id: generateId(),
+            name: name,
+            columns: columns,
+          };
 
-      const newBoardsList = [...boardsList, newBoard];
+          const newBoardsList = [...boardsList, newBoard];
 
-      boardsMutation.mutate(newBoardsList);
+          boardsMutation.mutate(newBoardsList);
+        }
+        break;
 
-      // const form = e.target as HTMLFormElement;
-      // const title = form.elements.namedItem("name") as HTMLInputElement;
+      case "editBoard":
+        if (board) {
+          const updatedBoard: Board = {
+            ...board,
+            name: name,
+            columns: columns,
+          };
+          const newBoardsList = boardsList.map((board) => {
+            if (board.id === updatedBoard.id) {
+              return updatedBoard;
+            } else {
+              return board;
+            }
+          });
 
-      // console.log(title.value);
+          boardsMutation.mutate(newBoardsList);
+        }
+        break;
+      default:
+        break;
     }
   };
 

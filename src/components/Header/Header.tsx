@@ -5,17 +5,24 @@ import logoLight from "./assets/logo-light.svg";
 import { UiContext } from "../../context/uiContext";
 import Button from "../ui/Button/Button";
 import ContextMenu from "../ui/ContextMenu/ContextMenu";
+import BoardModal from "../../modals/BoardModal/BoardModal";
+import { Board } from "../../models/board";
+import { useQueryClient } from "@tanstack/react-query";
 
 type HeaderPropsType = {
   title?: string;
 };
 
 const Header = ({ title }: HeaderPropsType) => {
-  const { isDarkMode, openModal } = useContext(UiContext);
+  const { activeBoardIndex, isDarkMode, openModal } = useContext(UiContext);
+  const queryClient = useQueryClient();
+
   const logoSrc = isDarkMode ? logoLight : logoDark;
 
   const handleEditBoard = () => {
-    console.log("Edit", title);
+    const boardsList = queryClient.getQueryData(["getBoardsList"]) as Board[];
+    const board = boardsList[activeBoardIndex];
+    openModal(<BoardModal type="editBoard" board={board} />);
   };
 
   const handleDeleteBoard = () => {

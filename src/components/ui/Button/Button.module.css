@@ -32,6 +32,11 @@
   color: var(--color-purple, #635FC7);
 }
 
+:root.light .button--secondary {
+  background: rgba(99, 95, 199, 0.1);
+  color: var(--color-purple, #635FC7);
+}
+
 .button--negative {
   background: var(--color-red, #EA5555);
   color: var(--color-white, #FFF);
