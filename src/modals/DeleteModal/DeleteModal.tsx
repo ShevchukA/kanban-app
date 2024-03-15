@@ -9,7 +9,7 @@ import { Column } from "../../models/column";
 import { Card } from "../../models/card";
 
 type DeleteModalProps = {
-  target: "board" | "column" | "task";
+  target: "board" | "column" | "card";
   object: Board | Column | Card;
 };
 
@@ -17,6 +17,7 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
   const { closeModal } = useContext(UiContext);
   const queryClient = useQueryClient();
   const deleteBoard = useBoardsMutation(Action.DeleteBoard);
+  const editBoard = useBoardsMutation(Action.EditBoard);
 
   let text = "";
   switch (target) {
@@ -30,7 +31,7 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
         (object as Column).name
       }’ column? This action will remove all tasks and cannot be reversed.`;
       break;
-    case "task":
+    case "card":
       text = `Are you sure you want to delete the ‘${
         (object as Card).title
       }’ task and its subtasks? This action cannot be reversed`;
@@ -41,10 +42,32 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
 
   const handleDelete = () => {
     const boardsList = queryClient.getQueryData(["getBoardsList"]) as Board[];
-    const newBoardsList = boardsList.filter(
-      (board) => board.id !== (object as Board).id
-    );
-    deleteBoard.mutate(newBoardsList);
+    let newBoardsList: Board[];
+
+    switch (target) {
+      case "board":
+        newBoardsList = boardsList.filter(
+          (board) => board.id !== (object as Board).id
+        );
+        deleteBoard.mutate(newBoardsList);
+        break;
+
+      case "card":
+        newBoardsList = boardsList.map((board: Board) => {
+          board.columns = board.columns?.map((column: Column) => {
+            column.tasks = column.tasks?.filter(
+              (card: Card) => card.id !== (object as Card).id
+            );
+            return column;
+          });
+          return board;
+        });
+        editBoard.mutate(newBoardsList);
+        break;
+      default:
+        break;
+    }
+
     closeModal();
   };
 

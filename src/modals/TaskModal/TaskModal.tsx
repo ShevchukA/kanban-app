@@ -1,17 +1,33 @@
-import MenuButton from "../../components/ui/MenuButton/MenuButton";
+import { useContext } from "react";
+import ContextMenu from "../../components/ui/ContextMenu/ContextMenu";
 import { Card } from "../../models/card";
 import styles from "./TaskModal.module.css";
+import { UiContext } from "../../context/uiContext";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 type TaskModalProps = {
   card: Card;
 };
 
 const TaskModal = ({ card }: TaskModalProps) => {
+  const { openModal } = useContext(UiContext);
+
+  const handleDeleteTask = () => {
+    openModal(<DeleteModal target="card" object={card} />);
+  };
+
+  const handleEditTask = () => {};
+
   return (
     <div className={styles.taskModal}>
       <div className={styles.taskModal__title}>
         <h1 className="heading--xl">{card.title}</h1>
-        <MenuButton />
+        <ContextMenu
+          target="Task"
+          onEdit={handleEditTask}
+          onDelete={handleDeleteTask}
+          centered
+        />
       </div>
       {card.description && <p className="text">{card.description}</p>}
       {card.subtasks && (

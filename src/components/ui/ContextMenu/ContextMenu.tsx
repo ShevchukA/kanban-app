@@ -6,9 +6,15 @@ type ContextMenuPropsType = {
   target?: string;
   onEdit?: () => void;
   onDelete?: () => void;
+  centered?: boolean;
 };
 
-const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
+const ContextMenu = ({
+  target,
+  centered,
+  onDelete,
+  onEdit,
+}: ContextMenuPropsType) => {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -47,7 +53,7 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
         ref={menuRef}
         className={`${styles.contextMenu} ${
           isMenuShown ? "" : styles["contextMenu--hidden"]
-        }`}
+        } ${centered ? styles["contextMenu--centered"] : ""}`}
       >
         <div
           onClick={() => {

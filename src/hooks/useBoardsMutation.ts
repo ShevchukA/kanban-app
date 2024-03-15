@@ -36,9 +36,10 @@ const useBoardsMutation = (action: Action) => {
         selectBoard(newBoardsList.length - 1);
       }
 
+      // TODO fix logic?
       if (action === Action.DeleteBoard) {
-        navigate(`/boards/${newBoardsList[0].id}`);
-        selectBoard(0);
+        navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
+        selectBoard(newBoardsList.length - 1);
       }
 
       closeModal();
