@@ -8,6 +8,7 @@ import ContextMenu from "../ui/ContextMenu/ContextMenu";
 import BoardModal from "../../modals/BoardModal/BoardModal";
 import { Board } from "../../models/board";
 import { useQueryClient } from "@tanstack/react-query";
+import DeleteModal from "../../modals/DeleteModal/DeleteModal";
 
 type HeaderPropsType = {
   title?: string;
@@ -26,7 +27,9 @@ const Header = ({ title }: HeaderPropsType) => {
   };
 
   const handleDeleteBoard = () => {
-    console.log("Delete", title);
+    const boardsList = queryClient.getQueryData(["getBoardsList"]) as Board[];
+    const board = boardsList[activeBoardIndex];
+    openModal(<DeleteModal target="board" object={board} />);
   };
 
   return (

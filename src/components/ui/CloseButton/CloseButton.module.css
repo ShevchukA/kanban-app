@@ -7,4 +7,13 @@
   border: none;
   cursor: pointer;
   background: none;
+  color: var(--color-medium-grey);
+}
+
+.closeButton:hover {
+  color: var(--color-red);
+}
+
+.closeButton>svg path {
+  transition: all 150ms;
 }

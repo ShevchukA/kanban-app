@@ -11,27 +11,38 @@ type ContextMenuPropsType = {
 const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
-  // useEffect(() => {
-  //   if (isMenuShown) {
-  //     document.addEventListener("click", (e) => {
-  //       if (!menuRef.current?.contains(e.target)) {
-  //         handleToggleMenu();
-  //       }
-  //     });
-  //   } else {
-  //     document.removeEventListener("click", () => {});
-  //   }
-  // }, [isMenuShown]);
+  const handleOpenMenu = (event: React.MouseEvent) => {
+    if (!isMenuShown) {
+      // prevent close menu from handleClickOutside()
+      event.stopPropagation();
+    }
 
-  const handleToggleMenu = () => {
     setIsMenuShown((prevState) => !prevState);
   };
 
+  const handleCloseMenu = () => {
+    setIsMenuShown(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        handleCloseMenu();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
-      <MenuButton onClick={handleToggleMenu} />
+      <MenuButton onClick={handleOpenMenu} />
       <div
         ref={menuRef}
         className={`${styles.contextMenu} ${
@@ -40,7 +51,7 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
       >
         <div
           onClick={() => {
-            handleToggleMenu();
+            handleCloseMenu();
             onEdit && onEdit();
           }}
           className={`text ${styles["contextMenu__editItem"]}`}
@@ -49,7 +60,7 @@ const ContextMenu = ({ target, onDelete, onEdit }: ContextMenuPropsType) => {
         </div>
         <div
           onClick={() => {
-            handleToggleMenu();
+            handleCloseMenu();
             onDelete && onDelete();
           }}
           className={`text ${styles["contextMenu__deleteItem"]}`}

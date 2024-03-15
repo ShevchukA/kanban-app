@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  color: var(--color-red);
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 16px;
+}

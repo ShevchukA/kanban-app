@@ -1,23 +1,19 @@
-import { SyntheticEvent, useContext, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Button from "../../components/ui/Button/Button";
 import InputText from "../../components/ui/InputText/InputText";
 import styles from "./BoardModal.module.css";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateBoards } from "../../database/api";
+import { useQueryClient } from "@tanstack/react-query";
 import { Board } from "../../models/board";
 import { Column } from "../../models/column";
-import { UiContext } from "../../context/uiContext";
-import { useNavigate } from "react-router-dom";
 import InputMultipleFields from "../../components/ui/InputMultipleFields/InputMultipleFields";
 import { v4 as generateId } from "uuid";
+import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
 
 type BoardModalProps = {
   type: "newBoard" | "editBoard";
   board?: Board | null;
 };
 const BoardModal = ({ type, board }: BoardModalProps) => {
-  const { closeModal, selectBoard } = useContext(UiContext);
-
   const [name, setName] = useState("");
   const [columns, setColumns] = useState<Column[]>([]);
 
@@ -28,50 +24,9 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
     }
   }, [board]);
 
-  const navigate = useNavigate();
-
   const queryClient = useQueryClient();
-
-  const boardsMutation = useMutation({
-    mutationFn: updateBoards,
-
-    // when mutate is called:
-    onMutate: async (newBoardsList: Board[]) => {
-      // cancel any outgoing refetches so they don't overwrite optimistic update
-      await queryClient.cancelQueries({ queryKey: ["getBoardsList"] });
-
-      // snapshot the previous value
-      const previousState = queryClient.getQueryData(["getBoardsList"]);
-
-      // optimistically update to the new value
-      queryClient.setQueryData(["getBoardsList"], () => newBoardsList);
-
-      // navigate to the last board in the list if new board added
-      if (type === "newBoard") {
-        navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
-        selectBoard(newBoardsList.length - 1);
-      }
-
-      closeModal();
-
-      // Return a context object with the snapshotted value
-      return { previousState };
-    },
-
-    // If the mutation fails, the context returned from onMutate to roll back
-    onError: (_, __, context) => {
-      queryClient.setQueryData(["getBoardsList"], context?.previousState);
-    },
-
-    onSettled: () => {
-      // refetch list of boards by setting initial query as invalid
-      queryClient.invalidateQueries({
-        queryKey: ["getBoardsList"],
-      });
-    },
-
-    // onSuccess: (data) => {},
-  });
+  const addBoard = useBoardsMutation(Action.AddBoard);
+  const editBoard = useBoardsMutation(Action.EditBoard);
 
   const handleChangeName = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -117,7 +72,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
 
           const newBoardsList = [...boardsList, newBoard];
 
-          boardsMutation.mutate(newBoardsList);
+          addBoard.mutate(newBoardsList);
         }
         break;
 
@@ -136,7 +91,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
             }
           });
 
-          boardsMutation.mutate(newBoardsList);
+          editBoard.mutate(newBoardsList);
         }
         break;
       default:
@@ -168,12 +123,9 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={boardsMutation.isPending}
+        disabled={addBoard.isPending || editBoard.isPending}
       />
       {/* TODO Error modal */}
-      {boardsMutation.isError && (
-        <p className="text">{boardsMutation.error.message}</p>
-      )}
     </form>
   );
 };

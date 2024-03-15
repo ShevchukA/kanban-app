@@ -24,7 +24,7 @@
 
 .button--stretched {
   width: auto;
-  flex-shrink: 1;
+  flex: 1;
 }
 
 .button--secondary {
