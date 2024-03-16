@@ -11,13 +11,14 @@ type TaskCardProps = {
 
 const TaskCard = ({ card, addNewCard }: TaskCardProps) => {
   const { openModal } = useContext(UiContext);
+
   const handleCardClick = () => {
     card && openModal(<TaskModal card={card} />);
   };
 
   return addNewCard ? (
     <div className={`${styles.card} ${styles["card--new"]}`}>
-      <button className={styles.card__addBtn}>+ New Task</button>
+      <button className={styles.card__addBtn}>+ New Card</button>
     </div>
   ) : (
     <div className={styles.card} onClick={handleCardClick}>

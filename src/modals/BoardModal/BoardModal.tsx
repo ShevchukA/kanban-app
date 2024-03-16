@@ -13,6 +13,7 @@ type BoardModalProps = {
   type: "newBoard" | "editBoard";
   board?: Board | null;
 };
+
 const BoardModal = ({ type, board }: BoardModalProps) => {
   const [name, setName] = useState("");
   const [columns, setColumns] = useState<Column[]>([]);

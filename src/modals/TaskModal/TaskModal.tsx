@@ -16,14 +16,17 @@ const TaskModal = ({ card }: TaskModalProps) => {
     openModal(<DeleteModal target="card" object={card} />);
   };
 
-  const handleEditTask = () => {};
+  const handleEditTask = () => {
+    // TODO
+    // openModal(<ColumnModal />);
+  };
 
   return (
     <div className={styles.taskModal}>
       <div className={styles.taskModal__title}>
         <h1 className="heading--xl">{card.title}</h1>
         <ContextMenu
-          target="Task"
+          target="Card"
           onEdit={handleEditTask}
           onDelete={handleDeleteTask}
           centered
