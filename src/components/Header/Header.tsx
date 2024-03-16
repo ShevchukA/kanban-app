@@ -3,7 +3,6 @@ import styles from "./Header.module.css";
 import logoDark from "./assets/logo-dark.svg";
 import logoLight from "./assets/logo-light.svg";
 import { UiContext } from "../../context/uiContext";
-import Button from "../ui/Button/Button";
 import ContextMenu from "../ui/ContextMenu/ContextMenu";
 import BoardModal from "../../modals/BoardModal/BoardModal";
 import { Board } from "../../models/board";
@@ -38,13 +37,14 @@ const Header = ({ title }: HeaderPropsType) => {
       <h1 className="heading--xl">{title}</h1>
       {title && (
         <div className={styles.header__controls}>
-          <Button
+          {/* TODO */}
+          {/* <Button
             text="+ Add New Task"
             size="large"
-            // onClick={() => {
-            //   openModal(<TaskModal />);
-            // }}
-          />
+            onClick={() => {
+              openModal(<TaskModal />);
+            }}
+          /> */}
           <ContextMenu
             target="Board"
             onDelete={handleDeleteBoard}

@@ -21,7 +21,7 @@ const InputMultipleFields = ({
   onDelete,
 }: InputMultipleFieldsProps) => {
   const buttonText =
-    label == "Columns" ? "+Add New Column" : "+Add New Subtask";
+    label == "Board Columns" ? "+Add New Column" : "+Add New Subtask";
   return (
     <div className={styles.container}>
       <label className={`${styles.label} text--bold`}>{label}</label>

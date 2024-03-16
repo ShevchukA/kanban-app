@@ -1,17 +1,18 @@
 import styles from "./Column.module.css";
-import { Card } from "../../models/card";
-import TaskCard from "../TaskCard/TaskCard";
+import { Card as CardType } from "../../models/card";
 import ColumnModal from "../../modals/ColumnModal/ColumnModal";
 import { useContext } from "react";
 import { UiContext } from "../../context/uiContext";
+import Card from "../Card/Card";
 
 type ColumnProps = {
+  index?: number;
   name?: string;
-  cards?: Card[];
+  cards?: CardType[];
   addNewColumn?: boolean;
 };
 
-const Column = ({ name, cards, addNewColumn }: ColumnProps) => {
+const Column = ({ index, name, cards, addNewColumn }: ColumnProps) => {
   const { openModal } = useContext(UiContext);
   const handleAddNewColumn = () => {
     openModal(<ColumnModal />);
@@ -32,9 +33,9 @@ const Column = ({ name, cards, addNewColumn }: ColumnProps) => {
         </span>
       </div>
       {cards?.map((card) => (
-        <TaskCard key={card?.title} card={card} />
+        <Card key={card?.title} card={card} columnIndex={index} />
       ))}
-      <TaskCard addNewCard={true} />
+      <Card addNewCard={true} columnIndex={index} />
     </div>
   );
 };

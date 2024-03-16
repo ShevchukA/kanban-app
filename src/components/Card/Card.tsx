@@ -1,24 +1,27 @@
-import styles from "./TaskCard.module.css";
-import { Card } from "../../models/card";
+import styles from "./Card.module.css";
+import { Card as CardType } from "../../models/card";
 import { useContext } from "react";
 import { UiContext } from "../../context/uiContext";
 import TaskModal from "../../modals/TaskModal/TaskModal";
 import CardModal from "../../modals/CardModal/CardModal";
 
-type TaskCardProps = {
-  card?: Card;
+type CardProps = {
+  card?: CardType;
   addNewCard?: boolean;
+  columnIndex?: number;
 };
 
-const TaskCard = ({ card, addNewCard }: TaskCardProps) => {
+const Card = ({ card, addNewCard, columnIndex }: CardProps) => {
   const { openModal } = useContext(UiContext);
 
   const handleCardClick = () => {
-    card && openModal(<TaskModal card={card} />);
+    if (card && columnIndex !== undefined) {
+      openModal(<TaskModal card={card} columnIndex={columnIndex} />);
+    }
   };
 
   const handleAddNewCard = () => {
-    openModal(<CardModal type="newCard" />);
+    openModal(<CardModal type="newCard" columnIndex={columnIndex} />);
   };
 
   return addNewCard ? (
@@ -30,9 +33,9 @@ const TaskCard = ({ card, addNewCard }: TaskCardProps) => {
   ) : (
     <div className={styles.card} onClick={handleCardClick}>
       <div className="heading--m">{card?.title}</div>
-      <div className="text--bold">{card?.subtasks.length} subtasks</div>
+      <div className="text--bold">{card?.subtasks?.length || 0} subtasks</div>
     </div>
   );
 };
 
-export default TaskCard;
+export default Card;

@@ -56,8 +56,13 @@ const Board = () => {
     <div className={styles.board}>
       <div className={styles.board__scrollContainer}>
         <div className={styles.board__container}>
-          {columns.map((column: ColumnType) => (
-            <Column key={column.id} name={column.name} cards={column.tasks} />
+          {columns.map((column: ColumnType, index: number) => (
+            <Column
+              key={column.id}
+              index={index}
+              name={column.name}
+              cards={column.tasks}
+            />
           ))}
           <Column addNewColumn={true} />
         </div>

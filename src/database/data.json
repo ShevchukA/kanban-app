@@ -15,15 +15,18 @@
               "status": "Todo",
               "subtasks": [
                 {
-                  "title": "Sign up page",
+                  "id": "st1",
+                  "name": "Sign up page",
                   "isCompleted": true
                 },
                 {
-                  "title": "Sign in page",
+                  "id": "st2",
+                  "name": "Sign in page",
                   "isCompleted": false
                 },
                 {
-                  "title": "Welcome page",
+                  "id": "st3",
+                  "name": "Welcome page",
                   "isCompleted": false
                 }
               ]
@@ -35,7 +38,8 @@
               "status": "Todo",
               "subtasks": [
                 {
-                  "title": "Search page",
+                  "id": "st4",
+                  "name": "Search page",
                   "isCompleted": false
                 }
               ]
@@ -47,11 +51,13 @@
               "status": "Todo",
               "subtasks": [
                 {
-                  "title": "Account page",
+                  "id": "st5",
+                  "name": "Account page",
                   "isCompleted": false
                 },
                 {
-                  "title": "Billing page",
+                  "id": "st6",
+                  "name": "Billing page",
                   "isCompleted": false
                 }
               ]
@@ -63,11 +69,13 @@
               "status": "Todo",
               "subtasks": [
                 {
-                  "title": "Internal testing",
+                  "id": "st7",
+                  "name": "Internal testing",
                   "isCompleted": false
                 },
                 {
-                  "title": "External testing",
+                  "id": "st8",
+                  "name": "External testing",
                   "isCompleted": false
                 }
               ]
@@ -85,15 +93,18 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Settings - Account page",
+                  "id": "st9",
+                  "name": "Settings - Account page",
                   "isCompleted": true
                 },
                 {
-                  "title": "Settings - Billing page",
+                  "id": "st10",
+                  "name": "Settings - Billing page",
                   "isCompleted": true
                 },
                 {
-                  "title": "Search page",
+                  "id": "st11",
+                  "name": "Search page",
                   "isCompleted": false
                 }
               ]
@@ -105,15 +116,18 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Upgrade plan",
+                  "id": "st12",
+                  "name": "Upgrade plan",
                   "isCompleted": true
                 },
                 {
-                  "title": "Cancel plan",
+                  "id": "st13",
+                  "name": "Cancel plan",
                   "isCompleted": true
                 },
                 {
-                  "title": "Update payment method",
+                  "id": "st14",
+                  "name": "Update payment method",
                   "isCompleted": false
                 }
               ]
@@ -125,15 +139,18 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Sign up page",
+                  "id": "st15",
+                  "name": "Sign up page",
                   "isCompleted": true
                 },
                 {
-                  "title": "Sign in page",
+                  "id": "st16",
+                  "name": "Sign in page",
                   "isCompleted": false
                 },
                 {
-                  "title": "Welcome page",
+                  "id": "st17",
+                  "name": "Welcome page",
                   "isCompleted": false
                 }
               ]
@@ -145,11 +162,13 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Add search endpoint",
+                  "id": "st18",
+                  "name": "Add search endpoint",
                   "isCompleted": true
                 },
                 {
-                  "title": "Define search filters",
+                  "id": "st19",
+                  "name": "Define search filters",
                   "isCompleted": false
                 }
               ]
@@ -161,11 +180,13 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Define user model",
+                  "id": "st20",
+                  "name": "Define user model",
                   "isCompleted": true
                 },
                 {
-                  "title": "Add auth endpoints",
+                  "id": "st21",
+                  "name": "Add auth endpoints",
                   "isCompleted": false
                 }
               ]
@@ -177,15 +198,18 @@
               "status": "Doing",
               "subtasks": [
                 {
-                  "title": "Research competitor pricing and business models",
+                  "id": "st22",
+                  "name": "Research competitor pricing and business models",
                   "isCompleted": true
                 },
                 {
-                  "title": "Outline a business model that works for our solution",
+                  "id": "st23",
+                  "name": "Outline a business model that works for our solution",
                   "isCompleted": false
                 },
                 {
-                  "title": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+                  "id": "st24",
+                  "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
                   "isCompleted": false
                 }
               ]
@@ -203,7 +227,8 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Complete 5 wireframe prototype tests",
+                  "id": "st25",
+                  "name": "Complete 5 wireframe prototype tests",
                   "isCompleted": true
                 }
               ]
@@ -215,7 +240,8 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Create clickable wireframe prototype in Balsamiq",
+                  "id": "st26",
+                  "name": "Create clickable wireframe prototype in Balsamiq",
                   "isCompleted": true
                 }
               ]
@@ -227,15 +253,18 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Meet to review notes from previous tests and plan changes",
+                  "id": "st27",
+                  "name": "Meet to review notes from previous tests and plan changes",
                   "isCompleted": true
                 },
                 {
-                  "title": "Make changes to paper prototypes",
+                  "id": "st28",
+                  "name": "Make changes to paper prototypes",
                   "isCompleted": true
                 },
                 {
-                  "title": "Conduct 5 usability tests",
+                  "id": "st29",
+                  "name": "Conduct 5 usability tests",
                   "isCompleted": true
                 }
               ]
@@ -247,11 +276,13 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Create paper prototypes for version one",
+                  "id": "st30",
+                  "name": "Create paper prototypes for version one",
                   "isCompleted": true
                 },
                 {
-                  "title": "Complete 10 usability tests",
+                  "id": "st31",
+                  "name": "Complete 10 usability tests",
                   "isCompleted": true
                 }
               ]
@@ -263,7 +294,8 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Interview 10 prospective customers",
+                  "id": "st32",
+                  "name": "Interview 10 prospective customers",
                   "isCompleted": true
                 }
               ]
@@ -275,11 +307,13 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Find direct and indirect competitors",
+                  "id": "st33",
+                  "name": "Find direct and indirect competitors",
                   "isCompleted": true
                 },
                 {
-                  "title": "SWOT analysis for each competitor",
+                  "id": "st34",
+                  "name": "SWOT analysis for each competitor",
                   "isCompleted": true
                 }
               ]
@@ -291,11 +325,13 @@
               "status": "Done",
               "subtasks": [
                 {
-                  "title": "Write up research analysis",
+                  "id": "st35",
+                  "name": "Write up research analysis",
                   "isCompleted": true
                 },
                 {
-                  "title": "Calculate TAM",
+                  "id": "st36",
+                  "name": "Calculate TAM",
                   "isCompleted": true
                 }
               ]
@@ -319,27 +355,33 @@
               "status": "Todo",
               "subtasks": [
                 {
-                  "title": "Find hunter",
+                  "id": "st37",
+                  "name": "Find hunter",
                   "isCompleted": false
                 },
                 {
-                  "title": "Gather assets",
+                  "id": "st38",
+                  "name": "Gather assets",
                   "isCompleted": false
                 },
                 {
-                  "title": "Draft product page",
+                  "id": "st39",
+                  "name": "Draft product page",
                   "isCompleted": false
                 },
                 {
-                  "title": "Notify customers",
+                  "id": "st40",
+                  "name": "Notify customers",
                   "isCompleted": false
                 },
                 {
-                  "title": "Notify network",
+                  "id": "st41",
+                  "name": "Notify network",
                   "isCompleted": false
                 },
                 {
-                  "title": "Launch!",
+                  "id": "st42",
+                  "name": "Launch!",
                   "isCompleted": false
                 }
               ]
@@ -351,15 +393,18 @@
               "status": "",
               "subtasks": [
                 {
-                  "title": "Draft out HN post",
+                  "id": "st43",
+                  "name": "Draft out HN post",
                   "isCompleted": false
                 },
                 {
-                  "title": "Get feedback and refine",
+                  "id": "st44",
+                  "name": "Get feedback and refine",
                   "isCompleted": false
                 },
                 {
-                  "title": "Publish post",
+                  "id": "st45",
+                  "name": "Publish post",
                   "isCompleted": false
                 }
               ]
@@ -371,19 +416,23 @@
               "status": "",
               "subtasks": [
                 {
-                  "title": "Write article",
+                  "id": "st46",
+                  "name": "Write article",
                   "isCompleted": false
                 },
                 {
-                  "title": "Publish on LinkedIn",
+                  "id": "st47",
+                  "name": "Publish on LinkedIn",
                   "isCompleted": false
                 },
                 {
-                  "title": "Publish on Inndie Hackers",
+                  "id": "st48",
+                  "name": "Publish on Inndie Hackers",
                   "isCompleted": false
                 },
                 {
-                  "title": "Publish on Medium",
+                  "id": "st49",
+                  "name": "Publish on Medium",
                   "isCompleted": false
                 }
               ]
@@ -417,11 +466,13 @@
               "status": "",
               "subtasks": [
                 {
-                  "title": "Launch privately to our waitlist",
+                  "id": "st1",
+                  "name": "Launch privately to our waitlist",
                   "isCompleted": false
                 },
                 {
-                  "title": "Launch publicly on PH, HN, etc.",
+                  "id": "st2",
+                  "name": "Launch publicly on PH, HN, etc.",
                   "isCompleted": false
                 }
               ]
@@ -433,15 +484,18 @@
               "status": "",
               "subtasks": [
                 {
-                  "title": "Interview 10 customers",
+                  "id": "st3",
+                  "name": "Interview 10 customers",
                   "isCompleted": false
                 },
                 {
-                  "title": "Review common customer pain points and suggestions",
+                  "id": "st4",
+                  "name": "Review common customer pain points and suggestions",
                   "isCompleted": false
                 },
                 {
-                  "title": "Outline next steps for our roadmap",
+                  "id": "st5",
+                  "name": "Outline next steps for our roadmap",
                   "isCompleted": false
                 }
               ]

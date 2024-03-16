@@ -4,12 +4,14 @@ import { Card } from "../../models/card";
 import styles from "./TaskModal.module.css";
 import { UiContext } from "../../context/uiContext";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import CardModal from "../CardModal/CardModal";
 
 type TaskModalProps = {
   card: Card;
+  columnIndex: number;
 };
 
-const TaskModal = ({ card }: TaskModalProps) => {
+const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const { openModal } = useContext(UiContext);
 
   const handleDeleteTask = () => {
@@ -17,8 +19,9 @@ const TaskModal = ({ card }: TaskModalProps) => {
   };
 
   const handleEditTask = () => {
-    // TODO
-    // openModal(<ColumnModal />);
+    openModal(
+      <CardModal type="editCard" card={card} columnIndex={columnIndex} />
+    );
   };
 
   return (
@@ -39,7 +42,7 @@ const TaskModal = ({ card }: TaskModalProps) => {
           <ul className={styles.taskModal__subtasks}>
             {card.subtasks.map((subtask) => (
               <li
-                key={subtask.title}
+                key={subtask.name}
                 className={
                   subtask.isCompleted
                     ? `${styles["taskModal__subtask--completed"]} ${styles.taskModal__subtask}`
@@ -47,7 +50,7 @@ const TaskModal = ({ card }: TaskModalProps) => {
                 }
               >
                 <input type="checkbox" defaultChecked={subtask.isCompleted} />
-                <label>{subtask.title}</label>
+                <label>{subtask.name}</label>
               </li>
             ))}
           </ul>
