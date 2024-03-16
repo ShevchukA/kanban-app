@@ -3,9 +3,10 @@ import CloseButton from "../CloseButton/CloseButton";
 import Button from "../Button/Button";
 import { SyntheticEvent } from "react";
 import { Column } from "../../../models/column";
+import { Subtask } from "../../../models/subtask";
 
 type InputMultipleFieldsProps = {
-  value: Column[];
+  value: Column[] | Subtask[];
   label?: string;
   onChange: (e: SyntheticEvent, index: number) => void;
   onAdd: () => void;
@@ -19,6 +20,8 @@ const InputMultipleFields = ({
   onAdd,
   onDelete,
 }: InputMultipleFieldsProps) => {
+  const buttonText =
+    label == "Columns" ? "+Add New Column" : "+Add New Subtask";
   return (
     <div className={styles.container}>
       <label className={`${styles.label} text--bold`}>{label}</label>
@@ -34,7 +37,7 @@ const InputMultipleFields = ({
         </span>
       ))}
 
-      <Button text="+Add New Column" type="secondary" onClick={onAdd} />
+      <Button text={buttonText} type="secondary" onClick={onAdd} />
     </div>
   );
 };

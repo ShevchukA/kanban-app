@@ -3,6 +3,7 @@ import { Card } from "../../models/card";
 import { useContext } from "react";
 import { UiContext } from "../../context/uiContext";
 import TaskModal from "../../modals/TaskModal/TaskModal";
+import CardModal from "../../modals/CardModal/CardModal";
 
 type TaskCardProps = {
   card?: Card;
@@ -16,9 +17,15 @@ const TaskCard = ({ card, addNewCard }: TaskCardProps) => {
     card && openModal(<TaskModal card={card} />);
   };
 
+  const handleAddNewCard = () => {
+    openModal(<CardModal type="newCard" />);
+  };
+
   return addNewCard ? (
     <div className={`${styles.card} ${styles["card--new"]}`}>
-      <button className={styles.card__addBtn}>+ New Card</button>
+      <button className={styles.card__addBtn} onClick={handleAddNewCard}>
+        + New Card
+      </button>
     </div>
   ) : (
     <div className={styles.card} onClick={handleCardClick}>

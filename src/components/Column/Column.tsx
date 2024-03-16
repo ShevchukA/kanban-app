@@ -28,7 +28,7 @@ const Column = ({ name, cards, addNewColumn }: ColumnProps) => {
       <div className={styles.column__title}>
         <span className={styles.column__pointer}></span>
         <span className={styles.column__name}>
-          {name} ({cards?.length})
+          {name} ({cards?.length || 0})
         </span>
       </div>
       {cards?.map((card) => (
