@@ -92,9 +92,12 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
         />
       </div>
       {card.description && <p className="text">{card.description}</p>}
-      {subtasks && (
-        <div>
-          <p className="heading--s">Subtasks</p>
+
+      <div>
+        <p className="heading--s">Subtasks</p>
+        {!subtasks || subtasks.length === 0 ? (
+          <p className="text">No subtasks</p>
+        ) : (
           <ul className={styles.taskModal__subtasks}>
             {subtasks.map((subtask) => (
               <li
@@ -114,8 +117,9 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
               </li>
             ))}
           </ul>
-        </div>
-      )}
+        )}
+      </div>
+
       {/* TODO delete save button and mutate task when modal closing */}
       {subtasksEdited && (
         <Button
