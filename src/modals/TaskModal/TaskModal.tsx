@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import ContextMenu from "../../components/ui/ContextMenu/ContextMenu";
 import { Card } from "../../models/card";
 import styles from "./TaskModal.module.css";
 import { UiContext } from "../../context/uiContext";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import CardModal from "../CardModal/CardModal";
+import { Subtask } from "../../models/subtask";
+import { Board } from "../../models/board";
+import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
+import Button from "../../components/ui/Button/Button";
 
 type TaskModalProps = {
   card: Card;
@@ -13,6 +18,17 @@ type TaskModalProps = {
 
 const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const { openModal } = useContext(UiContext);
+  const [subtasks, setSubtasks] = useState<Subtask[]>([]);
+  const [subtasksEdited, setSubtasksEdited] = useState(false);
+  const editBoard = useBoardsMutation(Action.EditBoard);
+  const queryClient = useQueryClient();
+  const { activeBoardIndex } = useContext(UiContext);
+
+  useEffect(() => {
+    if (card.subtasks) {
+      setSubtasks(card.subtasks);
+    }
+  }, [card]);
 
   const handleDeleteTask = () => {
     openModal(<DeleteModal target="card" object={card} />);
@@ -22,6 +38,46 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
     openModal(
       <CardModal type="editCard" card={card} columnIndex={columnIndex} />
     );
+  };
+
+  const handleSubtaskComplete = (taskId: string) => {
+    const updatedSubtasks = subtasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, isCompleted: !task.isCompleted };
+      }
+      return task;
+    });
+    setSubtasks(updatedSubtasks);
+    setSubtasksEdited(true);
+  };
+
+  const handleSubmit = () => {
+    const boardsList: Board[] =
+      queryClient.getQueryData(["getBoardsList"]) || [];
+
+    if (card && columnIndex !== undefined) {
+      const updatedCard: Card = {
+        ...card,
+        subtasks: subtasks,
+      };
+
+      const newBoardsList = [...boardsList];
+
+      // find card to be edited and update cards array
+      const updatedCards = newBoardsList[activeBoardIndex].columns[
+        columnIndex
+      ].tasks.map((card: Card) => {
+        if (card.id === updatedCard.id) {
+          return updatedCard;
+        } else {
+          return card;
+        }
+      });
+
+      newBoardsList[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
+
+      editBoard.mutate(newBoardsList);
+    }
   };
 
   return (
@@ -36,11 +92,11 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
         />
       </div>
       {card.description && <p className="text">{card.description}</p>}
-      {card.subtasks && (
+      {subtasks && (
         <div>
           <p className="heading--s">Subtasks</p>
           <ul className={styles.taskModal__subtasks}>
-            {card.subtasks.map((subtask) => (
+            {subtasks.map((subtask) => (
               <li
                 key={subtask.name}
                 className={
@@ -49,12 +105,24 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
                     : `${styles.taskModal__subtask}`
                 }
               >
-                <input type="checkbox" defaultChecked={subtask.isCompleted} />
+                <input
+                  type="checkbox"
+                  defaultChecked={subtask.isCompleted}
+                  onChange={() => handleSubtaskComplete(subtask.id)}
+                />
                 <label>{subtask.name}</label>
               </li>
             ))}
           </ul>
         </div>
+      )}
+      {/* TODO delete save button and mutate task when modal closing */}
+      {subtasksEdited && (
+        <Button
+          text="Save Changes"
+          disabled={editBoard.isPending}
+          onClick={handleSubmit}
+        />
       )}
     </div>
   );

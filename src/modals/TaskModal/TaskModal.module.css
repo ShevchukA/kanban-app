@@ -35,17 +35,16 @@
 }
 
 .taskModal__subtask input[type="checkbox"] {
-  flex: 0 0 16px;
   width: 16px;
   height: 16px;
   border-radius: 2px;
-  background: var(--color-purple, #635FC7);
+  background-color: var(--color-purple, #635FC7);
   cursor: pointer;
 }
 
 .taskModal__subtask input[type="checkbox"]:disabled {
   border: 1px solid rgba(130, 143, 163, 0.25);
-  background: var(--color-dark-grey, #2B2C37);
+  background-color: var(--color-dark-grey, #2B2C37);
 }
 
 .taskModal__subtask label {

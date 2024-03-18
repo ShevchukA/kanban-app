@@ -45,13 +45,3 @@ export async function updateBoards(boards: Board[]) {
   const data = await res.json();
   return data;
 }
-
-export async function addNewBoard(board: Board) {
-  const res = await fetch(`${URL}/boards/${board.id}.json`, {
-    method: "PUT",
-    body: JSON.stringify(board),
-  });
-  if (!res.ok) {
-    throw new Error(`Can't add new board. Try later...`);
-  }
-}
