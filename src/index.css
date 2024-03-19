@@ -11,41 +11,52 @@
   -webkit-text-size-adjust: 100%;
 
   --color-black: #000112;
+  --color-dark: #20212C;
+  --color-light: #F4F7FD;
   --color-white: #ffffff;
   --color-purple: #635FC7;
   --color-purple-hover: #A8A4FF;
+  --color-white-purple: #F0EFFA;
   --color-red: #EA5555;
   --color-red-hover: #FF9898;
   --color-dark-grey: #2B2C37;
+  --color-darg-grey-opacity: #2C2C374D;
   --color-medium-grey: #828FA3;
+  --color-heavy-grey: #3E3F4E;
 
   /*  Default */
-  --color-board: #20212C;
-  --color-interface: #2B2C37;
-  --color-lines: #3E3F4E;
-  --color-heading: #ffffff;
-  --color-nav-hover: #ffffff;
-  --color-text: #828FA3;
+  --color-board: var(--color-dark);
+  --color-interface: var(--color-dark-grey);
+  --color-lines: var(--color-heavy-grey);
+  --color-heading: var(--color-white);
+  --color-nav-hover: var(--color-white);
+  --color-text: var(--color-medium-grey);
+  --color-secondary-button: var(--color-white);
+  --color-new-element: var(--color-darg-grey-opacity);
 }
 
 /* Dark mode */
 :root.dark {
-  --color-board: #20212C;
-  --color-interface: #2B2C37;
-  --color-lines: #3E3F4E;
-  --color-heading: #ffffff;
-  --color-text: #828FA3;
-  --color-nav-hover: #ffffff;
+  --color-board: var(--color-dark);
+  --color-interface: var(--color-dark-grey);
+  --color-lines: var(--color-heavy-grey);
+  --color-heading: var(--color-white);
+  --color-text: var(--color-medium-grey);
+  --color-nav-hover: var(--color-white);
+  --color-secondary-button: var(--color-white);
+  --color-new-element: var(--color-darg-grey-opacity);
 }
 
 /* Light mode */
 :root.light {
-  --color-board: #F4F7FD;
-  --color-interface: #ffffff;
-  --color-lines: #635FC7;
-  --color-heading: #000112;
-  --color-text: #828FA3;
-  --color-nav-hover: #f0effa;
+  --color-board: var(--color-light);
+  --color-interface: var(--color-white);
+  --color-lines: var(--color-purple);
+  --color-heading: var(--color-black);
+  --color-text: var(--color-medium-grey);
+  --color-nav-hover: var(--color-white-purple);
+  --color-secondary-button: var(--color-white-purple);
+  --color-new-element: var(--color-white-purple);
 }
 
 * {

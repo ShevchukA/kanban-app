@@ -25,10 +25,11 @@ const Card = ({ card, addNewCard, columnIndex }: CardProps) => {
   };
 
   return addNewCard ? (
-    <div className={`${styles.card} ${styles["card--new"]}`}>
-      <button className={styles.card__addBtn} onClick={handleAddNewCard}>
-        + New Card
-      </button>
+    <div
+      className={`${styles.card} ${styles["card--new"]}`}
+      onClick={handleAddNewCard}
+    >
+      <p className={styles.card__text}>+ New Card</p>
     </div>
   ) : (
     <div className={styles.card} onClick={handleCardClick}>

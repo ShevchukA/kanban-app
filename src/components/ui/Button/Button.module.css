@@ -28,12 +28,7 @@
 }
 
 .button--secondary {
-  background: var(--color-white, #FFF);
-  color: var(--color-purple, #635FC7);
-}
-
-:root.light .button--secondary {
-  background: rgba(99, 95, 199, 0.1);
+  background: var(--color-secondary-button);
   color: var(--color-purple, #635FC7);
 }
 
@@ -47,7 +42,7 @@
 }
 
 .button.button--secondary:hover {
-  background: var(--color-white, #FFF);
+  background: var(--color-secondary-button);
 }
 
 .button.button--negative:hover {
