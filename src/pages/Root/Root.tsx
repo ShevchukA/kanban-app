@@ -62,7 +62,7 @@ const Root = () => {
         }
       >
         <Sidebar boards={boards} onToggle={handleToggleSidebar} />
-        <Outlet />{" "}
+        <Outlet />
       </main>
     </div>
   );
