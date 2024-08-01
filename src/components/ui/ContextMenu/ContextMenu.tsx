@@ -1,20 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import MenuButton from "../MenuButton/MenuButton";
-import styles from "./ContextMenu.module.css";
+import { useEffect, useRef, useState } from 'react';
+import MenuButton from '../MenuButton/MenuButton';
+import styles from './ContextMenu.module.css';
 
-type ContextMenuPropsType = {
+interface ContextMenuProps {
   target?: string;
   onEdit?: () => void;
   onDelete?: () => void;
   centered?: boolean;
-};
+}
 
 const ContextMenu = ({
   target,
   centered,
   onDelete,
   onEdit,
-}: ContextMenuPropsType) => {
+}: ContextMenuProps) => {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -39,10 +39,10 @@ const ContextMenu = ({
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, []);
 
@@ -52,15 +52,15 @@ const ContextMenu = ({
       <div
         ref={menuRef}
         className={`${styles.contextMenu} ${
-          isMenuShown ? "" : styles["contextMenu--hidden"]
-        } ${centered ? styles["contextMenu--centered"] : ""}`}
+          isMenuShown ? '' : styles['contextMenu--hidden']
+        } ${centered ? styles['contextMenu--centered'] : ''}`}
       >
         <div
           onClick={() => {
             handleCloseMenu();
             onEdit && onEdit();
           }}
-          className={`text ${styles["contextMenu__editItem"]}`}
+          className={`text ${styles.contextMenu__editItem}`}
         >
           Edit {target}
         </div>
@@ -69,7 +69,7 @@ const ContextMenu = ({
             handleCloseMenu();
             onDelete && onDelete();
           }}
-          className={`text ${styles["contextMenu__deleteItem"]}`}
+          className={`text ${styles.contextMenu__deleteItem}`}
         >
           Delete {target}
         </div>

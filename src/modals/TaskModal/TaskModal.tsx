@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
-import ContextMenu from "../../components/ui/ContextMenu/ContextMenu";
-import { Card } from "../../models/card";
-import styles from "./TaskModal.module.css";
-import { UiContext } from "../../context/uiContext";
-import DeleteModal from "../DeleteModal/DeleteModal";
-import CardModal from "../CardModal/CardModal";
-import { Subtask } from "../../models/subtask";
-import { Board } from "../../models/board";
-import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
-import Button from "../../components/ui/Button/Button";
+import { useContext, useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import ContextMenu from '../../components/ui/ContextMenu/ContextMenu';
+import { Card } from '../../models/card';
+import styles from './TaskModal.module.css';
+import { UiContext } from '../../context/uiContext';
+import DeleteModal from '../DeleteModal/DeleteModal';
+import CardModal from '../CardModal/CardModal';
+import { Subtask } from '../../models/subtask';
+import { Board } from '../../models/board';
+import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
+import Button from '../../components/ui/Button/Button';
 
-type TaskModalProps = {
+interface TaskModalProps {
   card: Card;
   columnIndex: number;
-};
+}
 
 const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const { openModal } = useContext(UiContext);
@@ -31,12 +31,12 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   }, [card]);
 
   const handleDeleteTask = () => {
-    openModal(<DeleteModal target="card" object={card} />);
+    openModal(<DeleteModal target='card' object={card} />);
   };
 
   const handleEditTask = () => {
     openModal(
-      <CardModal type="editCard" card={card} columnIndex={columnIndex} />
+      <CardModal type='editCard' card={card} columnIndex={columnIndex} />
     );
   };
 
@@ -52,8 +52,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   };
 
   const handleSubmit = () => {
-    const boardsList: Board[] =
-      queryClient.getQueryData(["getBoardsList"]) || [];
+    const boardsList: Board[] = queryClient.getQueryData(['boards']) || [];
 
     if (card && columnIndex !== undefined) {
       const updatedCard: Card = {
@@ -83,20 +82,20 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   return (
     <div className={styles.taskModal}>
       <div className={styles.taskModal__title}>
-        <h1 className="heading--xl">{card.title}</h1>
+        <h1 className='heading--xl'>{card.title}</h1>
         <ContextMenu
-          target="Card"
+          target='Card'
           onEdit={handleEditTask}
           onDelete={handleDeleteTask}
           centered
         />
       </div>
-      {card.description && <p className="text">{card.description}</p>}
+      {card.description && <p className='text'>{card.description}</p>}
 
       <div>
-        <p className="heading--s">Subtasks</p>
+        <p className='heading--s'>Subtasks</p>
         {!subtasks || subtasks.length === 0 ? (
-          <p className="text">No subtasks</p>
+          <p className='text'>No subtasks</p>
         ) : (
           <ul className={styles.taskModal__subtasks}>
             {subtasks.map((subtask) => (
@@ -104,14 +103,16 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
                 key={subtask.name}
                 className={
                   subtask.isCompleted
-                    ? `${styles["taskModal__subtask--completed"]} ${styles.taskModal__subtask}`
+                    ? `${styles['taskModal__subtask--completed']} ${styles.taskModal__subtask}`
                     : `${styles.taskModal__subtask}`
                 }
               >
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   defaultChecked={subtask.isCompleted}
-                  onChange={() => handleSubtaskComplete(subtask.id)}
+                  onChange={() => {
+                    handleSubtaskComplete(subtask.id);
+                  }}
                 />
                 <label>{subtask.name}</label>
               </li>
@@ -123,7 +124,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
       {/* TODO delete save button and mutate task when modal closing */}
       {subtasksEdited && (
         <Button
-          text="Save Changes"
+          text='Save Changes'
           disabled={editBoard.isPending}
           onClick={handleSubmit}
         />

@@ -1,25 +1,25 @@
-import { SyntheticEvent, useContext, useEffect, useState } from "react";
-import Button from "../../components/ui/Button/Button";
-import InputMultipleFields from "../../components/ui/InputMultipleFields/InputMultipleFields";
-import InputText from "../../components/ui/InputText/InputText";
-import { Card } from "../../models/card";
-import styles from "./CardModal.module.css";
-import { Subtask } from "../../models/subtask";
-import { v4 as generateId } from "uuid";
-import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
-import { useQueryClient } from "@tanstack/react-query";
-import { Board } from "../../models/board";
-import { UiContext } from "../../context/uiContext";
+import { SyntheticEvent, useContext, useEffect, useState } from 'react';
+import Button from '../../components/ui/Button/Button';
+import InputMultipleFields from '../../components/ui/InputMultipleFields/InputMultipleFields';
+import InputText from '../../components/ui/InputText/InputText';
+import { Card } from '../../models/card';
+import styles from './CardModal.module.css';
+import { Subtask } from '../../models/subtask';
+import { v4 as generateId } from 'uuid';
+import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
+import { useQueryClient } from '@tanstack/react-query';
+import { Board } from '../../models/board';
+import { UiContext } from '../../context/uiContext';
 
-type CardModalProps = {
-  type: "newCard" | "editCard";
+interface CardModalProps {
+  type: 'newCard' | 'editCard';
   columnIndex?: number;
   card?: Card;
-};
+}
 
 const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [subtasks, setSubtasks] = useState<Subtask[]>([]);
   const editBoard = useBoardsMutation(Action.EditBoard);
   const queryClient = useQueryClient();
@@ -53,7 +53,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
   const handleAddNewSubtask = () => {
     const newSubtasksSet = [
       ...subtasks,
-      { id: generateId(), name: "", isCompleted: false },
+      { id: generateId(), name: '', isCompleted: false },
     ];
     setSubtasks(newSubtasksSet);
   };
@@ -67,17 +67,16 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] =
-      queryClient.getQueryData(["getBoardsList"]) || [];
+    const boardsList: Board[] = queryClient.getQueryData(['']) || [];
 
     switch (type) {
-      case "newCard":
+      case 'newCard':
         if (title.length !== 0 && columnIndex !== undefined) {
           const newCard: Card = {
             id: generateId(),
             title: title,
             description: description,
-            status: "",
+            status: '',
             subtasks: subtasks,
           };
 
@@ -97,7 +96,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
         }
         break;
 
-      case "editCard":
+      case 'editCard':
         if (card && columnIndex !== undefined) {
           const updatedCard: Card = {
             ...card,
@@ -131,31 +130,40 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
     }
   };
 
-  const cardTitle = type === "newCard" ? "Add New Card" : "Edit Card";
-  const buttonText = type === "newCard" ? "Create New Card" : "Save Changes";
+  const cardTitle = type === 'newCard' ? 'Add New Card' : 'Edit Card';
+  const buttonText = type === 'newCard' ? 'Create New Card' : 'Save Changes';
 
   return (
-    <form className={styles.cardModal} onSubmit={(e) => handleSubmit(e)}>
-      <h1 className="heading--xl">{cardTitle}</h1>
+    <form
+      className={styles.cardModal}
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <h1 className='heading--xl'>{cardTitle}</h1>
       <InputText
-        type="text"
-        id="title"
+        type='text'
+        id='title'
         value={title}
-        label="Title"
-        placeholder="e.g. Take coffee break"
-        onChange={(e) => handleChangeName(e)}
+        label='Title'
+        placeholder='e.g. Take coffee break'
+        onChange={(e) => {
+          handleChangeName(e);
+        }}
       />
       <InputText
-        type="text"
-        id="description"
+        type='text'
+        id='description'
         value={description}
-        label="Description"
-        placeholder="e.g. It’s always good to take a break. This 15 minute break will 
-        recharge the batteries a little."
-        onChange={(e) => handleChangeDescription(e)}
+        label='Description'
+        placeholder='e.g. It’s always good to take a break. This 15 minute break will 
+        recharge the batteries a little.'
+        onChange={(e) => {
+          handleChangeDescription(e);
+        }}
       />
       <InputMultipleFields
-        label="Subtasks"
+        label='Subtasks'
         value={subtasks}
         onChange={handleChangeSubtasks}
         onAdd={handleAddNewSubtask}

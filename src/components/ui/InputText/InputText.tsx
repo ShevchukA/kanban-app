@@ -1,14 +1,14 @@
-import { SyntheticEvent } from "react";
-import styles from "./InputText.module.css";
+import { SyntheticEvent } from 'react';
+import styles from './InputText.module.css';
 
-type InputTextProps = {
-  type: "text" | "multiText";
+interface InputTextProps {
+  type: 'text' | 'multiText';
   value: string;
   id?: string;
   label?: string;
   placeholder?: string;
   onChange: (e: SyntheticEvent) => void;
-};
+}
 
 const InputText = ({
   id,
@@ -23,7 +23,7 @@ const InputText = ({
         {label}
       </label>
       <input
-        type="text"
+        type='text'
         id={id}
         value={value}
         placeholder={placeholder}

@@ -3,16 +3,6 @@
   background-color: var(--color-board);
   display: flex;
   overflow: scroll;
-
-}
-
-.boardLoader {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-white);
 }
 
 .board__scrollContainer {

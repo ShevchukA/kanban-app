@@ -1,12 +1,17 @@
-import styles from "./MenuButton.module.css";
-import MenuIcon from "./assets/icon-vertical-ellipsis.svg?react";
+import styles from './MenuButton.module.css';
+import MenuIcon from './assets/icon-vertical-ellipsis.svg?react';
 
-type MenuButtonPropsType = {
+interface MenuButtonProps {
   onClick: (e: React.MouseEvent) => void;
-};
-const MenuButton = ({ onClick }: MenuButtonPropsType) => {
+}
+const MenuButton = ({ onClick }: MenuButtonProps) => {
   return (
-    <button onClick={(e) => onClick(e)} className={styles.menuButton}>
+    <button
+      onClick={(e) => {
+        onClick(e);
+      }}
+      className={styles.menuButton}
+    >
       <MenuIcon />
     </button>
   );

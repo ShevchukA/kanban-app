@@ -1,6 +1,7 @@
-import { createContext, useState, ReactNode, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { createContext, useState, ReactNode, useEffect } from 'react';
 
-type UiContextType = {
+interface UiContextType {
   isDarkMode: boolean;
   isSidebarShown: boolean;
   isModalShown: boolean;
@@ -13,11 +14,11 @@ type UiContextType = {
   closeModal: () => void;
   selectBoard: (index: number) => void;
   setContentIsLoaded: () => void;
-};
+}
 
-type UiContextProviderPropsType = {
+interface UiContextProviderProps {
   children: ReactNode;
-};
+}
 
 const initialState: UiContextType = {
   isDarkMode: true,
@@ -36,7 +37,7 @@ const initialState: UiContextType = {
 
 export const UiContext = createContext(initialState);
 
-export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
+export const UiContextProvider = ({ children }: UiContextProviderProps) => {
   const [isDarkMode, setDarkMode] = useState(true);
   const [isSidebarShown, setSidebarIsShown] = useState(true);
   const [isModalShown, setModalIsShown] = useState(false);
@@ -46,11 +47,11 @@ export const UiContextProvider = ({ children }: UiContextProviderPropsType) => {
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   }, [isDarkMode]);
 

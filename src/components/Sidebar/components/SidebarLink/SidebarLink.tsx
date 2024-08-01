@@ -1,28 +1,28 @@
-import { NavLink } from "react-router-dom";
-import styles from "./SidebarLink.module.css";
-import { ReactNode } from "react";
+import { NavLink } from 'react-router-dom';
+import styles from './SidebarLink.module.css';
+import { ReactNode } from 'react';
 
-type SidebarLinkPropsType = {
+interface SidebarLinkProps {
   link?: string;
   children?: ReactNode;
   icon?: ReactNode;
   specialLink?: boolean;
   onClick?: () => void;
-};
+}
 const SidebarLink = ({
   link,
   children,
   icon,
   specialLink,
   onClick,
-}: SidebarLinkPropsType) => {
+}: SidebarLinkProps) => {
   return link ? (
     <NavLink
       to={`/boards/${link}`}
       onClick={onClick}
       className={({ isActive }) => {
         return isActive
-          ? `${styles.sidebar__link} ${styles["sidebar__link--active"]}`
+          ? `${styles.sidebar__link} ${styles['sidebar__link--active']}`
           : styles.sidebar__link;
       }}
     >
@@ -33,7 +33,7 @@ const SidebarLink = ({
     <button
       onClick={onClick}
       className={`${styles.sidebar__link} ${
-        specialLink ? styles["sidebar__link--spacial"] : ""
+        specialLink ? styles['sidebar__link--spacial'] : ''
       }`}
     >
       {icon}

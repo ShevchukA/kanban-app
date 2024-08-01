@@ -1,15 +1,15 @@
-import styles from "./Card.module.css";
-import { Card as CardType } from "../../models/card";
-import { useContext } from "react";
-import { UiContext } from "../../context/uiContext";
-import TaskModal from "../../modals/TaskModal/TaskModal";
-import CardModal from "../../modals/CardModal/CardModal";
+import styles from './Card.module.css';
+import { Card as CardType } from '../../models/card';
+import { useContext } from 'react';
+import { UiContext } from '../../context/uiContext';
+import TaskModal from '../../modals/TaskModal/TaskModal';
+import CardModal from '../../modals/CardModal/CardModal';
 
-type CardProps = {
+interface CardProps {
   card?: CardType;
   addNewCard?: boolean;
   columnIndex?: number;
-};
+}
 
 const Card = ({ card, addNewCard, columnIndex }: CardProps) => {
   const { openModal } = useContext(UiContext);
@@ -21,20 +21,20 @@ const Card = ({ card, addNewCard, columnIndex }: CardProps) => {
   };
 
   const handleAddNewCard = () => {
-    openModal(<CardModal type="newCard" columnIndex={columnIndex} />);
+    openModal(<CardModal type='newCard' columnIndex={columnIndex} />);
   };
 
   return addNewCard ? (
     <div
-      className={`${styles.card} ${styles["card--new"]}`}
+      className={`${styles.card} ${styles['card--new']}`}
       onClick={handleAddNewCard}
     >
       <p className={styles.card__text}>+ New Card</p>
     </div>
   ) : (
     <div className={styles.card} onClick={handleCardClick}>
-      <div className="heading--m">{card?.title}</div>
-      <div className="text--bold">{card?.subtasks?.length || 0} subtasks</div>
+      <div className='heading--m'>{card?.title}</div>
+      <div className='text--bold'>{card?.subtasks.length ?? 0} subtasks</div>
     </div>
   );
 };

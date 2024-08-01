@@ -1,21 +1,21 @@
-import { SyntheticEvent, useEffect, useState } from "react";
-import Button from "../../components/ui/Button/Button";
-import InputText from "../../components/ui/InputText/InputText";
-import styles from "./BoardModal.module.css";
-import { useQueryClient } from "@tanstack/react-query";
-import { Board } from "../../models/board";
-import { Column } from "../../models/column";
-import InputMultipleFields from "../../components/ui/InputMultipleFields/InputMultipleFields";
-import { v4 as generateId } from "uuid";
-import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
+import { SyntheticEvent, useEffect, useState } from 'react';
+import Button from '../../components/ui/Button/Button';
+import InputText from '../../components/ui/InputText/InputText';
+import styles from './BoardModal.module.css';
+import { useQueryClient } from '@tanstack/react-query';
+import { Board } from '../../models/board';
+import { Column } from '../../models/column';
+import InputMultipleFields from '../../components/ui/InputMultipleFields/InputMultipleFields';
+import { v4 as generateId } from 'uuid';
+import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 
-type BoardModalProps = {
-  type: "newBoard" | "editBoard";
+interface BoardModalProps {
+  type: 'newBoard' | 'editBoard';
   board?: Board | null;
-};
+}
 
 const BoardModal = ({ type, board }: BoardModalProps) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [columns, setColumns] = useState<Column[]>([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
   const handleAddNewColumn = () => {
     const newColumnsSet = [
       ...columns,
-      { name: "", id: generateId(), tasks: [] } as Column,
+      { name: '', id: generateId(), tasks: [] } as Column,
     ];
     setColumns(newColumnsSet);
   };
@@ -59,11 +59,10 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] =
-      queryClient.getQueryData(["getBoardsList"]) || [];
+    const boardsList: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
     switch (type) {
-      case "newBoard":
+      case 'newBoard':
         if (name.length !== 0) {
           const newBoard: Board = {
             id: generateId(),
@@ -77,7 +76,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
         }
         break;
 
-      case "editBoard":
+      case 'editBoard':
         if (board) {
           const updatedBoard: Board = {
             ...board,
@@ -100,22 +99,29 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
     }
   };
 
-  const title = type === "newBoard" ? "Add New Board" : "Edit Board";
-  const buttonText = type === "newBoard" ? "Create New Board" : "Save Changes";
+  const title = type === 'newBoard' ? 'Add New Board' : 'Edit Board';
+  const buttonText = type === 'newBoard' ? 'Create New Board' : 'Save Changes';
 
   return (
-    <form className={styles.boardModal} onSubmit={(e) => handleSubmit(e)}>
-      <h1 className="heading--xl">{title}</h1>
+    <form
+      className={styles.boardModal}
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <h1 className='heading--xl'>{title}</h1>
       <InputText
-        type="text"
-        id="name"
+        type='text'
+        id='name'
         value={name}
-        label="Board Name"
-        placeholder="e.g. Web Design"
-        onChange={(e) => handleChangeName(e)}
+        label='Board Name'
+        placeholder='e.g. Web Design'
+        onChange={(e) => {
+          handleChangeName(e);
+        }}
       />
       <InputMultipleFields
-        label="Board Columns"
+        label='Board Columns'
         value={columns}
         onChange={handleChangeColumns}
         onAdd={handleAddNewColumn}

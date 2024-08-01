@@ -12,9 +12,17 @@
   flex-direction: row;
   transition: all 200ms;
   overflow: hidden;
-
 }
 
 .main--hidden {
   transform: translateX(-300px);
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
 }

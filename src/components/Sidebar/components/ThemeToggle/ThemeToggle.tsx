@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import styles from "./ThemeToggle.module.css";
-import DarkThemeIcon from "./assets/icon-dark-theme.svg?react";
-import LightThemeIcon from "./assets/icon-light-theme.svg?react";
-import { UiContext } from "../../../../context/uiContext";
+import { useContext } from 'react';
+import styles from './ThemeToggle.module.css';
+import DarkThemeIcon from './assets/icon-dark-theme.svg?react';
+import LightThemeIcon from './assets/icon-light-theme.svg?react';
+import { UiContext } from '../../../../context/uiContext';
 
 const ThemeToggle = () => {
   const { isDarkMode, toggleDarkMode } = useContext(UiContext);
@@ -14,10 +14,10 @@ const ThemeToggle = () => {
   return (
     <div className={styles.toggle}>
       <LightThemeIcon />
-      <div onClick={handleToggleTheme} className={styles["toggle__switch"]}>
+      <div onClick={handleToggleTheme} className={styles.toggle__switch}>
         <div
-          className={`${styles["toggle__pointer"]} ${
-            isDarkMode ? styles["toggle--dark"] : styles["toggle--light"]
+          className={`${styles.toggle__pointer} ${
+            isDarkMode ? styles['toggle--dark'] : styles['toggle--light']
           }`}
         ></div>
       </div>

@@ -1,16 +1,16 @@
-import { SyntheticEvent, useContext, useState } from "react";
-import Button from "../../components/ui/Button/Button";
-import InputText from "../../components/ui/InputText/InputText";
-import styles from "./ColumnModal.module.css";
-import useBoardsMutation, { Action } from "../../hooks/useBoardsMutation";
-import { Board } from "../../models/board";
-import { Column } from "../../models/column";
-import { v4 as generateId } from "uuid";
-import { UiContext } from "../../context/uiContext";
-import { useQueryClient } from "@tanstack/react-query";
+import { SyntheticEvent, useContext, useState } from 'react';
+import Button from '../../components/ui/Button/Button';
+import InputText from '../../components/ui/InputText/InputText';
+import styles from './ColumnModal.module.css';
+import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
+import { Board } from '../../models/board';
+import { Column } from '../../models/column';
+import { v4 as generateId } from 'uuid';
+import { UiContext } from '../../context/uiContext';
+import { useQueryClient } from '@tanstack/react-query';
 
 const ColumnModal = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const queryClient = useQueryClient();
   const editBoard = useBoardsMutation(Action.EditBoard);
   const { activeBoardIndex } = useContext(UiContext);
@@ -24,8 +24,7 @@ const ColumnModal = () => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] =
-      queryClient.getQueryData(["getBoardsList"]) || [];
+    const boardsList: Board[] = queryClient.getQueryData(['boards']) || [];
 
     if (name.length !== 0) {
       const newColumn: Column = {
@@ -42,25 +41,32 @@ const ColumnModal = () => {
       }
 
       // add new column
-      newBoardsList[activeBoardIndex].columns?.push(newColumn);
+      newBoardsList[activeBoardIndex].columns.push(newColumn);
 
       editBoard.mutate(newBoardsList);
     }
   };
 
   return (
-    <form className={styles.columnModal} onSubmit={(e) => handleSubmit(e)}>
-      <h1 className="heading--xl">Add New Column</h1>
+    <form
+      className={styles.columnModal}
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <h1 className='heading--xl'>Add New Column</h1>
       <InputText
-        type="text"
-        id="name"
+        type='text'
+        id='name'
         value={name}
-        label="Column Name"
-        placeholder="e.g. TODO"
-        onChange={(e) => handleChangeName(e)}
+        label='Column Name'
+        placeholder='e.g. TODO'
+        onChange={(e) => {
+          handleChangeName(e);
+        }}
       />
       <Button
-        text="+Add New Column"
+        text='+Add New Column'
         submit={true}
         disabled={editBoard.isPending || editBoard.isPending}
       />

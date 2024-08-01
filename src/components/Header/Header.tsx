@@ -1,40 +1,41 @@
-import { useContext } from "react";
-import styles from "./Header.module.css";
-import logoDark from "./assets/logo-dark.svg";
-import logoLight from "./assets/logo-light.svg";
-import { UiContext } from "../../context/uiContext";
-import ContextMenu from "../ui/ContextMenu/ContextMenu";
-import BoardModal from "../../modals/BoardModal/BoardModal";
-import { Board } from "../../models/board";
-import { useQueryClient } from "@tanstack/react-query";
-import DeleteModal from "../../modals/DeleteModal/DeleteModal";
+/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
+import { useContext } from 'react';
+import styles from './Header.module.css';
+import logoDark from './assets/logo-dark.svg';
+import logoLight from './assets/logo-light.svg';
+import { UiContext } from '../../context/uiContext';
+import ContextMenu from '../ui/ContextMenu/ContextMenu';
+import BoardModal from '../../modals/BoardModal/BoardModal';
+import { Board } from '../../models/board';
+import { useQueryClient } from '@tanstack/react-query';
+import DeleteModal from '../../modals/DeleteModal/DeleteModal';
 
-type HeaderPropsType = {
+interface HeaderProps {
   title?: string;
-};
+}
 
-const Header = ({ title }: HeaderPropsType) => {
+const Header = ({ title }: HeaderProps) => {
   const { activeBoardIndex, isDarkMode, openModal } = useContext(UiContext);
   const queryClient = useQueryClient();
 
   const logoSrc = isDarkMode ? logoLight : logoDark;
 
   const handleEditBoard = () => {
-    const boardsList = queryClient.getQueryData(["getBoardsList"]) as Board[];
+    const boardsList = queryClient.getQueryData(['boards']) as Board[];
     const board = boardsList[activeBoardIndex];
-    openModal(<BoardModal type="editBoard" board={board} />);
+    openModal(<BoardModal type='editBoard' board={board} />);
   };
 
   const handleDeleteBoard = () => {
-    const boardsList = queryClient.getQueryData(["getBoardsList"]) as Board[];
+    const boardsList = queryClient.getQueryData(['boards']) as Board[];
     const board = boardsList[activeBoardIndex];
-    openModal(<DeleteModal target="board" object={board} />);
+    openModal(<DeleteModal target='board' object={board} />);
   };
 
   return (
     <header className={styles.header}>
-      <img src={logoSrc} alt="logo" />
-      <h1 className="heading--xl">{title}</h1>
+      <img src={logoSrc} alt='logo' />
+      <h1 className='heading--xl'>{title}</h1>
       {title && (
         <div className={styles.header__controls}>
           {/* TODO */}
@@ -46,7 +47,7 @@ const Header = ({ title }: HeaderPropsType) => {
             }}
           /> */}
           <ContextMenu
-            target="Board"
+            target='Board'
             onDelete={handleDeleteBoard}
             onEdit={handleEditBoard}
           />

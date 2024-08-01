@@ -1,10 +1,10 @@
-import styles from "./CloseButton.module.css";
-import CloseIcon from "./assets/icon-close.svg?react";
+import styles from './CloseButton.module.css';
+import CloseIcon from './assets/icon-close.svg?react';
 
-type CloseButtonPropsType = {
+interface CloseButtonProps {
   onClick?: () => void;
-};
-const CloseButton = ({ onClick }: CloseButtonPropsType) => {
+}
+const CloseButton = ({ onClick }: CloseButtonProps) => {
   return (
     <button onClick={onClick} className={styles.closeButton}>
       <CloseIcon />

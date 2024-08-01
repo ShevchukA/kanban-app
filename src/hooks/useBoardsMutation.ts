@@ -1,14 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { UiContext } from "../context/uiContext";
-import { updateBoards } from "../database/api";
-import { Board } from "../models/board";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UiContext } from '../context/uiContext';
+import { updateBoards } from '../database/api';
+import { Board } from '../models/board';
 
 export enum Action {
-  AddBoard = "AddBoard",
-  EditBoard = "EditBoard",
-  DeleteBoard = "DeleteBoard",
+  AddBoard = 'AddBoard',
+  EditBoard = 'EditBoard',
+  DeleteBoard = 'DeleteBoard',
 }
 
 const useBoardsMutation = (action: Action) => {
@@ -22,13 +22,13 @@ const useBoardsMutation = (action: Action) => {
     // when mutate is called:
     onMutate: async (newBoardsList: Board[]) => {
       // cancel any outgoing refetches so they don't overwrite optimistic update
-      await queryClient.cancelQueries({ queryKey: ["getBoardsList"] });
+      await queryClient.cancelQueries({ queryKey: ['boards'] });
 
       // snapshot the previous value
-      const previousState = queryClient.getQueryData(["getBoardsList"]);
+      const previousState = queryClient.getQueryData(['boards']);
 
       // optimistically update to the new value
-      queryClient.setQueryData(["getBoardsList"], () => newBoardsList);
+      queryClient.setQueryData(['boards'], () => newBoardsList);
 
       // navigate to the last board in the list if new board added
       if (action === Action.AddBoard) {
@@ -50,13 +50,13 @@ const useBoardsMutation = (action: Action) => {
 
     // If the mutation fails, the context returned from onMutate to roll back
     onError: (_, __, context) => {
-      queryClient.setQueryData(["getBoardsList"], context?.previousState);
+      queryClient.setQueryData(['boards'], context?.previousState);
     },
 
     onSettled: () => {
       // refetch list of boards by setting initial query as invalid
-      queryClient.invalidateQueries({
-        queryKey: ["getBoardsList"],
+      void queryClient.invalidateQueries({
+        queryKey: ['boards'],
       });
     },
 
