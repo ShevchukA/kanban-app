@@ -24,7 +24,7 @@ const ColumnModal = () => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] = queryClient.getQueryData(['boards']) || [];
+    const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
     if (name.length !== 0) {
       const newColumn: Column = {
@@ -33,17 +33,12 @@ const ColumnModal = () => {
         tasks: [],
       };
 
-      const newBoardsList = [...boardsList];
-
-      // if current board doesn't have columns, than add empty array
-      if (!newBoardsList[activeBoardIndex].columns) {
-        newBoardsList[activeBoardIndex].columns = [];
-      }
+      const newBoards = [...boards];
 
       // add new column
-      newBoardsList[activeBoardIndex].columns.push(newColumn);
+      newBoards[activeBoardIndex].columns.push(newColumn);
 
-      editBoard.mutate(newBoardsList);
+      editBoard.mutate(newBoards);
     }
   };
 

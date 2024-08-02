@@ -59,20 +59,20 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] = queryClient.getQueryData(['boards']) ?? [];
+    const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
     switch (type) {
       case 'newBoard':
         if (name.length !== 0) {
           const newBoard: Board = {
             id: generateId(),
-            name: name,
-            columns: columns,
+            name,
+            columns,
           };
 
-          const newBoardsList = [...boardsList, newBoard];
+          const newBoards = [...boards, newBoard];
 
-          addBoard.mutate(newBoardsList);
+          addBoard.mutate(newBoards);
         }
         break;
 
@@ -80,10 +80,10 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
         if (board) {
           const updatedBoard: Board = {
             ...board,
-            name: name,
-            columns: columns,
+            name,
+            columns,
           };
-          const newBoardsList = boardsList.map((board) => {
+          const newBoards = boards.map((board) => {
             if (board.id === updatedBoard.id) {
               return updatedBoard;
             } else {
@@ -91,7 +91,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
             }
           });
 
-          editBoard.mutate(newBoardsList);
+          editBoard.mutate(newBoards);
         }
         break;
       default:

@@ -21,14 +21,14 @@ const Header = ({ title }: HeaderProps) => {
   const logoSrc = isDarkMode ? logoLight : logoDark;
 
   const handleEditBoard = () => {
-    const boardsList = queryClient.getQueryData(['boards']) as Board[];
-    const board = boardsList[activeBoardIndex];
+    const boards = queryClient.getQueryData(['boards']) as Board[];
+    const board = boards[activeBoardIndex];
     openModal(<BoardModal type='editBoard' board={board} />);
   };
 
   const handleDeleteBoard = () => {
-    const boardsList = queryClient.getQueryData(['boards']) as Board[];
-    const board = boardsList[activeBoardIndex];
+    const boards = queryClient.getQueryData(['boards']) as Board[];
+    const board = boards[activeBoardIndex];
     openModal(<DeleteModal target='board' object={board} />);
   };
 

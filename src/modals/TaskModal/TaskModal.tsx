@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import ContextMenu from '../../components/ui/ContextMenu/ContextMenu';
 import { Card } from '../../models/card';
@@ -18,17 +18,11 @@ interface TaskModalProps {
 
 const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const { openModal } = useContext(UiContext);
-  const [subtasks, setSubtasks] = useState<Subtask[]>([]);
+  const [subtasks, setSubtasks] = useState<Subtask[]>(card.subtasks);
   const [subtasksEdited, setSubtasksEdited] = useState(false);
   const editBoard = useBoardsMutation(Action.EditBoard);
-  const queryClient = useQueryClient();
   const { activeBoardIndex } = useContext(UiContext);
-
-  useEffect(() => {
-    if (card.subtasks) {
-      setSubtasks(card.subtasks);
-    }
-  }, [card]);
+  const queryClient = useQueryClient();
 
   const handleDeleteTask = () => {
     openModal(<DeleteModal target='card' object={card} />);
@@ -52,31 +46,29 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   };
 
   const handleSubmit = () => {
-    const boardsList: Board[] = queryClient.getQueryData(['boards']) || [];
+    const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
-    if (card && columnIndex !== undefined) {
-      const updatedCard: Card = {
-        ...card,
-        subtasks: subtasks,
-      };
+    const newBoards = [...boards];
 
-      const newBoardsList = [...boardsList];
+    const updatedCard: Card = {
+      ...card,
+      subtasks: subtasks,
+    };
 
-      // find card to be edited and update cards array
-      const updatedCards = newBoardsList[activeBoardIndex].columns[
-        columnIndex
-      ].tasks.map((card: Card) => {
-        if (card.id === updatedCard.id) {
-          return updatedCard;
-        } else {
-          return card;
-        }
-      });
+    // find card to be edited and update cards array
+    const updatedCards = newBoards[activeBoardIndex].columns[
+      columnIndex
+    ].tasks.map((card: Card) => {
+      if (card.id === updatedCard.id) {
+        return updatedCard;
+      } else {
+        return card;
+      }
+    });
 
-      newBoardsList[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
+    newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
 
-      editBoard.mutate(newBoardsList);
-    }
+    editBoard.mutate(newBoards);
   };
 
   return (
@@ -94,7 +86,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
 
       <div>
         <p className='heading--s'>Subtasks</p>
-        {!subtasks || subtasks.length === 0 ? (
+        {subtasks.length === 0 ? (
           <p className='text'>No subtasks</p>
         ) : (
           <ul className={styles.taskModal__subtasks}>

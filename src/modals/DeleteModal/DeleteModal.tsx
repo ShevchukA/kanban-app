@@ -19,53 +19,40 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
   const deleteBoard = useBoardsMutation(Action.DeleteBoard);
   const editBoard = useBoardsMutation(Action.EditBoard);
 
-  let text = '';
-  switch (target) {
-    case 'board':
-      text = `Are you sure you want to delete the ‘${
-        (object as Board).name
-      }’ board? This action will remove all columns and tasks and cannot be reversed.`;
-      break;
-    case 'column':
-      text = `Are you sure you want to delete the ‘${
-        (object as Column).name
-      }’ column? This action will remove all tasks and cannot be reversed.`;
-      break;
-    case 'card':
-      text = `Are you sure you want to delete the ‘${
-        (object as Card).title
-      }’ task and its subtasks? This action cannot be reversed`;
-      break;
-    default:
-      break;
-  }
+  const confirmMessage = {
+    board: `Are you sure you want to delete the ‘${
+      (object as Board).name
+    }’ board? This action will remove all columns and tasks and cannot be reversed.`,
+
+    column: `Are you sure you want to delete the ‘${
+      (object as Column).name
+    }’ column? This action will remove all tasks and cannot be reversed.`,
+
+    card: `Are you sure you want to delete the ‘${
+      (object as Card).title
+    }’ task and its subtasks? This action cannot be reversed`,
+  };
 
   const handleDelete = () => {
-    const boardsList = queryClient.getQueryData(['boards']) as Board[];
-    let newBoardsList: Board[];
+    const boards = queryClient.getQueryData(['boards']) as Board[];
+    let newBoards: Board[];
 
-    switch (target) {
-      case 'board':
-        newBoardsList = boardsList.filter(
-          (board) => board.id !== (object as Board).id
-        );
-        deleteBoard.mutate(newBoardsList);
-        break;
+    if (target == 'board') {
+      newBoards = boards.filter((board) => board.id !== (object as Board).id);
+      deleteBoard.mutate(newBoards);
+    }
 
-      case 'card':
-        newBoardsList = boardsList.map((board: Board) => {
-          board.columns = board.columns.map((column: Column) => {
-            column.tasks = column.tasks.filter(
-              (card: Card) => card.id !== (object as Card).id
-            );
-            return column;
-          });
-          return board;
+    if (target == 'card') {
+      newBoards = boards.map((board: Board) => {
+        board.columns = board.columns.map((column: Column) => {
+          column.tasks = column.tasks.filter(
+            (card: Card) => card.id !== (object as Card).id
+          );
+          return column;
         });
-        editBoard.mutate(newBoardsList);
-        break;
-      default:
-        break;
+        return board;
+      });
+      editBoard.mutate(newBoards);
     }
 
     closeModal();
@@ -77,7 +64,7 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
   return (
     <div className={styles.container}>
       <h1 className={`heading--l ${styles.heading}`}>Delete this {target}?</h1>
-      <p className='text'>{text}</p>
+      <p className='text'>{confirmMessage[target]}</p>
       <div className={styles.buttonsContainer}>
         <Button
           type='negative'

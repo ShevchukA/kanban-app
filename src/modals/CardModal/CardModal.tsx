@@ -29,7 +29,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
     if (card) {
       setTitle(card.title);
       setDescription(card.description);
-      setSubtasks(card.subtasks || []);
+      setSubtasks(card.subtasks);
     }
   }, [card]);
 
@@ -67,66 +67,49 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
     e.preventDefault();
 
     // get boards array from cache for further mutation
-    const boardsList: Board[] = queryClient.getQueryData(['']) || [];
+    const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
-    switch (type) {
-      case 'newCard':
-        if (title.length !== 0 && columnIndex !== undefined) {
-          const newCard: Card = {
-            id: generateId(),
-            title: title,
-            description: description,
-            status: '',
-            subtasks: subtasks,
-          };
+    if (type == 'newCard' && title.length !== 0 && columnIndex !== undefined) {
+      const newCard: Card = {
+        id: generateId(),
+        title: title,
+        description: description,
+        status: '',
+        subtasks: subtasks,
+      };
 
-          const newBoardsList = [...boardsList];
+      const newBoards = [...boards];
 
-          // if current column doesn't have cards, than add empty array
-          if (!newBoardsList[activeBoardIndex].columns[columnIndex].tasks) {
-            newBoardsList[activeBoardIndex].columns[columnIndex].tasks = [];
-          }
+      // add new card
+      newBoards[activeBoardIndex].columns[columnIndex]?.tasks.push(newCard);
 
-          // add new card
-          newBoardsList[activeBoardIndex].columns[columnIndex]?.tasks.push(
-            newCard
-          );
+      editBoard.mutate(newBoards);
+    }
 
-          editBoard.mutate(newBoardsList);
+    if (type == 'editCard' && card && columnIndex !== undefined) {
+      const updatedCard: Card = {
+        ...card,
+        title: title,
+        description: description,
+        subtasks: subtasks,
+      };
+
+      const newBoards = [...boards];
+
+      // find card to be edited and update cards array
+      const updatedCards = newBoards[activeBoardIndex].columns[
+        columnIndex
+      ].tasks.map((card: Card) => {
+        if (card.id === updatedCard.id) {
+          return updatedCard;
+        } else {
+          return card;
         }
-        break;
+      });
 
-      case 'editCard':
-        if (card && columnIndex !== undefined) {
-          const updatedCard: Card = {
-            ...card,
-            title: title,
-            description: description,
-            subtasks: subtasks,
-          };
+      newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
 
-          const newBoardsList = [...boardsList];
-
-          // find card to be edited and update cards array
-          const updatedCards = newBoardsList[activeBoardIndex].columns[
-            columnIndex
-          ].tasks.map((card: Card) => {
-            if (card.id === updatedCard.id) {
-              return updatedCard;
-            } else {
-              return card;
-            }
-          });
-
-          newBoardsList[activeBoardIndex].columns[columnIndex].tasks =
-            updatedCards;
-
-          editBoard.mutate(newBoardsList);
-        }
-        break;
-
-      default:
-        break;
+      editBoard.mutate(newBoards);
     }
   };
 

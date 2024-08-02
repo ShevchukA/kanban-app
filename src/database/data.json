@@ -1,519 +1,516 @@
-{
-  "boards": [
-    {
-      "id": "1",
-      "name": "Platform Launch",
-      "columns": [
-        {
-          "id": "1",
-          "name": "Todo",
-          "tasks": [
-            {
-              "id": "1",
-              "title": "Build UI for onboarding flow",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "id": "st1",
-                  "name": "Sign up page",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st2",
-                  "name": "Sign in page",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st3",
-                  "name": "Welcome page",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "2",
-              "title": "Build UI for search",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "id": "st4",
-                  "name": "Search page",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "3",
-              "title": "Build settings UI",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "id": "st5",
-                  "name": "Account page",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st6",
-                  "name": "Billing page",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "4",
-              "title": "QA and test all major user journeys",
-              "description": "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "id": "st7",
-                  "name": "Internal testing",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st8",
-                  "name": "External testing",
-                  "isCompleted": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "name": "Doing",
-          "tasks": [
-            {
-              "id": "5",
-              "title": "Design settings and search pages",
-              "description": "",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st9",
-                  "name": "Settings - Account page",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st10",
-                  "name": "Settings - Billing page",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st11",
-                  "name": "Search page",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "6",
-              "title": "Add account management endpoints",
-              "description": "",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st12",
-                  "name": "Upgrade plan",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st13",
-                  "name": "Cancel plan",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st14",
-                  "name": "Update payment method",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "7",
-              "title": "Design onboarding flow",
-              "description": "",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st15",
-                  "name": "Sign up page",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st16",
-                  "name": "Sign in page",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st17",
-                  "name": "Welcome page",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "8",
-              "title": "Add search enpoints",
-              "description": "",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st18",
-                  "name": "Add search endpoint",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st19",
-                  "name": "Define search filters",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "9",
-              "title": "Add authentication endpoints",
-              "description": "",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st20",
-                  "name": "Define user model",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st21",
-                  "name": "Add auth endpoints",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "10",
-              "title": "Research pricing points of various competitors and trial different business models",
-              "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
-              "status": "Doing",
-              "subtasks": [
-                {
-                  "id": "st22",
-                  "name": "Research competitor pricing and business models",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st23",
-                  "name": "Outline a business model that works for our solution",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st24",
-                  "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
-                  "isCompleted": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "3",
-          "name": "Done",
-          "tasks": [
-            {
-              "id": "11",
-              "title": "Conduct 5 wireframe tests",
-              "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st25",
-                  "name": "Complete 5 wireframe prototype tests",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "12",
-              "title": "Create wireframe prototype",
-              "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st26",
-                  "name": "Create clickable wireframe prototype in Balsamiq",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "13",
-              "title": "Review results of usability tests and iterate",
-              "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st27",
-                  "name": "Meet to review notes from previous tests and plan changes",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st28",
-                  "name": "Make changes to paper prototypes",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st29",
-                  "name": "Conduct 5 usability tests",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "14",
-              "title": "Create paper prototypes and conduct 10 usability tests with potential customers",
-              "description": "",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st30",
-                  "name": "Create paper prototypes for version one",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st31",
-                  "name": "Complete 10 usability tests",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "15",
-              "title": "Market discovery",
-              "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st32",
-                  "name": "Interview 10 prospective customers",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "16",
-              "title": "Competitor analysis",
-              "description": "",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st33",
-                  "name": "Find direct and indirect competitors",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st34",
-                  "name": "SWOT analysis for each competitor",
-                  "isCompleted": true
-                }
-              ]
-            },
-            {
-              "id": "17",
-              "title": "Research the market",
-              "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
-              "status": "Done",
-              "subtasks": [
-                {
-                  "id": "st35",
-                  "name": "Write up research analysis",
-                  "isCompleted": true
-                },
-                {
-                  "id": "st36",
-                  "name": "Calculate TAM",
-                  "isCompleted": true
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Marketing Plan",
-      "columns": [
-        {
-          "id": "1",
-          "name": "Todo",
-          "tasks": [
-            {
-              "id": "18",
-              "title": "Plan Product Hunt launch",
-              "description": "",
-              "status": "Todo",
-              "subtasks": [
-                {
-                  "id": "st37",
-                  "name": "Find hunter",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st38",
-                  "name": "Gather assets",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st39",
-                  "name": "Draft product page",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st40",
-                  "name": "Notify customers",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st41",
-                  "name": "Notify network",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st42",
-                  "name": "Launch!",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "19",
-              "title": "Share on Show HN",
-              "description": "",
-              "status": "",
-              "subtasks": [
-                {
-                  "id": "st43",
-                  "name": "Draft out HN post",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st44",
-                  "name": "Get feedback and refine",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st45",
-                  "name": "Publish post",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "20",
-              "title": "Write launch article to publish on multiple channels",
-              "description": "",
-              "status": "",
-              "subtasks": [
-                {
-                  "id": "st46",
-                  "name": "Write article",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st47",
-                  "name": "Publish on LinkedIn",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st48",
-                  "name": "Publish on Inndie Hackers",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st49",
-                  "name": "Publish on Medium",
-                  "isCompleted": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "name": "Doing",
-          "tasks": []
-        },
-        {
-          "id": "3",
-          "name": "Done",
-          "tasks": []
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Roadmap",
-      "columns": [
-        {
-          "id": "1",
-          "name": "Now",
-          "tasks": [
-            {
-              "id": "21",
-              "title": "Launch version one",
-              "description": "",
-              "status": "",
-              "subtasks": [
-                {
-                  "id": "st1",
-                  "name": "Launch privately to our waitlist",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st2",
-                  "name": "Launch publicly on PH, HN, etc.",
-                  "isCompleted": false
-                }
-              ]
-            },
-            {
-              "id": "22",
-              "title": "Review early feedback and plan next steps for roadmap",
-              "description": "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
-              "status": "",
-              "subtasks": [
-                {
-                  "id": "st3",
-                  "name": "Interview 10 customers",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st4",
-                  "name": "Review common customer pain points and suggestions",
-                  "isCompleted": false
-                },
-                {
-                  "id": "st5",
-                  "name": "Outline next steps for our roadmap",
-                  "isCompleted": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "name": "Next",
-          "tasks": []
-        },
-        {
-          "id": "3",
-          "name": "Later",
-          "tasks": []
-        }
-      ]
-    }
-  ],
-  "users": [1, 2, 3]
-}
+[
+  {
+    "id": "1",
+    "name": "Platform Launch",
+    "columns": [
+      {
+        "id": "1",
+        "name": "Todo",
+        "tasks": [
+          {
+            "id": "1",
+            "title": "Build UI for onboarding flow",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "id": "st1",
+                "name": "Sign up page",
+                "isCompleted": true
+              },
+              {
+                "id": "st2",
+                "name": "Sign in page",
+                "isCompleted": false
+              },
+              {
+                "id": "st3",
+                "name": "Welcome page",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "title": "Build UI for search",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "id": "st4",
+                "name": "Search page",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "title": "Build settings UI",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "id": "st5",
+                "name": "Account page",
+                "isCompleted": false
+              },
+              {
+                "id": "st6",
+                "name": "Billing page",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "title": "QA and test all major user journeys",
+            "description": "Once we feel version one is ready, we need to rigorously test it both internally and externally to identify any major gaps.",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "id": "st7",
+                "name": "Internal testing",
+                "isCompleted": false
+              },
+              {
+                "id": "st8",
+                "name": "External testing",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Doing",
+        "tasks": [
+          {
+            "id": "5",
+            "title": "Design settings and search pages",
+            "description": "",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st9",
+                "name": "Settings - Account page",
+                "isCompleted": true
+              },
+              {
+                "id": "st10",
+                "name": "Settings - Billing page",
+                "isCompleted": true
+              },
+              {
+                "id": "st11",
+                "name": "Search page",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "6",
+            "title": "Add account management endpoints",
+            "description": "",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st12",
+                "name": "Upgrade plan",
+                "isCompleted": true
+              },
+              {
+                "id": "st13",
+                "name": "Cancel plan",
+                "isCompleted": true
+              },
+              {
+                "id": "st14",
+                "name": "Update payment method",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "7",
+            "title": "Design onboarding flow",
+            "description": "",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st15",
+                "name": "Sign up page",
+                "isCompleted": true
+              },
+              {
+                "id": "st16",
+                "name": "Sign in page",
+                "isCompleted": false
+              },
+              {
+                "id": "st17",
+                "name": "Welcome page",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "title": "Add search enpoints",
+            "description": "",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st18",
+                "name": "Add search endpoint",
+                "isCompleted": true
+              },
+              {
+                "id": "st19",
+                "name": "Define search filters",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "9",
+            "title": "Add authentication endpoints",
+            "description": "",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st20",
+                "name": "Define user model",
+                "isCompleted": true
+              },
+              {
+                "id": "st21",
+                "name": "Add auth endpoints",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "10",
+            "title": "Research pricing points of various competitors and trial different business models",
+            "description": "We know what we're planning to build for version one. Now we need to finalise the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+            "status": "Doing",
+            "subtasks": [
+              {
+                "id": "st22",
+                "name": "Research competitor pricing and business models",
+                "isCompleted": true
+              },
+              {
+                "id": "st23",
+                "name": "Outline a business model that works for our solution",
+                "isCompleted": false
+              },
+              {
+                "id": "st24",
+                "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Done",
+        "tasks": [
+          {
+            "id": "11",
+            "title": "Conduct 5 wireframe tests",
+            "description": "Ensure the layout continues to make sense and we have strong buy-in from potential users.",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st25",
+                "name": "Complete 5 wireframe prototype tests",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "12",
+            "title": "Create wireframe prototype",
+            "description": "Create a greyscale clickable wireframe prototype to test our asssumptions so far.",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st26",
+                "name": "Create clickable wireframe prototype in Balsamiq",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "13",
+            "title": "Review results of usability tests and iterate",
+            "description": "Keep iterating through the subtasks until we're clear on the core concepts for the app.",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st27",
+                "name": "Meet to review notes from previous tests and plan changes",
+                "isCompleted": true
+              },
+              {
+                "id": "st28",
+                "name": "Make changes to paper prototypes",
+                "isCompleted": true
+              },
+              {
+                "id": "st29",
+                "name": "Conduct 5 usability tests",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "14",
+            "title": "Create paper prototypes and conduct 10 usability tests with potential customers",
+            "description": "",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st30",
+                "name": "Create paper prototypes for version one",
+                "isCompleted": true
+              },
+              {
+                "id": "st31",
+                "name": "Complete 10 usability tests",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "15",
+            "title": "Market discovery",
+            "description": "We need to define and refine our core product. Interviews will help us learn common pain points and help us define the strongest MVP.",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st32",
+                "name": "Interview 10 prospective customers",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "16",
+            "title": "Competitor analysis",
+            "description": "",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st33",
+                "name": "Find direct and indirect competitors",
+                "isCompleted": true
+              },
+              {
+                "id": "st34",
+                "name": "SWOT analysis for each competitor",
+                "isCompleted": true
+              }
+            ]
+          },
+          {
+            "id": "17",
+            "title": "Research the market",
+            "description": "We need to get a solid overview of the market to ensure we have up-to-date estimates of market size and demand.",
+            "status": "Done",
+            "subtasks": [
+              {
+                "id": "st35",
+                "name": "Write up research analysis",
+                "isCompleted": true
+              },
+              {
+                "id": "st36",
+                "name": "Calculate TAM",
+                "isCompleted": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Marketing Plan",
+    "columns": [
+      {
+        "id": "1",
+        "name": "Todo",
+        "tasks": [
+          {
+            "id": "18",
+            "title": "Plan Product Hunt launch",
+            "description": "",
+            "status": "Todo",
+            "subtasks": [
+              {
+                "id": "st37",
+                "name": "Find hunter",
+                "isCompleted": false
+              },
+              {
+                "id": "st38",
+                "name": "Gather assets",
+                "isCompleted": false
+              },
+              {
+                "id": "st39",
+                "name": "Draft product page",
+                "isCompleted": false
+              },
+              {
+                "id": "st40",
+                "name": "Notify customers",
+                "isCompleted": false
+              },
+              {
+                "id": "st41",
+                "name": "Notify network",
+                "isCompleted": false
+              },
+              {
+                "id": "st42",
+                "name": "Launch!",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "19",
+            "title": "Share on Show HN",
+            "description": "",
+            "status": "",
+            "subtasks": [
+              {
+                "id": "st43",
+                "name": "Draft out HN post",
+                "isCompleted": false
+              },
+              {
+                "id": "st44",
+                "name": "Get feedback and refine",
+                "isCompleted": false
+              },
+              {
+                "id": "st45",
+                "name": "Publish post",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "20",
+            "title": "Write launch article to publish on multiple channels",
+            "description": "",
+            "status": "",
+            "subtasks": [
+              {
+                "id": "st46",
+                "name": "Write article",
+                "isCompleted": false
+              },
+              {
+                "id": "st47",
+                "name": "Publish on LinkedIn",
+                "isCompleted": false
+              },
+              {
+                "id": "st48",
+                "name": "Publish on Inndie Hackers",
+                "isCompleted": false
+              },
+              {
+                "id": "st49",
+                "name": "Publish on Medium",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Doing",
+        "tasks": []
+      },
+      {
+        "id": "3",
+        "name": "Done",
+        "tasks": []
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Roadmap",
+    "columns": [
+      {
+        "id": "1",
+        "name": "Now",
+        "tasks": [
+          {
+            "id": "21",
+            "title": "Launch version one",
+            "description": "",
+            "status": "",
+            "subtasks": [
+              {
+                "id": "st1",
+                "name": "Launch privately to our waitlist",
+                "isCompleted": false
+              },
+              {
+                "id": "st2",
+                "name": "Launch publicly on PH, HN, etc.",
+                "isCompleted": false
+              }
+            ]
+          },
+          {
+            "id": "22",
+            "title": "Review early feedback and plan next steps for roadmap",
+            "description": "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
+            "status": "",
+            "subtasks": [
+              {
+                "id": "st3",
+                "name": "Interview 10 customers",
+                "isCompleted": false
+              },
+              {
+                "id": "st4",
+                "name": "Review common customer pain points and suggestions",
+                "isCompleted": false
+              },
+              {
+                "id": "st5",
+                "name": "Outline next steps for our roadmap",
+                "isCompleted": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "Next",
+        "tasks": []
+      },
+      {
+        "id": "3",
+        "name": "Later",
+        "tasks": []
+      }
+    ]
+  }
+]
