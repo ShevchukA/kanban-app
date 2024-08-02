@@ -42,6 +42,21 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
       deleteBoard.mutate(newBoards);
     }
 
+    if (target == 'column') {
+      console.log('Delete column');
+
+      // TODO
+      // newBoards = boards.map((board: Board) => {
+      //   board.columns = board.columns.filter(
+      //     (column: Column) => column.id !== (object as Column).id
+      //   );
+      //   return board;
+      // });
+      // editBoard.mutate(newBoards);
+
+      // openModal(<BoardModal type='editBoard' />);
+    }
+
     if (target == 'card') {
       newBoards = boards.map((board: Board) => {
         board.columns = board.columns.map((column: Column) => {

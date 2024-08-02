@@ -5,7 +5,6 @@ interface UiContextType {
   isDarkMode: boolean;
   isSidebarShown: boolean;
   isModalShown: boolean;
-  isContentLoaded: boolean;
   activeBoardIndex: number;
   activeModal: ReactNode | null;
   toggleSidebar: () => void;
@@ -13,7 +12,6 @@ interface UiContextType {
   openModal: (modal: ReactNode) => void;
   closeModal: () => void;
   selectBoard: (index: number) => void;
-  setContentIsLoaded: () => void;
 }
 
 interface UiContextProviderProps {
@@ -24,7 +22,6 @@ const initialState: UiContextType = {
   isDarkMode: true,
   isSidebarShown: true,
   isModalShown: false,
-  isContentLoaded: false,
   activeBoardIndex: 0,
   activeModal: null,
   toggleSidebar: () => {},
@@ -32,7 +29,6 @@ const initialState: UiContextType = {
   openModal: () => {},
   closeModal: () => {},
   selectBoard: () => {},
-  setContentIsLoaded: () => {},
 };
 
 export const UiContext = createContext(initialState);
@@ -41,7 +37,6 @@ export const UiContextProvider = ({ children }: UiContextProviderProps) => {
   const [isDarkMode, setDarkMode] = useState(true);
   const [isSidebarShown, setSidebarIsShown] = useState(true);
   const [isModalShown, setModalIsShown] = useState(false);
-  const [isContentLoaded, setIsContentLoaded] = useState(false);
   const [activeModal, setActiveModal] = useState<ReactNode>(null);
   const [activeBoardIndex, setActiveBoardIndex] = useState(0);
 
@@ -76,17 +71,12 @@ export const UiContextProvider = ({ children }: UiContextProviderProps) => {
     setActiveBoardIndex(index);
   };
 
-  const setContentIsLoaded = () => {
-    setIsContentLoaded(true);
-  };
-
   return (
     <UiContext.Provider
       value={{
         isDarkMode,
         isSidebarShown,
         isModalShown,
-        isContentLoaded,
         activeBoardIndex,
         activeModal,
         toggleSidebar,
@@ -94,7 +84,6 @@ export const UiContextProvider = ({ children }: UiContextProviderProps) => {
         openModal,
         closeModal,
         selectBoard,
-        setContentIsLoaded,
       }}
     >
       {children}

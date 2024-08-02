@@ -50,7 +50,16 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
   };
 
   const handleDeleteColumn = (id: string) => {
-    // TODO check if column is not empty than show delete modal
+    // TODO
+    // const column = columns.find((column) => column.id == id) as Column;
+
+    // if (column.tasks.length > 0) {
+    //   openModal(<DeleteModal target='column' object={column} />);
+    // } else {
+    //   const newColumnsSet = columns.filter((column) => column.id !== id);
+    //   setColumns(newColumnsSet);
+    // }
+
     const newColumnsSet = columns.filter((column) => column.id !== id);
     setColumns(newColumnsSet);
   };

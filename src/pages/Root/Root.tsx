@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header/Header';
-
 import styles from './Root.module.css';
 import { useContext, useEffect } from 'react';
 import { UiContext } from '../../context/uiContext';
@@ -21,7 +20,12 @@ const Root = () => {
 
   const navigate = useNavigate();
 
-  const { data: boards, isLoading } = useQuery<Board[]>({
+  const {
+    data: boards,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<Board[]>({
     queryKey: ['boards'],
     queryFn: getBoards, // fetch from my api
     // select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
@@ -38,8 +42,14 @@ const Root = () => {
   };
 
   const Loader = () => (
-    <div className={styles.loader}>
+    <div className={styles.container}>
       <h1 className='heading--xl'>Loading...</h1>
+    </div>
+  );
+
+  const Error = () => (
+    <div className={styles.container}>
+      <h1 className='heading--xl'>{error?.message}</h1>
     </div>
   );
 
@@ -55,7 +65,7 @@ const Root = () => {
         }
       >
         <Sidebar boards={boards} onToggle={handleToggleSidebar} />
-        {isLoading ? <Loader /> : <Outlet />}
+        {isLoading ? <Loader /> : isError ? <Error /> : <Outlet />}
       </main>
     </div>
   );

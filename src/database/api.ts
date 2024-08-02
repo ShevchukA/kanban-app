@@ -27,21 +27,6 @@ export async function getBoards() {
 
 // Mutations
 
-export async function resetServerData() {
-  const res = await fetch(URL, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Access-Key': ACCESS_KEY,
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!res.ok) {
-    throw new Error(`Can't reset data`);
-  }
-}
-
 export async function updateBoards(boards: Board[]) {
   const res = await fetch(URL, {
     method: 'PUT',
@@ -58,4 +43,19 @@ export async function updateBoards(boards: Board[]) {
   const data = await res.json();
 
   return data.record;
+}
+
+export async function resetServerData() {
+  const res = await fetch(URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Access-Key': ACCESS_KEY,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Can't reset data`);
+  }
 }
