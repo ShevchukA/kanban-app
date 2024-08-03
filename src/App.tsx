@@ -1,28 +1,19 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root/Root";
-import Board from "./pages/Board/Board";
-// import data from "./database/data.json";
-// import { useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './pages/Root/Root';
+import Board from './pages/Board/Board';
 
 function App() {
-  // useEffect(() => {
-  //   fetch(
-  //     "https://my-kanban-e646e-default-rtdb.asia-southeast1.firebasedatabase.app/kanban.json",
-  //     { method: "PUT", body: JSON.stringify(data) }
-  //   );
-  // }, []);
-
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Root />,
       children: [
         {
-          path: "/",
+          path: '/',
           element: <Board />,
         },
         {
-          path: "boards/:boardID",
+          path: 'boards/:boardID',
           element: <Board />,
         },
       ],

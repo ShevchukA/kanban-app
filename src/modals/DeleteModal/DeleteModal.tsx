@@ -43,8 +43,6 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
     }
 
     if (target == 'column') {
-      console.log('Delete column');
-
       // TODO
       // newBoards = boards.map((board: Board) => {
       //   board.columns = board.columns.filter(
@@ -53,7 +51,6 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
       //   return board;
       // });
       // editBoard.mutate(newBoards);
-
       // openModal(<BoardModal type='editBoard' />);
     }
 

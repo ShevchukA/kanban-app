@@ -10,24 +10,21 @@ import { Board } from '../../models/board';
 import { useQueryClient } from '@tanstack/react-query';
 import DeleteModal from '../../modals/DeleteModal/DeleteModal';
 
-interface HeaderProps {
-  title?: string;
-}
-
-const Header = ({ title }: HeaderProps) => {
+const Header = () => {
   const { activeBoardIndex, isDarkMode, openModal } = useContext(UiContext);
   const queryClient = useQueryClient();
+  const boards = queryClient.getQueryData(['boards']) as Board[];
+
+  const title = boards && boards[activeBoardIndex]?.name;
 
   const logoSrc = isDarkMode ? logoLight : logoDark;
 
   const handleEditBoard = () => {
-    const boards = queryClient.getQueryData(['boards']) as Board[];
     const board = boards[activeBoardIndex];
     openModal(<BoardModal type='editBoard' board={board} />);
   };
 
   const handleDeleteBoard = () => {
-    const boards = queryClient.getQueryData(['boards']) as Board[];
     const board = boards[activeBoardIndex];
     openModal(<DeleteModal target='board' object={board} />);
   };
@@ -35,23 +32,17 @@ const Header = ({ title }: HeaderProps) => {
   return (
     <header className={styles.header}>
       <img src={logoSrc} alt='logo' />
-      <h1 className='heading--xl'>{title}</h1>
       {title && (
-        <div className={styles.header__controls}>
-          {/* TODO */}
-          {/* <Button
-            text="+ Add New Task"
-            size="large"
-            onClick={() => {
-              openModal(<TaskModal />);
-            }}
-          /> */}
-          <ContextMenu
-            target='Board'
-            onDelete={handleDeleteBoard}
-            onEdit={handleEditBoard}
-          />
-        </div>
+        <>
+          <h1 className='heading--xl'>{title}</h1>
+          <div className={styles.header__controls}>
+            <ContextMenu
+              target='Board'
+              onDelete={handleDeleteBoard}
+              onEdit={handleEditBoard}
+            />
+          </div>
+        </>
       )}
     </header>
   );

@@ -8,6 +8,7 @@ import Modal from '../../components/ui/Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
 import { getBoards } from '../../database/api';
 import { Board } from '../../models/board';
+import { Message } from '../../components/Message/Message';
 
 const Root = () => {
   const {
@@ -28,12 +29,15 @@ const Root = () => {
   } = useQuery<Board[]>({
     queryKey: ['boards'],
     queryFn: getBoards, // fetch from my api
-    // select: (boards) => boards.map((board: Board) => board.name), // get array of names from response data, it does't affect on cache
   });
 
   useEffect(() => {
     if (boards) {
-      navigate(`/boards/${boards[activeBoardIndex]?.id}`);
+      if (boards.length === 0) {
+        navigate('/');
+      } else {
+        navigate(`/boards/${boards[activeBoardIndex]?.id}`);
+      }
     }
   }, [boards, activeBoardIndex, navigate]);
 
@@ -41,22 +45,10 @@ const Root = () => {
     toggleSidebar();
   };
 
-  const Loader = () => (
-    <div className={styles.container}>
-      <h1 className='heading--xl'>Loading...</h1>
-    </div>
-  );
-
-  const Error = () => (
-    <div className={styles.container}>
-      <h1 className='heading--xl'>{error?.message}</h1>
-    </div>
-  );
-
   return (
     <div className={styles.app}>
       {isModalShown && <Modal window={activeModal} />}
-      <Header title={boards?.[activeBoardIndex].name} />
+      <Header />
       <main
         className={
           isSidebarShown
@@ -65,7 +57,13 @@ const Root = () => {
         }
       >
         <Sidebar boards={boards} onToggle={handleToggleSidebar} />
-        {isLoading ? <Loader /> : isError ? <Error /> : <Outlet />}
+        {isLoading ? (
+          <Message message='Loading...' />
+        ) : isError ? (
+          <Message message={error.message} />
+        ) : (
+          <Outlet />
+        )}
       </main>
     </div>
   );

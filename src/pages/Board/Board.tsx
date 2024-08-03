@@ -5,12 +5,17 @@ import { useQueryClient } from '@tanstack/react-query';
 import Column from '../../components/Column/Column';
 import { Board as BoardType } from '../../models/board';
 import { Column as ColumnType } from '../../models/column';
+import { Message } from '../../components/Message/Message';
 
 const Board = () => {
   const { activeBoardIndex } = useContext(UiContext);
   const queryClient = useQueryClient();
-
   const boards: BoardType[] = queryClient.getQueryData(['boards']) ?? [];
+
+  if (boards.length === 0) {
+    return <Message message='Create New Board to start...' />;
+  }
+
   const board = boards[activeBoardIndex];
   const columns: ColumnType[] = board.columns;
 

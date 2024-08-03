@@ -17,12 +17,3 @@
 .main--hidden {
   transform: translateX(-300px);
 }
-
-.container {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-white);
-}

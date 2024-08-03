@@ -12,7 +12,7 @@
   align-items: center;
   border-radius: 6px;
   background-color: var(--color-new-element);
-  box-shadow: 0px 4px 6px 0px rgba(54, 78, 126, 0.10);
+  box-shadow: 0px 4px 6px 0px rgba(54, 78, 126, 0.1);
 }
 
 .column__title {
@@ -22,7 +22,7 @@
 }
 
 .column__name {
-  color: var(--color-medium-grey, #828FA3);
+  color: var(--color-medium-grey, #828fa3);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2.4px;
@@ -34,22 +34,22 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #49C4E5;
+  background-color: #49c4e5;
 }
 
 .column:nth-child(2) .column__pointer {
-  background-color: #8471F2;
+  background-color: #8471f2;
 }
 
 .column:nth-child(3) .column__pointer {
-  background-color: #67E2AE;
+  background-color: #67e2ae;
 }
 
 .column__addBtn {
   height: 50px;
-  color: var(--color-medium-grey, #828FA3);
+  color: var(--color-medium-grey, #828fa3);
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   border: none;
   background: none;
@@ -57,5 +57,5 @@
 }
 
 .column__addBtn:hover {
-  color: var(--color-purple, #635FC7);
+  color: var(--color-purple, #635fc7);
 }

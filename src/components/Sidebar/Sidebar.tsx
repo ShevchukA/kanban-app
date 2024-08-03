@@ -25,6 +25,7 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
 
   const queryClient = useQueryClient();
 
+  // TODO delete
   const resetMutation = useMutation({
     mutationFn: resetServerData,
     onSuccess: () => {
@@ -46,30 +47,33 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
     <nav className={styles.sidebar}>
       <div className={styles.sidebar__boardList}>
         <p className={`${styles.sidebar__title} text--bold`}>All boards</p>
-        {boards && (
-          <ul>
-            {boards.map((board: Board, index: number) => (
-              <SidebarLink
-                key={board.id}
-                link={board.id}
-                icon={<BoardIcon />}
-                onClick={() => {
-                  handleBoardSelection(index);
-                }}
-              >
-                {board.name}
-              </SidebarLink>
-            ))}
-            <SidebarLink
-              specialLink={true}
-              icon={<BoardIcon />}
-              onClick={handleBoardCreation}
-            >
-              + Create New Board
-            </SidebarLink>
-          </ul>
-        )}
+        <ul>
+          {boards && boards.length > 0 && (
+            <>
+              {boards.map((board: Board, index: number) => (
+                <SidebarLink
+                  key={board.id}
+                  link={board.id}
+                  icon={<BoardIcon />}
+                  onClick={() => {
+                    handleBoardSelection(index);
+                  }}
+                >
+                  {board.name}
+                </SidebarLink>
+              ))}
+            </>
+          )}
+          <SidebarLink
+            specialLink={true}
+            icon={<BoardIcon />}
+            onClick={handleBoardCreation}
+          >
+            + Create New Board
+          </SidebarLink>
+        </ul>
       </div>
+
       <div className={styles.sidebar__controls}>
         <ThemeToggle />
         <SidebarLink icon={<HideIcon />} onClick={onToggle}>

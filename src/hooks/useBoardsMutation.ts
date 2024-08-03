@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UiContext } from '../context/uiContext';
 import { updateBoards } from '../database/api';
@@ -13,7 +12,6 @@ export enum Action {
 
 const useBoardsMutation = (action: Action) => {
   const { closeModal, selectBoard } = useContext(UiContext);
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const boardsMutation = useMutation({
@@ -32,14 +30,12 @@ const useBoardsMutation = (action: Action) => {
 
       // navigate to the last board in the list if new board added
       if (action === Action.AddBoard) {
-        navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
         selectBoard(newBoardsList.length - 1);
       }
 
-      // TODO fix logic?
+      // navigate to the first board
       if (action === Action.DeleteBoard) {
-        navigate(`/boards/${newBoardsList[newBoardsList.length - 1].id}`);
-        selectBoard(newBoardsList.length - 1);
+        selectBoard(0);
       }
 
       closeModal();
@@ -49,7 +45,8 @@ const useBoardsMutation = (action: Action) => {
     },
 
     // If the mutation fails, the context returned from onMutate to roll back
-    onError: (_, __, context) => {
+    onError: (error, _, context) => {
+      console.log(error.message);
       queryClient.setQueryData(['boards'], context?.previousState);
     },
 

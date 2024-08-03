@@ -1,0 +1,11 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container > h1 {
+  color: var(--color-medium-grey);
+}
