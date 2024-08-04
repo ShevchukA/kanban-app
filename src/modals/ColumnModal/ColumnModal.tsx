@@ -26,20 +26,18 @@ const ColumnModal = () => {
     // get boards array from cache for further mutation
     const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
-    if (name.length !== 0) {
-      const newColumn: Column = {
-        id: generateId(),
-        name: name,
-        tasks: [],
-      };
+    const newColumn: Column = {
+      id: generateId(),
+      name: name,
+      tasks: [],
+    };
 
-      const newBoards = [...boards];
+    const newBoards = [...boards];
 
-      // add new column
-      newBoards[activeBoardIndex].columns.push(newColumn);
+    // add new column
+    newBoards[activeBoardIndex].columns.push(newColumn);
 
-      updateBoard.mutate(newBoards);
-    }
+    updateBoard.mutate(newBoards);
   };
 
   return (
@@ -63,7 +61,7 @@ const ColumnModal = () => {
       <Button
         text='+Add New Column'
         submit={true}
-        disabled={updateBoard.isPending}
+        disabled={updateBoard.isPending || name.length === 0}
       />
     </form>
   );

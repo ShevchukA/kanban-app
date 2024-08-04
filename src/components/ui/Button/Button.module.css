@@ -7,12 +7,12 @@
   padding: 14px 24px;
   border: none;
   border-radius: 20px;
-  background: var(--color-purple, #635FC7);
-  color: var(--color-white, #FFF);
+  background: var(--color-purple, #635fc7);
+  color: var(--color-white, #fff);
   text-align: center;
   font-size: 15px;
   font-weight: 700;
-  font-family: "Plus Jakarta Sans";
+  font-family: 'Plus Jakarta Sans';
   transition: all 200ms;
   cursor: pointer;
 }
@@ -29,22 +29,27 @@
 
 .button--secondary {
   background: var(--color-secondary-button);
-  color: var(--color-purple, #635FC7);
+  color: var(--color-purple, #635fc7);
 }
 
 .button--negative {
-  background: var(--color-red, #EA5555);
-  color: var(--color-white, #FFF);
+  background: var(--color-red, #ea5555);
+  color: var(--color-white, #fff);
 }
 
-.button:hover {
-  background: var(--color-purple-hover, #A8A4FF);
+.button:disabled {
+  opacity: 0.6;
+  cursor: initial;
 }
 
-.button.button--secondary:hover {
+.button:hover:not(:disabled) {
+  background: var(--color-purple-hover, #a8a4ff);
+}
+
+.button.button--secondary:hover:not(:disabled) {
   background: var(--color-secondary-button);
 }
 
-.button.button--negative:hover {
-  background: var(--color-red-hover, #FF9898);
+.button.button--negative:hover:not(:disabled) {
+  background: var(--color-red-hover, #ff9898);
 }

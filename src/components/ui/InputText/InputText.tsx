@@ -11,6 +11,7 @@ interface InputTextProps {
 }
 
 const InputText = ({
+  type,
   id,
   value,
   label,
@@ -22,14 +23,26 @@ const InputText = ({
       <label htmlFor={id} className={`${styles.label} text--bold`}>
         {label}
       </label>
-      <input
-        type='text'
-        id={id}
-        value={value}
-        placeholder={placeholder}
-        className={styles.input}
-        onChange={onChange}
-      />
+      {type === 'text' ? (
+        <input
+          type='text'
+          id={id}
+          value={value}
+          placeholder={placeholder}
+          className={styles.input}
+          onChange={onChange}
+        />
+      ) : (
+        <textarea
+          id={id}
+          value={value}
+          placeholder={placeholder}
+          className={styles.textarea}
+          onChange={onChange}
+          rows={4}
+          maxLength={160}
+        />
+      )}
     </div>
   );
 };

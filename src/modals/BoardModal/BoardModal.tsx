@@ -139,7 +139,9 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={addBoard.isPending || updateBoard.isPending}
+        disabled={
+          addBoard.isPending || updateBoard.isPending || name.length === 0
+        }
       />
       {/* TODO Error modal */}
     </form>

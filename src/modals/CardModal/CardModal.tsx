@@ -135,12 +135,11 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
         }}
       />
       <InputText
-        type='text'
+        type='multiText'
         id='description'
         value={description}
         label='Description'
-        placeholder='e.g. It’s always good to take a break. This 15 minute break will 
-        recharge the batteries a little.'
+        placeholder='e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little.'
         onChange={(e) => {
           handleChangeDescription(e);
         }}
@@ -155,7 +154,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={updateBoard.isPending}
+        disabled={updateBoard.isPending || title.length === 0}
       />
     </form>
   );
