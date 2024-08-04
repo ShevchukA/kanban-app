@@ -8,7 +8,7 @@ import Modal from '../../components/ui/Modal/Modal';
 import { useQuery } from '@tanstack/react-query';
 import { getBoards } from '../../database/api';
 import { Board } from '../../models/board';
-import { Message } from '../../components/Message/Message';
+import { Message } from '../../components/ui/Message/Message';
 
 const Root = () => {
   const {

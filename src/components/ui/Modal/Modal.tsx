@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Modal.module.css';
 import { UiContext } from '../../../context/uiContext';
@@ -10,6 +10,21 @@ interface ModalProps {
 const Modal = ({ window }: ModalProps) => {
   const modalRoot = document.getElementById('root-modal');
   const { closeModal } = useContext(UiContext);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [closeModal]);
 
   return (
     <>

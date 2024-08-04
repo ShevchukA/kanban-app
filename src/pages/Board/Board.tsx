@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Column, NewColumn } from '../../components/Column/Column';
 import { Board as BoardType } from '../../models/board';
 import { Column as ColumnType } from '../../models/column';
-import { Message } from '../../components/Message/Message';
+import { Message } from '../../components/ui/Message/Message';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 
