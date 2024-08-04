@@ -12,7 +12,7 @@ import { useQueryClient } from '@tanstack/react-query';
 const ColumnModal = () => {
   const [name, setName] = useState('');
   const queryClient = useQueryClient();
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
   const { activeBoardIndex } = useContext(UiContext);
 
   const handleChangeName = (e: SyntheticEvent) => {
@@ -38,7 +38,7 @@ const ColumnModal = () => {
       // add new column
       newBoards[activeBoardIndex].columns.push(newColumn);
 
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     }
   };
 
@@ -63,7 +63,7 @@ const ColumnModal = () => {
       <Button
         text='+Add New Column'
         submit={true}
-        disabled={editBoard.isPending || editBoard.isPending}
+        disabled={updateBoard.isPending}
       />
     </form>
   );

@@ -17,7 +17,7 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
   const { closeModal } = useContext(UiContext);
   const queryClient = useQueryClient();
   const deleteBoard = useBoardsMutation(Action.DeleteBoard);
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
 
   const confirmMessage = {
     board: `Are you sure you want to delete the ‘${
@@ -50,8 +50,8 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
       //   );
       //   return board;
       // });
-      // editBoard.mutate(newBoards);
-      // openModal(<BoardModal type='editBoard' />);
+      // updateBoard.mutate(newBoards);
+      // openModal(<BoardModal type='updateBoard' />);
     }
 
     if (target == 'card') {
@@ -64,7 +64,7 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
         });
         return board;
       });
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     }
 
     closeModal();

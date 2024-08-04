@@ -6,7 +6,7 @@ import { Board } from '../models/board';
 
 export enum Action {
   AddBoard = 'AddBoard',
-  EditBoard = 'EditBoard',
+  UpdateBoard = 'UpdateBoard',
   DeleteBoard = 'DeleteBoard',
 }
 

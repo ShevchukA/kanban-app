@@ -12,7 +12,7 @@ import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 const Board = () => {
   const { activeBoardIndex } = useContext(UiContext);
   const queryClient = useQueryClient();
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
 
   const boards: BoardType[] = queryClient.getQueryData(['boards']) ?? [];
 
@@ -57,7 +57,7 @@ const Board = () => {
         return board;
       });
 
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     }
     // card move to another column
     else if (startColumn && endColumn) {
@@ -89,7 +89,7 @@ const Board = () => {
         return board;
       });
 
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     } else {
       console.log(`Drag'n'drop error`);
     }

@@ -21,7 +21,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [subtasks, setSubtasks] = useState<Subtask[]>([]);
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
   const queryClient = useQueryClient();
   const { activeBoardIndex } = useContext(UiContext);
 
@@ -83,7 +83,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
       // add new card
       newBoards[activeBoardIndex].columns[columnIndex]?.tasks.push(newCard);
 
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     }
 
     if (type == 'editCard' && card && columnIndex !== undefined) {
@@ -109,7 +109,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
 
       newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
 
-      editBoard.mutate(newBoards);
+      updateBoard.mutate(newBoards);
     }
   };
 
@@ -152,7 +152,11 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
         onAdd={handleAddNewSubtask}
         onDelete={handleDeleteSubtask}
       />
-      <Button text={buttonText} submit={true} disabled={editBoard.isPending} />
+      <Button
+        text={buttonText}
+        submit={true}
+        disabled={updateBoard.isPending}
+      />
     </form>
   );
 };

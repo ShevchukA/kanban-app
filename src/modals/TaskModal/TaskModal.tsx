@@ -20,7 +20,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const { openModal } = useContext(UiContext);
   const [subtasks, setSubtasks] = useState<Subtask[]>(card.subtasks);
   const [subtasksEdited, setSubtasksEdited] = useState(false);
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
   const { activeBoardIndex } = useContext(UiContext);
   const queryClient = useQueryClient();
 
@@ -68,7 +68,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
 
     newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
 
-    editBoard.mutate(newBoards);
+    updateBoard.mutate(newBoards);
   };
 
   return (
@@ -117,7 +117,7 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
       {subtasksEdited && (
         <Button
           text='Save Changes'
-          disabled={editBoard.isPending}
+          disabled={updateBoard.isPending}
           onClick={handleSubmit}
         />
       )}

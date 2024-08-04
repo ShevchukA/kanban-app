@@ -27,7 +27,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
 
   const queryClient = useQueryClient();
   const addBoard = useBoardsMutation(Action.AddBoard);
-  const editBoard = useBoardsMutation(Action.EditBoard);
+  const updateBoard = useBoardsMutation(Action.UpdateBoard);
 
   const handleChangeName = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -100,7 +100,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
             }
           });
 
-          editBoard.mutate(newBoards);
+          updateBoard.mutate(newBoards);
         }
         break;
       default:
@@ -139,7 +139,7 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={addBoard.isPending || editBoard.isPending}
+        disabled={addBoard.isPending || updateBoard.isPending}
       />
       {/* TODO Error modal */}
     </form>
