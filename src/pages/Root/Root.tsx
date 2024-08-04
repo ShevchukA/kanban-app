@@ -28,7 +28,7 @@ const Root = () => {
     error,
   } = useQuery<Board[]>({
     queryKey: ['boards'],
-    queryFn: getBoards, // fetch from my api
+    queryFn: getBoards, // fetch from api
   });
 
   useEffect(() => {
