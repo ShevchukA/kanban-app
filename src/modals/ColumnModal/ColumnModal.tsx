@@ -8,11 +8,12 @@ import { Column } from '../../models/column';
 import { v4 as generateId } from 'uuid';
 import { UiContext } from '../../context/uiContext';
 import { useQueryClient } from '@tanstack/react-query';
+import { addColumn } from '../../helpers/operations';
 
 const ColumnModal = () => {
   const [name, setName] = useState('');
   const queryClient = useQueryClient();
-  const updateBoard = useBoardsMutation(Action.UpdateBoard);
+  const updateBoards = useBoardsMutation(Action.UpdateBoard);
   const { activeBoardIndex } = useContext(UiContext);
 
   const handleChangeName = (e: SyntheticEvent) => {
@@ -32,12 +33,9 @@ const ColumnModal = () => {
       tasks: [],
     };
 
-    const newBoards = [...boards];
+    const newBoards = addColumn(boards, activeBoardIndex, newColumn);
 
-    // add new column
-    newBoards[activeBoardIndex].columns.push(newColumn);
-
-    updateBoard.mutate(newBoards);
+    updateBoards.mutate(newBoards);
   };
 
   return (
@@ -61,7 +59,7 @@ const ColumnModal = () => {
       <Button
         text='+Add New Column'
         submit={true}
-        disabled={updateBoard.isPending || name.length === 0}
+        disabled={updateBoards.isPending || name.length === 0}
       />
     </form>
   );

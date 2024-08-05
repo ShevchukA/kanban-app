@@ -8,6 +8,7 @@ import { Column } from '../../models/column';
 import InputMultipleFields from '../../components/ui/InputMultipleFields/InputMultipleFields';
 import { v4 as generateId } from 'uuid';
 import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
+import { addBoard, editBoard } from '../../helpers/operations';
 
 interface BoardModalProps {
   type: 'newBoard' | 'editBoard';
@@ -17,6 +18,8 @@ interface BoardModalProps {
 const BoardModal = ({ type, board }: BoardModalProps) => {
   const [name, setName] = useState('');
   const [columns, setColumns] = useState<Column[]>([]);
+  const title = type === 'newBoard' ? 'Add New Board' : 'Edit Board';
+  const buttonText = type === 'newBoard' ? 'Create New Board' : 'Save Changes';
 
   useEffect(() => {
     if (board) {
@@ -26,8 +29,8 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
   }, [board]);
 
   const queryClient = useQueryClient();
-  const addBoard = useBoardsMutation(Action.AddBoard);
-  const updateBoard = useBoardsMutation(Action.UpdateBoard);
+  const updateBoardsWithAdd = useBoardsMutation(Action.AddBoard);
+  const updateBoardsWithEdit = useBoardsMutation(Action.UpdateBoard);
 
   const handleChangeName = (e: SyntheticEvent) => {
     const input = e.target as HTMLInputElement;
@@ -50,16 +53,6 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
   };
 
   const handleDeleteColumn = (id: string) => {
-    // TODO
-    // const column = columns.find((column) => column.id == id) as Column;
-
-    // if (column.tasks.length > 0) {
-    //   openModal(<DeleteModal target='column' object={column} />);
-    // } else {
-    //   const newColumnsSet = columns.filter((column) => column.id !== id);
-    //   setColumns(newColumnsSet);
-    // }
-
     const newColumnsSet = columns.filter((column) => column.id !== id);
     setColumns(newColumnsSet);
   };
@@ -70,46 +63,30 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
     // get boards array from cache for further mutation
     const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
-    switch (type) {
-      case 'newBoard':
-        if (name.length !== 0) {
-          const newBoard: Board = {
-            id: generateId(),
-            name,
-            columns,
-          };
+    if (type === 'newBoard' && name.length !== 0) {
+      const newBoard: Board = {
+        id: generateId(),
+        name,
+        columns,
+      };
 
-          const newBoards = [...boards, newBoard];
+      const newBoards = addBoard(boards, newBoard);
 
-          addBoard.mutate(newBoards);
-        }
-        break;
+      updateBoardsWithAdd.mutate(newBoards);
+    }
 
-      case 'editBoard':
-        if (board) {
-          const updatedBoard: Board = {
-            ...board,
-            name,
-            columns,
-          };
-          const newBoards = boards.map((board) => {
-            if (board.id === updatedBoard.id) {
-              return updatedBoard;
-            } else {
-              return board;
-            }
-          });
+    if (type === 'editBoard' && board) {
+      const editedBoard: Board = {
+        ...board,
+        name,
+        columns,
+      };
 
-          updateBoard.mutate(newBoards);
-        }
-        break;
-      default:
-        break;
+      const newBoards = editBoard(boards, editedBoard);
+
+      updateBoardsWithEdit.mutate(newBoards);
     }
   };
-
-  const title = type === 'newBoard' ? 'Add New Board' : 'Edit Board';
-  const buttonText = type === 'newBoard' ? 'Create New Board' : 'Save Changes';
 
   return (
     <form
@@ -140,10 +117,11 @@ const BoardModal = ({ type, board }: BoardModalProps) => {
         text={buttonText}
         submit={true}
         disabled={
-          addBoard.isPending || updateBoard.isPending || name.length === 0
+          updateBoardsWithAdd.isPending ||
+          updateBoardsWithEdit.isPending ||
+          name.length === 0
         }
       />
-      {/* TODO Error modal */}
     </form>
   );
 };

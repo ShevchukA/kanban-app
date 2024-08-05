@@ -10,6 +10,7 @@ import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 import { useQueryClient } from '@tanstack/react-query';
 import { Board } from '../../models/board';
 import { UiContext } from '../../context/uiContext';
+import { addNewCard, editCard } from '../../helpers/operations';
 
 interface CardModalProps {
   type: 'newCard' | 'editCard';
@@ -21,7 +22,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [subtasks, setSubtasks] = useState<Subtask[]>([]);
-  const updateBoard = useBoardsMutation(Action.UpdateBoard);
+  const updateBoards = useBoardsMutation(Action.UpdateBoard);
   const queryClient = useQueryClient();
   const { activeBoardIndex } = useContext(UiContext);
 
@@ -78,12 +79,14 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
         subtasks: subtasks,
       };
 
-      const newBoards = [...boards];
+      const newBoards = addNewCard(
+        boards,
+        activeBoardIndex,
+        columnIndex,
+        newCard
+      );
 
-      // add new card
-      newBoards[activeBoardIndex].columns[columnIndex]?.tasks.push(newCard);
-
-      updateBoard.mutate(newBoards);
+      updateBoards.mutate(newBoards);
     }
 
     if (type == 'editCard' && card && columnIndex !== undefined) {
@@ -94,22 +97,14 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
         subtasks: subtasks,
       };
 
-      const newBoards = [...boards];
+      const newBoards = editCard(
+        boards,
+        activeBoardIndex,
+        columnIndex,
+        updatedCard
+      );
 
-      // find card to be edited and update cards array
-      const updatedCards = newBoards[activeBoardIndex].columns[
-        columnIndex
-      ].tasks.map((card: Card) => {
-        if (card.id === updatedCard.id) {
-          return updatedCard;
-        } else {
-          return card;
-        }
-      });
-
-      newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
-
-      updateBoard.mutate(newBoards);
+      updateBoards.mutate(newBoards);
     }
   };
 
@@ -154,7 +149,7 @@ const CardModal = ({ type, columnIndex, card }: CardModalProps) => {
       <Button
         text={buttonText}
         submit={true}
-        disabled={updateBoard.isPending || title.length === 0}
+        disabled={updateBoards.isPending || title.length === 0}
       />
     </form>
   );

@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 import { Column } from '../../models/column';
 import { Card } from '../../models/card';
+import { deleteBoard, deleteCard } from '../../helpers/operations';
 
 interface DeleteModalProps {
   target: 'board' | 'column' | 'card';
@@ -16,8 +17,8 @@ interface DeleteModalProps {
 const DeleteModal = ({ target, object }: DeleteModalProps) => {
   const { closeModal } = useContext(UiContext);
   const queryClient = useQueryClient();
-  const deleteBoard = useBoardsMutation(Action.DeleteBoard);
-  const updateBoard = useBoardsMutation(Action.UpdateBoard);
+  const updateBoardsWithDelete = useBoardsMutation(Action.DeleteBoard);
+  const updateBoardsWithEdit = useBoardsMutation(Action.UpdateBoard);
 
   const confirmMessage = {
     board: `Are you sure you want to delete the ‘${
@@ -35,36 +36,15 @@ const DeleteModal = ({ target, object }: DeleteModalProps) => {
 
   const handleDelete = () => {
     const boards = queryClient.getQueryData(['boards']) as Board[];
-    let newBoards: Board[];
 
     if (target == 'board') {
-      newBoards = boards.filter((board) => board.id !== (object as Board).id);
-      deleteBoard.mutate(newBoards);
-    }
-
-    if (target == 'column') {
-      // TODO
-      // newBoards = boards.map((board: Board) => {
-      //   board.columns = board.columns.filter(
-      //     (column: Column) => column.id !== (object as Column).id
-      //   );
-      //   return board;
-      // });
-      // updateBoard.mutate(newBoards);
-      // openModal(<BoardModal type='updateBoard' />);
+      const newBoards = deleteBoard(boards, object as Board);
+      updateBoardsWithDelete.mutate(newBoards);
     }
 
     if (target == 'card') {
-      newBoards = boards.map((board: Board) => {
-        board.columns = board.columns.map((column: Column) => {
-          column.tasks = column.tasks.filter(
-            (card: Card) => card.id !== (object as Card).id
-          );
-          return column;
-        });
-        return board;
-      });
-      updateBoard.mutate(newBoards);
+      const newBoards = deleteCard(boards, object as Card);
+      updateBoardsWithEdit.mutate(newBoards);
     }
 
     closeModal();

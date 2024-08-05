@@ -79,6 +79,7 @@ body {
   font-weight: 500;
   line-height: 23px;
   color: var(--color-text);
+  white-space: pre-wrap;
 }
 
 .text--bold {

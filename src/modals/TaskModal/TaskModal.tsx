@@ -10,6 +10,7 @@ import { Subtask } from '../../models/subtask';
 import { Board } from '../../models/board';
 import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 import Button from '../../components/ui/Button/Button';
+import { editCard } from '../../helpers/operations';
 
 interface TaskModalProps {
   card: Card;
@@ -48,25 +49,17 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
   const handleSubmit = () => {
     const boards: Board[] = queryClient.getQueryData(['boards']) ?? [];
 
-    const newBoards = [...boards];
-
     const updatedCard: Card = {
       ...card,
       subtasks: subtasks,
     };
 
-    // find card to be edited and update cards array
-    const updatedCards = newBoards[activeBoardIndex].columns[
-      columnIndex
-    ].tasks.map((card: Card) => {
-      if (card.id === updatedCard.id) {
-        return updatedCard;
-      } else {
-        return card;
-      }
-    });
-
-    newBoards[activeBoardIndex].columns[columnIndex].tasks = updatedCards;
+    const newBoards = editCard(
+      boards,
+      activeBoardIndex,
+      columnIndex,
+      updatedCard
+    );
 
     updateBoard.mutate(newBoards);
   };
@@ -113,7 +106,6 @@ const TaskModal = ({ card, columnIndex }: TaskModalProps) => {
         )}
       </div>
 
-      {/* TODO delete save button and mutate task when modal closing */}
       {subtasksEdited && (
         <Button
           text='Save Changes'
