@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Board.module.css';
 import { UiContext } from '../../context/uiContext';
 import { useQueryClient } from '@tanstack/react-query';
@@ -17,6 +17,12 @@ const Board = () => {
 
   const boards: BoardType[] = queryClient.getQueryData(['boards']) ?? [];
 
+  // to avoid 'react-beautiful-dnd' bug with strict mode
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   const onDragEnd = (result: DropResult) => {
     const updatedBoards = replaceCard(boards, activeBoardIndex, result);
     if (updatedBoards) {
@@ -30,18 +36,20 @@ const Board = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={styles.board}>
-        <div className={styles.board__scrollContainer}>
-          <div className={styles.board__container}>
-            {boards[activeBoardIndex].columns.map(
-              (column: ColumnType, index: number) => (
-                <Column key={column.id} columnIndex={index} column={column} />
-              )
-            )}
-            <NewColumn />
+      {ready && (
+        <div className={styles.board}>
+          <div className={styles.board__scrollContainer}>
+            <div className={styles.board__container}>
+              {boards[activeBoardIndex].columns.map(
+                (column: ColumnType, index: number) => (
+                  <Column key={column.id} columnIndex={index} column={column} />
+                )
+              )}
+              <NewColumn />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </DragDropContext>
   );
 };
