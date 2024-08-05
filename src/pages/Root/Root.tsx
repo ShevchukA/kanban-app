@@ -57,13 +57,9 @@ const Root = () => {
         }
       >
         <Sidebar boards={boards} onToggle={handleToggleSidebar} />
-        {isLoading ? (
-          <Message message='Loading...' />
-        ) : isError ? (
-          <Message message={error.message} />
-        ) : (
-          <Outlet />
-        )}
+        {isLoading && <Message message='Loading...' />}
+        {isError && <Message message={error.message} />}
+        {boards && <Outlet />}
       </main>
     </div>
   );
