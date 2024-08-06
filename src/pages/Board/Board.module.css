@@ -3,6 +3,11 @@
   background-color: var(--color-board);
   display: flex;
   overflow: scroll;
+  transition: margin-left 0.2s ease;
+}
+
+.board--fullscreen {
+  margin-left: -300px;
 }
 
 .board__scrollContainer {

@@ -8,6 +8,11 @@
   background-color: var(--color-interface);
   border-right: 1px solid var(--color-lines);
   position: relative;
+  transition: transform 0.2s ease;
+}
+
+.sidebar--hidden {
+  transform: translateX(-300px);
 }
 
 .sidebar__boardList {
@@ -18,7 +23,7 @@
 
 .sidebar__title {
   margin: 15px 0 19px 32px;
-  color: var(--color-medium-grey, #828FA3);
+  color: var(--color-medium-grey, #828fa3);
   text-transform: uppercase;
   letter-spacing: 2.4px;
 }

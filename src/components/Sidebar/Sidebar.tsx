@@ -21,7 +21,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ boards, onToggle }: SidebarProps) => {
-  const { selectBoard, openModal } = useContext(UiContext);
+  const { selectBoard, openModal, isSidebarShown } = useContext(UiContext);
 
   const queryClient = useQueryClient();
 
@@ -44,7 +44,13 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
   };
 
   return (
-    <nav className={styles.sidebar}>
+    <nav
+      className={
+        isSidebarShown
+          ? `${styles.sidebar}`
+          : `${styles.sidebar} ${styles['sidebar--hidden']}`
+      }
+    >
       <div className={styles.sidebar__boardList}>
         <p className={`${styles.sidebar__title} text--bold`}>All boards</p>
         <ul>

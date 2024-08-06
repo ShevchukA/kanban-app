@@ -11,13 +11,8 @@ import { Board } from '../../models/board';
 import { Message } from '../../components/ui/Message/Message';
 
 const Root = () => {
-  const {
-    isSidebarShown,
-    isModalShown,
-    activeModal,
-    activeBoardIndex,
-    toggleSidebar,
-  } = useContext(UiContext);
+  const { isModalShown, activeModal, activeBoardIndex, toggleSidebar } =
+    useContext(UiContext);
 
   const navigate = useNavigate();
 
@@ -49,13 +44,7 @@ const Root = () => {
     <div className={styles.app}>
       {isModalShown && <Modal window={activeModal} />}
       <Header />
-      <main
-        className={
-          isSidebarShown
-            ? `${styles.main}`
-            : `${styles.main} ${styles['main--hidden']}`
-        }
-      >
+      <main className={styles.main}>
         <Sidebar boards={boards} onToggle={handleToggleSidebar} />
         {isLoading && <Message message='Loading...' />}
         {isError && <Message message={error.message} />}

@@ -11,7 +11,7 @@ import useBoardsMutation, { Action } from '../../hooks/useBoardsMutation';
 import { replaceCard } from '../../helpers/operations';
 
 const Board = () => {
-  const { activeBoardIndex } = useContext(UiContext);
+  const { activeBoardIndex, isSidebarShown } = useContext(UiContext);
   const queryClient = useQueryClient();
   const updateBoards = useBoardsMutation(Action.UpdateBoard);
 
@@ -37,7 +37,13 @@ const Board = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       {ready && (
-        <div className={styles.board}>
+        <div
+          className={
+            isSidebarShown
+              ? `${styles.board}`
+              : `${styles.board} ${styles['board--fullscreen']}`
+          }
+        >
           <div className={styles.board__scrollContainer}>
             <div className={styles.board__container}>
               {boards[activeBoardIndex].columns.map(
