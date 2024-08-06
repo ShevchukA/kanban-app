@@ -122,7 +122,8 @@ body {
   background-clip: padding-box;
 }
 
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
   background-color: var(--color-board);
 }
 
