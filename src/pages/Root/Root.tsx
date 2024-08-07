@@ -11,8 +11,7 @@ import { Board } from '../../models/board';
 import { Message } from '../../components/ui/Message/Message';
 
 const Root = () => {
-  const { isModalShown, activeModal, activeBoardIndex, toggleSidebar } =
-    useContext(UiContext);
+  const { isModalShown, activeModal, activeBoardIndex } = useContext(UiContext);
 
   const navigate = useNavigate();
 
@@ -36,16 +35,12 @@ const Root = () => {
     }
   }, [boards, activeBoardIndex, navigate]);
 
-  const handleToggleSidebar = () => {
-    toggleSidebar();
-  };
-
   return (
     <div className={styles.app}>
       {isModalShown && <Modal window={activeModal} />}
       <Header />
       <main className={styles.main}>
-        <Sidebar boards={boards} onToggle={handleToggleSidebar} />
+        <Sidebar boards={boards} />
         {isLoading && <Message message='Loading...' />}
         {isError && <Message message={error.message} />}
         {boards && <Outlet />}

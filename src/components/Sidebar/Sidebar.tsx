@@ -10,30 +10,20 @@ import ShowIcon from './assets/icon-show-sidebar.svg?react';
 import SidebarShowButton from './components/SidebarShowButton/SidebarShowButton';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
 import BoardModal from '../../modals/BoardModal/BoardModal';
-import Button from '../ui/Button/Button';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { resetServerData } from '../../database/api';
+
 import { Board } from '../../models/board';
 
 interface SidebarProps {
   boards?: Board[];
-  onToggle: () => void;
 }
 
-const Sidebar = ({ boards, onToggle }: SidebarProps) => {
-  const { selectBoard, openModal, isSidebarShown } = useContext(UiContext);
+const Sidebar = ({ boards }: SidebarProps) => {
+  const { toggleSidebar, selectBoard, openModal, isSidebarShown } =
+    useContext(UiContext);
 
-  const queryClient = useQueryClient();
-
-  // TODO delete
-  const resetMutation = useMutation({
-    mutationFn: resetServerData,
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: ['boards'],
-      });
-    },
-  });
+  const handleToggleSidebar = () => {
+    toggleSidebar();
+  };
 
   const handleBoardSelection = (index: number) => {
     selectBoard(index);
@@ -82,18 +72,11 @@ const Sidebar = ({ boards, onToggle }: SidebarProps) => {
 
       <div className={styles.sidebar__controls}>
         <ThemeToggle />
-        <SidebarLink icon={<HideIcon />} onClick={onToggle}>
+        <SidebarLink icon={<HideIcon />} onClick={handleToggleSidebar}>
           Hide Sidebar
         </SidebarLink>
-        <Button
-          text='Reset'
-          onClick={() => {
-            resetMutation.mutate();
-            selectBoard(0);
-          }}
-        />
       </div>
-      <SidebarShowButton icon={<ShowIcon />} onClick={onToggle} />
+      <SidebarShowButton icon={<ShowIcon />} onClick={handleToggleSidebar} />
     </nav>
   );
 };
