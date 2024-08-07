@@ -1,4 +1,4 @@
-# Frontend Mentor - Kanban task management web app solution
+# Kanban task management web app
 
 This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB).
 
@@ -44,6 +44,9 @@ Users should be able to:
 ### Commands
 
 Before start - `yarn global add vite`
+
 Install packages - `yarn`
+
 Start Project - `yarn dev`
+
 Build project - `yarn build`
