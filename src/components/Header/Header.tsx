@@ -13,20 +13,24 @@ import DeleteModal from '../../modals/DeleteModal/DeleteModal';
 const Header = () => {
   const { activeBoardIndex, isDarkMode, openModal } = useContext(UiContext);
   const queryClient = useQueryClient();
-  const boards = queryClient.getQueryData(['boards']) as Board[];
+  const boards = queryClient.getQueryData<Board[]>(['boards']);
 
-  const title = boards && boards[activeBoardIndex]?.name;
+  const title = boards?.[activeBoardIndex]?.name;
 
   const logoSrc = isDarkMode ? logoLight : logoDark;
 
   const handleEditBoard = () => {
-    const board = boards[activeBoardIndex];
-    openModal(<BoardModal type='editBoard' board={board} />);
+    if (boards) {
+      const board = boards[activeBoardIndex];
+      openModal(<BoardModal type='editBoard' board={board} />);
+    }
   };
 
   const handleDeleteBoard = () => {
-    const board = boards[activeBoardIndex];
-    openModal(<DeleteModal target='board' object={board} />);
+    if (boards) {
+      const board = boards[activeBoardIndex];
+      openModal(<DeleteModal target='board' object={board} />);
+    }
   };
 
   return (
